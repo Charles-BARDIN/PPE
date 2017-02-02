@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "target": "ES6",
+    "preserveConstEnums": true,
+    "outDir": "build"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
