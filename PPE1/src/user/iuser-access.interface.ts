@@ -1,10 +1,31 @@
-import { UserModel, User } from 'm2l-core';
+import { User } from 'm2l-core';
 
-interface IUserAccess {
-  add(user: UserModel): Promise<{ user: User, faults: string[] }>;
-  remove(user: UserModel): Promise<{ user: User, faults: string[] }>;
-  update(user: UserModel): Promise<{ user: User, faults: string[] }>;
-  login(credentials: { username: string, password: string }): { success: boolean, faults: string[] };
+export interface IUserAccess {
+  add(user: {
+    username: string,
+    firstname: string,
+    lastname: string,
+    mail: string,
+    phone: string,
+    address: string,
+    zip: string,
+    town: string,
+    country: string
+  }): Promise<{ user: User, faults: string[] }>;
+
+  remove(username: string): Promise<{ user: User, faults: string[] }>;
+
+  update(user: {
+    username: string,
+    firstname?: string,
+    lastname?: string,
+    mail?: string,
+    phone?: string,
+    address?: string,
+    zip?: string,
+    town?: string,
+    country?: string
+  }): Promise<{ user: User, faults: string[] }>;
+
+  login(credentials: { username: string, password: string }): Promise<{ success: boolean, faults: string[] }>;
 }
-
-export { IUserAccess };

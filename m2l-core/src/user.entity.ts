@@ -1,17 +1,4 @@
-interface UserModel {
-  username: string,
-  firstname: string,
-  lastname: string,
-  mail: string,
-  phone: string,
-  address: string,
-  zip: string,
-  town: string,
-  country: string,
-  registerDate: Date
-}
-
-class User {
+export class User {
   private _username: string;
   private _firstname: string;
   private _lastname: string;
@@ -21,9 +8,18 @@ class User {
   private _zip: string;
   private _town: string;
   private _country: string;
-  private _registerDate: Date;
 
-  constructor(user: UserModel) {
+  constructor(user: {
+    username: string,
+    firstname: string,
+    lastname: string,
+    mail: string,
+    phone: string,
+    address: string,
+    zip: string,
+    town: string,
+    country: string
+  }) {
     this.username = user.username;
     this.firstname = user.firstname;
     this.lastname = user.lastname;
@@ -33,7 +29,6 @@ class User {
     this.zip = user.zip;
     this.town = user.town;
     this.country = user.country;
-    this.registerDate = user.registerDate;
   }
 
   public get username(): string {
@@ -99,16 +94,4 @@ class User {
   public set country(country: string) {
     this._country = country;
   }
-
-  public get registerDate(): Date {
-    return this._registerDate;
-  }
-  public set registerDate(registerDate: Date) {
-    this._registerDate = registerDate;
-  }
 }
-
-export {
-  User,
-  UserModel
-};

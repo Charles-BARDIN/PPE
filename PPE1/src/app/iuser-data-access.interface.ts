@@ -1,11 +1,23 @@
-import { UserModel } from 'm2l-core';
+import { User } from 'm2l-core';
 
-interface IUserDataAccess {
-  checkIfUserExists(user: UserModel): Promise<{ mail_taken: boolean, username_taken: boolean }>;
-  add(user: UserModel): Promise<UserModel>;
-  get(user: { username?: string, mail?: string}): Promise<UserModel>;
-  update(user: UserModel): Promise<UserModel>;
-  remove(user: UserModel): Promise<boolean>;
+export interface IUserDataAccess {
+  checkIfUserExists(user: { mail: string, username: string }): Promise<{ mail_taken: boolean, username_taken: boolean }>;
+
+  add(user: User): Promise<User>;
+
+  get(user: { username?: string, mail?: string }): Promise<User>;
+
+  update(user: {
+    username: string,
+    firstname?: string,
+    lastname?: string,
+    mail?: string,
+    phone?: string,
+    address?: string,
+    zip?: string,
+    town?: string,
+    country?: string
+  }): Promise<User>;
+
+  remove(username: string): Promise<boolean>;
 }
-
-export { IUserDataAccess };

@@ -1,12 +1,11 @@
-import { UserModel } from 'm2l-core';
+import { User, ILogger } from 'm2l-core';
 
 import { UserService, IUserService } from '../app';
-import { ILogger } from '../common';
 
 import { IUserAccess } from './iuser-access.interface';
 import { UserDatabaseAdapter } from './user-database.adapter';
 
-class UserAdapter implements IUserAccess {
+export class UserAdapter implements IUserAccess {
   private _userService: IUserService;
   private _logger: ILogger;
 
@@ -17,21 +16,47 @@ class UserAdapter implements IUserAccess {
     this._logger = config.logger;
   }
 
-  add(user: UserModel): Promise<{ user: User, faults: string[] }> {
+  add(user: {
+    username: string,
+    firstname: string,
+    lastname: string,
+    mail: string,
+    phone: string,
+    address: string,
+    zip: string,
+    town: string,
+    country: string
+  }): Promise<{ user: User, faults: string[] }> {
+    return new Promise((resolve, reject) => {
 
+    });
   }
 
-  remove(user: UserModel): Promise<{ user: User, faults: string[] }> {
+  remove(username: string): Promise<{ user: User, faults: string[] }> {
+    return new Promise((resolve, reject) => {
 
+    });
   }
 
-  update(user: UserModel): Promise<{ user: User, faults: string[] }> {
+  update(user: {
+    username: string,
+    firstname?: string,
+    lastname?: string,
+    mail?: string,
+    phone?: string,
+    address?: string,
+    zip?: string,
+    town?: string,
+    country?: string
+  }): Promise<{ user: User, faults: string[] }> {
+    return new Promise((resolve, reject) => {
 
+    });
   }
 
-  login(credentials: { username: string, password: string }): { success: boolean, faults: string[] } {
+  login(credentials: { username: string, password: string }): Promise<{ success: boolean, faults: string[] }> {
+    return new Promise((resolve, reject) => {
 
+    });
   }
 }
-
-export { UserAdapter };

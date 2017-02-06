@@ -1,40 +1,50 @@
-import { UserModel } from 'm2l-core';
+import { User } from "m2l-core";
 
 import { IUserDataAccess } from '../app';
 
-class UserDatabaseAdapter implements IUserDataAccess {
+export class UserDatabaseAdapter implements IUserDataAccess {
   constructor() { }
 
-  checkIfUserExists(user: UserModel): Promise<{ mail_taken: boolean, username_taken: boolean }> {
+  public checkIfUserExists(user: {
+    username: string,
+    mail: string
+  }): Promise<{ mail_taken: boolean, username_taken: boolean }> {
     return new Promise((resolve, reject) => {
 
     });
   }
 
-  add(user: UserModel): Promise<UserModel> {
+  public add(user: User): Promise<User> {
     return new Promise((resolve, reject) => {
 
     });
   }
 
-  get(user: { username?: string, mail?: string }): Promise<UserModel> {
+  public get(user: { username?: string, mail?: string }): Promise<User> {
     return new Promise((resolve, reject) => {
 
     });
   }
 
-  update(user: UserModel): Promise<UserModel> {
+  public update(user: {
+    username: string,
+    firstname?: string,
+    lastname?: string,
+    mail?: string,
+    phone?: string,
+    address?: string,
+    zip?: string,
+    town?: string,
+    country?: string
+  }): Promise<User> {
     return new Promise((resolve, reject) => {
 
     });
   }
 
-  remove(user: UserModel): Promise<boolean> {
+  public remove(username: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
 
     });
   }
-
 }
-
-export { UserDatabaseAdapter };
