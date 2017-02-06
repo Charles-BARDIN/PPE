@@ -1,7 +1,5 @@
 import { Room } from "m2l-core";
 
-interface IRoomAccess {
+export interface IRoomAccess {
   get(id: number): Promise<{ room: Room, faults: string[] }>;
 }
-
-export { IRoomAccess };

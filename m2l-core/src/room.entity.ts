@@ -1,4 +1,4 @@
-class Room {
+export class Room {
   private _id: number;
   private _name: string;
   private _image: string;
@@ -34,5 +34,3 @@ class Room {
     this._image = image;
   }
 }
-
-export { Room };

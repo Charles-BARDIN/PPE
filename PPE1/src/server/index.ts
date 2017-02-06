@@ -1,5 +1,1 @@
-import { Server } from './server.api';
-
-export {
-  Server
-};
+export * from './server.api';

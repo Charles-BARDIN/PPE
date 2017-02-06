@@ -1,4 +1,4 @@
-import { ILogger } from './ilogger.interface';
+import { ILogger } from 'm2l-core';
 
 class LoggerAdapter implements ILogger {
   constructor() { }

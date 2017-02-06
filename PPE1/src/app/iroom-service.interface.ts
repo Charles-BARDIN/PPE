@@ -1,6 +1,6 @@
 import { Room } from 'm2l-core';
 
-interface IRoomService {
+export interface IRoomService {
   getRoom(id: number): Promise<Room>;
 
   // This is not in the requirements
@@ -9,5 +9,3 @@ interface IRoomService {
   // updateRoom(room: Room): Promise<Room>;
   // addRoom(room: Room): Promise<Room>;
 }
-
-export { IRoomService };

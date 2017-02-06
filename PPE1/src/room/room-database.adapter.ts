@@ -2,7 +2,7 @@ import { Room } from 'm2l-core';
 
 import { IRoomDataAccess } from '../app';
 
-class RoomDatabaseAdapter implements IRoomDataAccess {
+export class RoomDatabaseAdapter implements IRoomDataAccess {
   constructor() { }
 
   public getRoom(id: number): Promise<Room> {
@@ -11,5 +11,3 @@ class RoomDatabaseAdapter implements IRoomDataAccess {
     });
   }
 }
-
-export { RoomDatabaseAdapter };

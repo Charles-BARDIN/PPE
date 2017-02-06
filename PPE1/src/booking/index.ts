@@ -1,5 +1,2 @@
-import { BookingAdapter } from './booking.adapter';
-
-import { IBookingAccess } from './ibooking-access.interface';
-
-export { BookingAdapter, IBookingAccess };
+export * from './booking.adapter';
+export * from './ibooking-access.interface';

@@ -1,10 +1,4 @@
-import { Booking } from './booking.entity';
-import { User, UserModel } from './user.entity';
-import { Room } from './room.entity';
-
-export {
-  Booking,
-  User,
-  UserModel,
-  Room
-};
+export * from './booking.entity';
+export * from './user.entity';
+export * from './room.entity';
+export * from './ilogger.interface';

@@ -1,5 +1,2 @@
-import { RoomAdapter } from './room.adapter';
-
-import { IRoomAccess } from './iroom-access.interface';
-
-export { RoomAdapter, IRoomAccess };
+export * from './room.adapter';
+export * from './iroom-access.interface';
