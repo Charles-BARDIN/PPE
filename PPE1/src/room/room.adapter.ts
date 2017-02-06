@@ -1,12 +1,11 @@
-import { Room } from "m2l-core";
+import { Room, ILogger } from "m2l-core";
 
 import { RoomService, IRoomService } from '../app';
-import { ILogger } from '../common';
 
 import { IRoomAccess } from './iroom-access.interface';
 import { RoomDatabaseAdapter } from './room-database.adapter';
 
-class RoomAdapter implements IRoomAccess {
+export class RoomAdapter implements IRoomAccess {
   private _roomService: IRoomService;
   private _logger: ILogger;
 
@@ -18,8 +17,8 @@ class RoomAdapter implements IRoomAccess {
   }
 
   public get(id: number): Promise<{ room: Room, faults: string[] }> {
+    return new Promise((resolve, reject) => {
 
+    });
   }
 }
-
-export { RoomAdapter };
