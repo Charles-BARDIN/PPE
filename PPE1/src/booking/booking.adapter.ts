@@ -1,12 +1,11 @@
-import { Booking } from 'm2l-core';
+import { Booking, ILogger } from 'm2l-core';
 
 import { BookingService, IBookingService } from '../app';
-import { ILogger } from '../common';
 
 import { BookingDatabaseAdapter } from './booking-database.adapter';
 import { IBookingAccess } from './ibooking-access.interface';
 
-class BookingAdapter implements IBookingAccess {
+export class BookingAdapter implements IBookingAccess {
   private _bookingService: IBookingService;
   private _logger: ILogger;
 
@@ -17,17 +16,29 @@ class BookingAdapter implements IBookingAccess {
     this._logger = config.logger;
   }
 
-  public bookARoom(booking: Booking): Promise<{ booking: Booking, faults: string[] }> {
+  public bookARoom(booking: {
+    roomID: number,
+    user: string,
+    date: Date
+  }): Promise<{ booking: Booking, faults: string[] }> {
+    return new Promise((resolve, reject) => {
 
+    });
   }
 
-  public cancelBooking(booking: Booking): Promise<{ success: boolean, faults: string[] }> {
+  public cancelBooking(booking: {
+    roomID: number,
+    user: string,
+    date: Date
+  }): Promise<{ success: boolean, faults: string[] }> {
+    return new Promise((resolve, reject) => {
 
+    });
   }
 
   public getBookings(query: { room: number, limit?: Date }): Promise<{ bookings: Booking[], faults: string[] }> {
+    return new Promise((resolve, reject) => {
 
+    });
   }
 }
-
-export { BookingAdapter };

@@ -1,8 +1,8 @@
-import { Booking, Room } from 'm2l-core';
+import { Booking } from 'm2l-core';
 
 import { IBookingDataAccess } from '../app';
 
-class BookingDatabaseAdapter implements IBookingDataAccess {
+export class BookingDatabaseAdapter implements IBookingDataAccess {
   constructor() { }
 
   public add(booking: Booking): Promise<Booking> {
@@ -11,7 +11,7 @@ class BookingDatabaseAdapter implements IBookingDataAccess {
     });
   }
 
-  public get(booking: { room: Room, date?: Date }): Promise<Booking[]> {
+  public get(booking: { roomID: number, date?: Date }): Promise<Booking[]> {
     return new Promise((resolve, reject) => {
 
     });
@@ -23,5 +23,3 @@ class BookingDatabaseAdapter implements IBookingDataAccess {
     });
   }
 }
-
-export { BookingDatabaseAdapter };

@@ -1,9 +1,17 @@
 import { Booking, Room } from 'm2l-core';
 
-interface IBookingService {
-  bookARoom(booking: Booking): Promise<Booking>;
-  cancelBooking(booking: Booking): Promise<boolean>;
-  getBookings(room: Room): Promise<Booking[]>;
-}
+export interface IBookingService {
+  bookARoom(booking: {
+    roomID: number,
+    user: string,
+    date: Date
+  }): Promise<Booking>;
 
-export { IBookingService };
+  cancelBooking(booking: {
+    roomID: number,
+    user: string,
+    date: Date
+  }): Promise<boolean>;
+
+  getBookings(filter: { roomID: number, date?: Date }): Promise<Booking[]>;
+}

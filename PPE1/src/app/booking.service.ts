@@ -1,11 +1,9 @@
-import { Booking, Room } from 'm2l-core';
-
-import { ILogger } from '../common';
+import { Booking, Room, ILogger } from 'm2l-core';
 
 import { IBookingDataAccess } from './ibooking-data-access.interface';
 import { IBookingService } from './ibooking-service.interface';
 
-class BookingService implements IBookingService {
+export class BookingService implements IBookingService {
   private _logger: ILogger;
   private _data: IBookingDataAccess;
 
@@ -17,25 +15,39 @@ class BookingService implements IBookingService {
     this._data = config.dataAccess;
   }
 
-  public bookARoom(booking: Booking): Promise<Booking> {
+  public bookARoom(booking: {
+    roomID: number,
+    user: string,
+    date: Date
+  }): Promise<Booking> {
+    // TODO: check user and room
+
     return new Promise((resolve, reject) => {
-      this._data.get({ room: booking.room, date: booking.date })
+      this._data.get({ roomID: booking.roomID, date: booking.date })
         .then((bookings: Booking[]) => {
           if (bookings.length) {
             reject('This room is already booked for this date');
             return;
           }
 
-          return this._data.add(booking);
+          let book = new Booking(booking);
+
+          return this._data.add(book);
         })
         .then(resolve)
         .catch(reject);
     })
   }
 
-  public cancelBooking(booking: Booking): Promise<boolean> {
+  public cancelBooking(booking: {
+    roomID: number,
+    user: string,
+    date: Date
+  }): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this._data.remove(booking)
+      let book = new Booking(booking);
+
+      this._data.remove(book)
         .then((success: boolean) => {
           if (!success) {
             this._logger.error("Unknown error");
@@ -49,14 +61,12 @@ class BookingService implements IBookingService {
     });
   }
 
-  public getBookings(room: Room): Promise<Booking[]> {
+  public getBookings(filter: { roomID: number, date?: Date }): Promise<Booking[]> {
     // TODO: add limit ?
     return new Promise((resolve, reject) => {
-      this._data.get({ room })
+      this._data.get({ roomID: filter.roomID, date: filter.date })
         .then(resolve)
         .catch(reject);
     });
   }
 }
-
-export { BookingService };

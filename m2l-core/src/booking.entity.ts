@@ -1,40 +1,36 @@
-import { Room } from './room.entity';
-
-class Booking {
-  private _room: Room;
+export class Booking {
+  private _roomID: number;
   private _user: string;
   private _date: Date;
 
   constructor(booking: {
-    room: Room,
+    roomID: number,
     user: string,
     date: Date
   }) {
-    this.room = booking.room;
+    this.roomID = booking.roomID;
     this.user = booking.user;
     this.date = booking.date;
   }
 
-  get room(): Room {
-    return this._room;
+  public get roomID(): number {
+    return this._roomID;
   }
-  set room(room: Room) {
-    this._room = room;
+  public set roomID(room: number) {
+    this._roomID = room;
   }
 
-  get user(): string {
+  public get user(): string {
     return this._user;
   }
-  set user(user: string) {
+  public set user(user: string) {
     this._user = user;
   }
 
-  get date(): Date {
+  public get date(): Date {
     return this._date;
   }
-  set date(date: Date) {
+  public set date(date: Date) {
     this._date = date;
   }
 }
-
-export { Booking };
