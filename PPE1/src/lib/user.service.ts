@@ -16,7 +16,6 @@ export class UserService implements IUserService {
   }
 
   public addUser(user_input: {
-    username: string,
     firstname: string,
     lastname: string,
     mail: string,
@@ -27,37 +26,29 @@ export class UserService implements IUserService {
     country: string
   }): Promise<User> {
     return new Promise((resolve, reject) => {
-      let user_model = {
-        username: user_input.username,
-        firstname: user_input.firstname,
-        lastname: user_input.lastname,
-        mail: user_input.mail,
-        phone: user_input.phone,
-        address: user_input.address,
-        zip: user_input.zip,
-        town: user_input.town,
-        country: user_input.country
-      }
+      // let user_model = {
+      //   firstname: user_input.firstname,
+      //   lastname: user_input.lastname,
+      //   mail: user_input.mail,
+      //   phone: user_input.phone,
+      //   address: user_input.address,
+      //   zip: user_input.zip,
+      //   town: user_input.town,
+      //   country: user_input.country
+      // }
 
-      let user = new User(user_model);
+      // let user = new User(user_model);
 
-      this._data.checkIfUserExists(user)
-        .then((res: { mail_taken: boolean, username_taken: boolean }) => {
-          if (res.mail_taken) {
-            this._logger.log(`Mail ${user.mail} already taken`);
-            reject(`Mail ${user.mail} already taken`);
+      this._data.checkIfUserExists(user_input.mail)
+        .then((res) => {
+          if (!res) {
+            this._logger.log(`Mail ${user_input.mail} already taken`);
+            reject(`Mail ${user_input.mail} already taken`);
             // TODO: check if this can cause issue for next Promise
             return;
           }
 
-          if (res.username_taken) {
-            this._logger.log(`Username ${user.username} already taken`);
-            reject(`Username ${user.username} already taken`);
-            // TODO: check if this can cause issue for next Promise
-            return;
-          }
-
-          return this._data.add(user);
+          return this._data.add(user_input);
         })
         .then((user_data: User) => {
           if (!user_data) {
@@ -75,14 +66,9 @@ export class UserService implements IUserService {
     });
   }
 
-  public getUser(user: { username?: string, mail?: string }): Promise<User> {
+  public getUser(id: number): Promise<User> {
     return new Promise((resolve, reject) => {
-      if (!user.username && !user.mail) {
-        reject('You must provide a username or a mail');
-        return;
-      }
-
-      this._data.get(user)
+      this._data.get(id)
         .then((user: User) => {
           if (!user) {
             reject('User not found');
@@ -95,7 +81,7 @@ export class UserService implements IUserService {
   }
 
   public updateUser(user_input: {
-    username: string,
+    id: number,
     firstname?: string,
     lastname?: string,
     mail?: string,
@@ -118,16 +104,16 @@ export class UserService implements IUserService {
     })
   }
 
-  public removeUser(username: string): Promise<boolean> {
+  public removeUser(id: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this._data.remove(username)
+      this._data.remove(id)
         .then((success: boolean) => {
           if (!success) {
             this._logger.error("Unknown error");
             reject("Unknown error");
           }
 
-          resolve(`User ${username} removed with success`);
+          resolve(true);
         })
         .catch((err: string) => {
           this._logger.error(err);

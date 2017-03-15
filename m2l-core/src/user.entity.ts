@@ -1,5 +1,5 @@
 export class User {
-  private _username: string;
+  private _id: number;
   private _firstname: string;
   private _lastname: string;
   private _mail: string;
@@ -10,7 +10,7 @@ export class User {
   private _country: string;
 
   constructor(user: {
-    username: string,
+    id: number,
     firstname: string,
     lastname: string,
     mail: string,
@@ -20,7 +20,7 @@ export class User {
     town: string,
     country: string
   }) {
-    this.username = user.username;
+    this.id = user.id;
     this.firstname = user.firstname;
     this.lastname = user.lastname;
     this.mail = user.mail;
@@ -31,11 +31,11 @@ export class User {
     this.country = user.country;
   }
 
-  public get username(): string {
-    return this._username;
+  public get id(): number {
+    return this._id;
   }
-  public set username(username: string) {
-    this._username = username;
+  public set id(id: number) {
+    this._id = id;
   }
 
   public get firstname(): string {

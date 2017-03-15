@@ -1,6 +1,6 @@
 import { User, ILogger } from 'm2l-core';
 
-import { UserService, IUserService } from '../app';
+import { UserService, IUserService } from '../lib';
 
 import { IUserAccess } from './iuser-access.interface';
 import { UserDatabaseAdapter } from './user-database.adapter';

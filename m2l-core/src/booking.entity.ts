@@ -1,15 +1,15 @@
 export class Booking {
   private _roomID: number;
-  private _user: string;
+  private _userID: number;
   private _date: Date;
 
   constructor(booking: {
     roomID: number,
-    user: string,
+    userID: number,
     date: Date
   }) {
     this.roomID = booking.roomID;
-    this.user = booking.user;
+    this.userID = booking.userID;
     this.date = booking.date;
   }
 
@@ -20,11 +20,11 @@ export class Booking {
     this._roomID = room;
   }
 
-  public get user(): string {
-    return this._user;
+  public get userID(): number {
+    return this._userID;
   }
-  public set user(user: string) {
-    this._user = user;
+  public set userID(userID: number) {
+    this._userID = userID;
   }
 
   public get date(): Date {

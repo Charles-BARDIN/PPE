@@ -2,7 +2,6 @@ import { User } from 'm2l-core';
 
 export interface IUserService {
   addUser(user_input: {
-    username: string,
     firstname: string,
     lastname: string,
     mail: string,
@@ -13,10 +12,10 @@ export interface IUserService {
     country: string
   }): Promise<User>;
 
-  getUser(user: { username?: string, mail?: string }): Promise<User>;
+  getUser(id: number): Promise<User>;
 
   updateUser(user_input: {
-    username: string,
+    id: number,
     firstname?: string,
     lastname?: string,
     mail?: string,
@@ -27,5 +26,5 @@ export interface IUserService {
     country?: string
   }): Promise<User>;
 
-  removeUser(username: string): Promise<boolean>;
+  removeUser(id: number): Promise<boolean>;
 }

@@ -1,33 +1,39 @@
 import { User } from "m2l-core";
 
-import { IUserDataAccess } from '../app';
+import { IUserDataAccess } from '../lib';
 
 export class UserDatabaseAdapter implements IUserDataAccess {
   constructor() { }
 
-  public checkIfUserExists(user: {
-    username: string,
-    mail: string
-  }): Promise<{ mail_taken: boolean, username_taken: boolean }> {
+  public checkIfUserExists(mail: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
 
     });
   }
 
-  public add(user: User): Promise<User> {
+  public add(user: {
+    firstname: string,
+    lastname: string,
+    mail: string,
+    phone: string,
+    address: string,
+    zip: string,
+    town: string,
+    country: string
+  }): Promise<User> {
     return new Promise((resolve, reject) => {
 
     });
   }
 
-  public get(user: { username?: string, mail?: string }): Promise<User> {
+  public get(id: number): Promise<User> {
     return new Promise((resolve, reject) => {
 
     });
   }
 
   public update(user: {
-    username: string,
+    id: number,
     firstname?: string,
     lastname?: string,
     mail?: string,
@@ -42,7 +48,7 @@ export class UserDatabaseAdapter implements IUserDataAccess {
     });
   }
 
-  public remove(username: string): Promise<boolean> {
+  public remove(id: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
 
     });

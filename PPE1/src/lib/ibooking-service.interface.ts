@@ -3,13 +3,13 @@ import { Booking, Room } from 'm2l-core';
 export interface IBookingService {
   bookARoom(booking: {
     roomID: number,
-    user: string,
+    userID: number,
     date: Date
   }): Promise<Booking>;
 
   cancelBooking(booking: {
     roomID: number,
-    user: string,
+    userID: number,
     date: Date
   }): Promise<boolean>;
 

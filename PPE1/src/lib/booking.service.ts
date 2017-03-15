@@ -17,7 +17,7 @@ export class BookingService implements IBookingService {
 
   public bookARoom(booking: {
     roomID: number,
-    user: string,
+    userID: number,
     date: Date
   }): Promise<Booking> {
     // TODO: check user and room
@@ -41,7 +41,7 @@ export class BookingService implements IBookingService {
 
   public cancelBooking(booking: {
     roomID: number,
-    user: string,
+    userID: number,
     date: Date
   }): Promise<boolean> {
     return new Promise((resolve, reject) => {

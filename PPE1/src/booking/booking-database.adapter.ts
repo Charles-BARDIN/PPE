@@ -1,6 +1,6 @@
 import { Booking } from 'm2l-core';
 
-import { IBookingDataAccess } from '../app';
+import { IBookingDataAccess } from '../lib';
 
 export class BookingDatabaseAdapter implements IBookingDataAccess {
   constructor() { }
