@@ -1,0 +1,90 @@
+.container {
+    width: 100% ;
+}
+.masthead {
+    display: flex ;
+    justify-content: space-evenly ; 
+    margin-top : 20px ;
+}
+.menu {
+    width : 80% ;
+}
+.nav-justified{
+    border : 0px ;
+    background-color: inherit;
+}
+
+.nav-justified > li > a {
+    background-image: none; 
+    background-color: inherit ;
+    border : none ;
+}
+.nav-justified > li > a:hover{
+    text-decoration: underline;
+}
+footer p {
+    text-align: right;
+}
+.notopnobottom {
+    padding-top : 0px ;
+    padding-bottom : 0px ;
+    margin-bottom :0px;
+    margin-top : 0px ;
+}
+.footernotop {
+    margin-top : 0px ;
+    padding-top : 10px ;
+    padding-bottom : 0px ;
+    margin-bottom :0px ;
+}
+.center {
+    text-align: center ;
+}
+.getaway {
+    margin-top : 50px ;
+}
+.borderbottom {
+    padding-bottom : 20px;
+    border-bottom: 2px solid ;
+}
+.biggermenu {
+    font-size: xx-large ;
+}
+
+.space {
+    width: 250px ;
+    margin-left: 100px ;
+    text-align: right;
+    border : 3px solid ;
+    border-radius :5px ; 
+}
+.profilespace {
+    width: 250px ;
+    margin-left: 100px ;
+}
+.labelo {
+    width: 100px; 
+    margin-bottom : 35px ;
+}
+.spaceSelect {
+    width: 100px; 
+    margin-left :250px;
+     border : 3px solid ;
+    border-radius :5px ; 
+}
+/*
+    Visualisation tablettes, smartphones.
+*/
+
+@media screen and ( max-width:780px) {
+    .logo {
+        text-align: center;
+    }
+    .labelo {
+        width : 10px ;
+        margin-bottom :0px ;
+    }
+}
+
+
+
