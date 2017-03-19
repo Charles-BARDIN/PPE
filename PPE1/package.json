@@ -20,6 +20,15 @@
   "dependencies": {
     "@types/express": "^4.0.35",
     "express": "^4.14.1",
-    "m2l-core": "../m2l-core"
+    "m2l-core": "../m2l-core",
+    "mongoose": "^4.9.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.2.2",
+    "nodemon": "^1.11.0",
+    "ts-loader": "^2.0.2",
+    "webpack": "^2.2.1"
   }
 }
