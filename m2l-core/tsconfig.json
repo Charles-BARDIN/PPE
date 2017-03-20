@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "noImplicitAny": true,
-    "removeComments": true,
-    "target": "ES6",
-    "preserveConstEnums": true,
+    "target": "esnext",
+    "declaration": true,
     "outDir": "build"
   },
   "include": [
-    "src/**/*"
+    "./src/**/*.ts"
+  ],
+  "exclude": [
+    "./src/**/*.spec.ts"
   ]
 }

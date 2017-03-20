@@ -17,6 +17,14 @@
     "clean:build": "rimraf -r ./build/*",
     "clean:tmp": "rimraf -r ./.tmp"
   },
+  "devDependencies": {
+    "typescript": "^2.2.1",
+    "@types/chai": "^3.4.35",
+    "@types/mocha": "^2.2.40",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "rimraf": "^2.6.1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
