@@ -1,3 +1,6 @@
 m2l-core/build
-PPE1/build
-PPE1/node_modules
+m2l-core/node_modules
+PPE1/booking-app/build
+PPE1/booking-app/node_modules
+PPE1/booking-lib/build
+PPE1/booking-lib/node_modules
