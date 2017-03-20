@@ -1,5 +1,5 @@
 {
-  "name": "booking-app",
+  "name": "m2l-node-logger",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,22 +17,15 @@
     "clean:build": "rimraf -r ./build/*",
     "clean:tmp": "rimraf -r ./.tmp"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@types/express": "^4.0.35",
-    "express": "^4.14.1",
-    "m2l-core": "../../m2l-core",
-    "mongoose": "^4.9.0"
-  },
   "devDependencies": {
-    "nodemon": "^1.11.0",
     "typescript": "^2.2.1",
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.40",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
     "rimraf": "^2.6.1"
-  }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
