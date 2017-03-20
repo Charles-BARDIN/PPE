@@ -2,13 +2,10 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "esnext",
-    "declaration": true,
+    "declaration": false,
     "outDir": "build"
   },
   "include": [
     "./src/**/*.ts"
-  ],
-  "exclude": [
-    "./src/**/*.spec.ts"
   ]
 }
