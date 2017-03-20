@@ -72,6 +72,14 @@ footer p {
      border : 3px solid ;
     border-radius :5px ; 
 }
+.spacebetween {
+    margin-right: 10% ;
+    margin-bottom: 25%;
+}
+.flexcenter {
+    display: flex ;
+    justify-content: center;
+}
 /*
     Visualisation tablettes, smartphones.
 */
@@ -84,6 +92,7 @@ footer p {
         width : 10px ;
         margin-bottom :0px ;
     }
+    
 }
 
 
