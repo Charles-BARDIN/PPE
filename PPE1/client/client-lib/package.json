@@ -15,14 +15,13 @@
     "pretest": "npm run -s build:t",
     "clean": "npm run -s clean:build && npm run -s clean:tmp",
     "clean:build": "rimraf -r ./build/*",
-    "clean:tmp": "rimraf -r ./.tmp",
-    "postinstall": "npm run build"
+    "clean:tmp": "rimraf -r ./.tmp"
   },
   "dependencies": {
-    "m2l-core": "../../m2l-core"
+    "m2l-core": "../../../m2l-core",
+    "typescript": "^2.2.1"
   },
   "devDependencies": {
-    "typescript": "^2.2.1",
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.40",
     "chai": "^3.5.0",
