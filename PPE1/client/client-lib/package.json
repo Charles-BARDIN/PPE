@@ -1,5 +1,5 @@
 {
-  "name": "booking-lib",
+  "name": "client-lib",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -19,8 +19,7 @@
     "postinstall": "npm run build"
   },
   "dependencies": {
-    "m2l-core": "../../m2l-core",
-    "m2l-node-logger": "../../m2l-node-logger"
+    "m2l-core": "../../m2l-core"
   },
   "devDependencies": {
     "typescript": "^2.2.1",

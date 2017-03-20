@@ -1,7 +1,9 @@
 m2l-core/build
 m2l-core/node_modules
+m2l-node-logger/build
+m2l-node-logger/node_modules
 PPE1/node_modules
-PPE1/booking-app/build
-PPE1/booking-app/node_modules
-PPE1/booking-lib/build
-PPE1/booking-lib/node_modules
+PPE1/client/client-app/dist
+PPE1/client/client-lib/node_modules
+PPE1/server/server-app/build
+PPE1/server/server-lib/node_modules

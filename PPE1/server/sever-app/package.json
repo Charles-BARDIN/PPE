@@ -1,5 +1,5 @@
 {
-  "name": "booking-app",
+  "name": "server-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -25,7 +25,8 @@
     "express": "^4.14.1",
     "mongoose": "^4.9.0",
     "m2l-core": "../../m2l-core",
-    "m2l-node-logger": "../../m2l-node-logger"
+    "m2l-node-logger": "../../m2l-node-logger",
+    "server-lib": "../../server-lib"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",
