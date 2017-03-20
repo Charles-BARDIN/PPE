@@ -15,7 +15,11 @@
     "pretest": "npm run -s build:t",
     "clean": "npm run -s clean:build && npm run -s clean:tmp",
     "clean:build": "rimraf -r ./build/*",
-    "clean:tmp": "rimraf -r ./.tmp"
+    "clean:tmp": "rimraf -r ./.tmp",
+    "postinstall": "npm run build"
+  },
+  "dependencies": {
+    "m2l-core": "../../m2l-core"
   },
   "devDependencies": {
     "typescript": "^2.2.1",
