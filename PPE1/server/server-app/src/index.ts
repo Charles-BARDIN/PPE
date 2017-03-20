@@ -1,6 +1,6 @@
 import { Server } from './server';
 
-import { LoggerAdapter } from './common';
+import { LoggerAdapter } from 'm2l-node-logger';
 
 const logger = new LoggerAdapter();
 

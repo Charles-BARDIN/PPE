@@ -1,6 +1,6 @@
 import { Room } from 'm2l-core';
 
-import { IRoomDataAccess } from '../lib';
+import { IRoomDataAccess } from 'server-lib';
 
 export class RoomDatabaseAdapter implements IRoomDataAccess {
   constructor() { }
