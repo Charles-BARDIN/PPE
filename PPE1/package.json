@@ -7,7 +7,11 @@
     "doc": "doc"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run test:logger & npm run test:clib & npm run test:slib & npm run test:sapp",
+    "test:logger": "cd ../m2l-node-logger && npm test",
+    "test:clib": "cd client/client-lib && npm test",
+    "test:slib": "cd server/server-lib && npm test",
+    "test:sapp": "cd server/server-app && npm test",
     "init": "npm install && npm run link && npm run install:all",
     "link": "npm run link:core && npm run link:logger && npm run link:clib && npm run link:capp && npm run link:slib && npm run link:sapp",
     "link:core": "cd ../m2l-core && npm link",
