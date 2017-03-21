@@ -15,7 +15,8 @@
     "pretest": "npm run -s build:t",
     "clean": "npm run -s clean:build && npm run -s clean:tmp",
     "clean:build": "rimraf -r ./build/*",
-    "clean:tmp": "rimraf -r ./.tmp"
+    "clean:tmp": "rimraf -r ./.tmp",
+    "dev": "npm run build:w && nodemon ."
   },
   "keywords": [],
   "author": "",

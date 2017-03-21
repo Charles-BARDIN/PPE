@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "init": "npm run link && npm run install:all && npm run build",
+    "init": "npm install && npm run link && npm run install:all && npm run build",
     "link": "npm run link:core && npm run link:logger && npm run link:clib && npm run link:capp && npm run link:slib && npm run link:sapp",
     "link:core": "cd ../m2l-core && npm link",
     "link:logger": "cd ../m2l-node-logger && npm link && npm link m2l-core",
@@ -30,15 +30,18 @@
     "build:capp": "cd client/client-app && npm run build",
     "build:slib": "cd server/server-lib && npm run build",
     "build:sapp": "cd server/server-app && npm run build",
-    "dev": "npm run dev:core && npm run dev:logger && npm run dev:clib && npm run dev:capp && npm run dev:slib && npm run dev:sapp",
+    "dev": "concurrently \"npm run dev:core\" \"npm run dev:logger\" \"npm run dev:clib\" \"npm run dev:capp\" \"npm run dev:slib\" \"npm run dev:sapp\"",
     "dev:core": "cd ../m2l-core && npm run build:w",
     "dev:logger": "cd ../m2l-node-logger && npm run build:w",
     "dev:clib": "cd client/client-lib && npm run build:w",
-    "dev:capp": "cd client/client-app && npm run build:w",
+    "dev:capp": "cd client/client-app && npm run dev",
     "dev:slib": "cd server/server-lib && npm run build:w",
-    "dev:sapp": "cd server/server-app && npm run build:w"
+    "dev:sapp": "cd server/server-app && npm run dev"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^3.4.0"
+  }
 }
