@@ -1,5 +1,5 @@
 {
-  "name": "Réservation M2L",
+  "name": "booking-m2l",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,12 +7,38 @@
     "doc": "doc"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "npm run link && npm run install:all && npm run build",
+    "link": "npm run link:core && npm run link:logger && npm run link:clib && npm run link:capp && npm run link:slib && npm run link:sapp",
+    "link:core": "cd ../m2l-core && npm link",
+    "link:logger": "cd ../m2l-node-logger && npm link && npm link m2l-core",
+    "link:clib": "cd client/client-lib && npm link && npm link m2l-core",
+    "link:capp": "cd client/client-app && npm link && npm link m2l-core && npm link client-lib",
+    "link:slib": "cd server/server-lib && npm link && npm link m2l-core && npm link m2l-node-logger",
+    "link:sapp": "cd server/server-app && npm link && npm link m2l-core && npm link m2l-node-logger && npm link server-lib",
+    "install:all": "npm run install:core && npm run install:logger && npm run install:clib && npm run install:capp && npm run install:slib && npm run install:sapp",
+    "install:core": "cd ../m2l-core && npm i",
+    "install:logger": "cd ../m2l-node-logger && npm i",
+    "install:clib": "cd client/client-lib && npm i",
+    "install:capp": "cd client/client-app && npm i",
+    "install:slib": "cd server/server-lib && npm i",
+    "install:sapp": "cd server/server-app && npm i",
+    "build": "npm run build:core && npm run build:logger && npm run build:clib && npm run build:capp && npm run build:slib && npm run build:sapp",
+    "build:core": "cd ../m2l-core && npm run build",
+    "build:logger": "cd ../m2l-node-logger && npm run build",
+    "build:clib": "cd client/client-lib && npm run build",
+    "build:capp": "cd client/client-app && npm run build",
+    "build:slib": "cd server/server-lib && npm run build",
+    "build:sapp": "cd server/server-app && npm run build",
+    "dev": "npm run dev:core && npm run dev:logger && npm run dev:clib && npm run dev:capp && npm run dev:slib && npm run dev:sapp",
+    "dev:core": "cd ../m2l-core && npm run build:w",
+    "dev:logger": "cd ../m2l-node-logger && npm run build:w",
+    "dev:clib": "cd client/client-lib && npm run build:w",
+    "dev:capp": "cd client/client-app && npm run build:w",
+    "dev:slib": "cd server/server-lib && npm run build:w",
+    "dev:sapp": "cd server/server-app && npm run build:w"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "gulp": "^3.9.1"
-  }
+  "license": "ISC"
 }
