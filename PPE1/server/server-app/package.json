@@ -16,7 +16,7 @@
     "clean": "npm run -s clean:build && npm run -s clean:tmp",
     "clean:build": "rimraf -r ./build/*",
     "clean:tmp": "rimraf -r ./.tmp",
-    "dev": "npm run build:w && nodemon ."
+    "dev": "concurrently \"npm run build:w\" \"nodemon .\""
   },
   "keywords": [],
   "author": "",
@@ -36,6 +36,7 @@
     "@types/mocha": "^2.2.40",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.1",
+    "concurrently": "^3.4.0"
   }
 }
