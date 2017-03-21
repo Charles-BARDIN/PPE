@@ -2,12 +2,11 @@
   "name": "client-app",
   "version": "1.0.0",
   "description": " ",
-  "author": " ",
+  "author": "Charles BARDIN <charles.bardin.pro@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "build": "node build/build.js"
   },
   "dependencies": {
     "client-lib": "../client-lib",
@@ -17,7 +16,6 @@
   "devDependencies": {
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",
-    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-preset-env": "^1.2.1",
@@ -27,13 +25,6 @@
     "connect-history-api-fallback": "^1.3.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
-    "eslint": "^3.14.1",
-    "eslint-friendly-formatter": "^2.0.7",
-    "eslint-loader": "^1.6.1",
-    "eslint-plugin-html": "^2.0.0",
-    "eslint-config-airbnb-base": "^11.0.1",
-    "eslint-import-resolver-webpack": "^0.8.1",
-    "eslint-plugin-import": "^2.2.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.14.1",
     "extract-text-webpack-plugin": "^2.0.0",
