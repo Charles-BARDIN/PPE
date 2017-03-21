@@ -1,12 +1,11 @@
 import { Booking, ILogger } from 'm2l-core';
 
-import { BookingService, IBookingService } from 'server-lib';
+import { BookingService } from 'server-lib';
 
 import { BookingDatabaseAdapter } from './booking-database.adapter';
-import { IBookingAccess } from './ibooking-access.interface';
 
-export class BookingAdapter implements IBookingAccess {
-  private _bookingService: IBookingService;
+export class BookingAdapter {
+  private _bookingService: BookingService;
   private _logger: ILogger;
 
   constructor(config: { logger: ILogger }) {

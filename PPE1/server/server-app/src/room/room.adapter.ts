@@ -1,12 +1,11 @@
 import { Room, ILogger } from "m2l-core";
 
-import { RoomService, IRoomService } from 'server-lib';
+import { RoomService } from 'server-lib';
 
-import { IRoomAccess } from './iroom-access.interface';
 import { RoomDatabaseAdapter } from './room-database.adapter';
 
-export class RoomAdapter implements IRoomAccess {
-  private _roomService: IRoomService;
+export class RoomAdapter {
+  private _roomService: RoomService;
   private _logger: ILogger;
 
   constructor(config: { logger: ILogger }) {

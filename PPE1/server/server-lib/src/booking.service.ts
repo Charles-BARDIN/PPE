@@ -1,9 +1,8 @@
 import { Booking, Room, ILogger } from 'm2l-core';
 
 import { IBookingDataAccess } from './ibooking-data-access.interface';
-import { IBookingService } from './ibooking-service.interface';
 
-export class BookingService implements IBookingService {
+export class BookingService {
   private _logger: ILogger;
   private _data: IBookingDataAccess;
 

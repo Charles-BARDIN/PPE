@@ -1,9 +1,8 @@
 import { User, ILogger } from 'm2l-core';
 
 import { IUserDataAccess } from './iuser-data-access.interface';
-import { IUserService } from './iuser-service.interface';
 
-export class UserService implements IUserService {
+export class UserService {
   private _logger: ILogger;
   private _data: IUserDataAccess;
 
@@ -26,19 +25,6 @@ export class UserService implements IUserService {
     country: string
   }): Promise<User> {
     return new Promise((resolve, reject) => {
-      // let user_model = {
-      //   firstname: user_input.firstname,
-      //   lastname: user_input.lastname,
-      //   mail: user_input.mail,
-      //   phone: user_input.phone,
-      //   address: user_input.address,
-      //   zip: user_input.zip,
-      //   town: user_input.town,
-      //   country: user_input.country
-      // }
-
-      // let user = new User(user_model);
-
       this._data.checkIfUserExists(user_input.mail)
         .then((res) => {
           if (!res) {

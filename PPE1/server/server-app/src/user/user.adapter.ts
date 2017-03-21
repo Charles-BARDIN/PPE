@@ -1,12 +1,11 @@
 import { User, ILogger } from 'm2l-core';
 
-import { UserService, IUserService } from 'server-lib';
+import { UserService } from 'server-lib';
 
-import { IUserAccess } from './iuser-access.interface';
 import { UserDatabaseAdapter } from './user-database.adapter';
 
-export class UserAdapter implements IUserAccess {
-  private _userService: IUserService;
+export class UserAdapter {
+  private _userService: UserService;
   private _logger: ILogger;
 
   constructor(config: { logger: ILogger }) {

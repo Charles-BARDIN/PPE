@@ -1,9 +1,8 @@
 import { Room, ILogger } from 'm2l-core';
 
-import { IRoomService } from './iroom-service.interface';
 import { IRoomDataAccess } from './iroom-data-access.interface';
 
-export class RoomService implements IRoomService{
+export class RoomService {
   private _logger: ILogger;
   private _data: IRoomDataAccess;
 
