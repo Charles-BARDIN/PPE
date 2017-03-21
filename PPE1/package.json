@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "init": "npm install && npm run link && npm run install:all && npm run build",
+    "init": "npm install && npm run link && npm run install:all",
     "link": "npm run link:core && npm run link:logger && npm run link:clib && npm run link:capp && npm run link:slib && npm run link:sapp",
     "link:core": "cd ../m2l-core && npm link",
     "link:logger": "cd ../m2l-node-logger && npm link && npm link m2l-core",
