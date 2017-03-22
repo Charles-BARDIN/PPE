@@ -18,10 +18,10 @@
     "clean:tmp": "rimraf -r ./.tmp"
   },
   "dependencies": {
-    "@types/node": "^7.0.8",
     "m2l-core": "../m2l-core"
   },
   "devDependencies": {
+    "@types/node": "^7.0.8",
     "typescript": "^2.2.1",
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.40",
