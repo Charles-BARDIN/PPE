@@ -7,7 +7,7 @@
     "doc": "doc"
   },
   "scripts": {
-    "init": "npm install && npm run link && npm run install:all",
+    "init": "npm install && npm run link && npm run install:all && npm run build:core && npm run build:logger && npm run build:clib && npm run build:slib",
 
     "test": "npm run test:logger & npm run test:clib & npm run test:slib & npm run test:sapp",
     "test:logger": "cd ../m2l-node-logger && npm test",
