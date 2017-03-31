@@ -47,10 +47,4 @@ export class UserDatabaseAdapter implements IUserDataAccess {
 
     });
   }
-
-  public remove(id: number): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-
-    });
-  }
 }

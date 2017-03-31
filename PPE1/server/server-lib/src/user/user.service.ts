@@ -89,22 +89,4 @@ export class UserService {
         })
     })
   }
-
-  public removeUser(id: number): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this._data.remove(id)
-        .then((success: boolean) => {
-          if (!success) {
-            this._logger.error("Unknown error");
-            reject("Unknown error");
-          }
-
-          resolve(true);
-        })
-        .catch((err: string) => {
-          this._logger.error(err);
-          reject(err);
-        })
-    })
-  }
 }

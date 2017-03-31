@@ -27,6 +27,4 @@ export interface IUserDataAccess {
     town?: string,
     country?: string
   }): Promise<User>;
-
-  remove(id: number): Promise<boolean>;
 }
