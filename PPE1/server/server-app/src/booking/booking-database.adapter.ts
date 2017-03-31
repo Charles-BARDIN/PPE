@@ -16,10 +16,4 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
 
     });
   }
-
-  public remove(booking: Booking): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-
-    });
-  }
 }

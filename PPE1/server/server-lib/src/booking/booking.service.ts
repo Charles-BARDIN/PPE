@@ -38,28 +38,6 @@ export class BookingService {
     })
   }
 
-  public cancelBooking(booking: {
-    roomID: number,
-    userID: number,
-    date: Date
-  }): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      let book = new Booking(booking);
-
-      this._data.remove(book)
-        .then((success: boolean) => {
-          if (!success) {
-            this._logger.error("Unknown error");
-            reject('Unknown error');
-            return;
-          }
-
-          resolve(success);
-        })
-        .catch(reject);
-    });
-  }
-
   public getBookings(filter: { roomID: number, date?: Date }): Promise<Booking[]> {
     // TODO: add limit ?
     return new Promise((resolve, reject) => {

@@ -4,6 +4,4 @@ export interface IBookingDataAccess {
   add(booking: Booking): Promise<Booking>;
 
   get(booking: { roomID: number, date?: Date }): Promise<Booking[]>;
-  
-  remove(booking: Booking): Promise<boolean>;
 }
