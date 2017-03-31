@@ -24,7 +24,6 @@
   "dependencies": {
     "@types/express": "^4.0.35",
     "express": "^4.14.1",
-    "mongoose": "^4.9.0",
     "m2l-core": "../../../m2l-core",
     "m2l-node-logger": "../../../m2l-node-logger",
     "server-lib": "../server-lib"
