@@ -24,18 +24,4 @@ export class RoomService {
         });
     })
   }
-
-  // The following methods are not in the requirements
-  
-  // public addRoom() {
-
-  // }
-
-  // public removeRoom() {
-
-  // }
-
-  // public updateRoom() {
-
-  // }
 }

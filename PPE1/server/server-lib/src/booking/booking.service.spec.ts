@@ -12,19 +12,25 @@ let dataAccess: IBookingDataAccess, booking: Booking, bookingService: BookingSer
 describe('Booking Service', () => {
   beforeEach(() => {
     dataAccess = {
-      add: function add(booking: Booking): Promise<Booking> {
+      add: (booking: Booking) => {
         return new Promise((resolve, reject) => {
           resolve({ roomID: 1, userID: 1, date: new Date() });
         });
       },
-      get: function get(booking: { roomID: number, date?: Date }): Promise<Booking[]> {
+      get: (booking: { roomID: number, date?: Date }) => {
         return new Promise((resolve, reject) => {
           resolve([]);
         });
       }
     };
 
-    logger = new LoggerAdapter();
+    logger = {
+      debug: () => null,
+      log: () => null,
+      info: () => null,
+      warn: () => null,
+      error: () => null
+    };
 
     bookingService = new BookingService({ logger, dataAccess });
   });
@@ -39,8 +45,8 @@ describe('Booking Service', () => {
     });
 
     it('Should call the get method of the dataAccess', done => {
-      dataAccess.get = function get(booking: Booking): Promise<Booking[]> {
-        return new Promise((resolve, reject) => {
+      dataAccess.get = (booking: Booking) => {
+        return new Promise(() => {
           done();
         });
       };
@@ -50,7 +56,7 @@ describe('Booking Service', () => {
     });
 
     it('Should call the add method of the dataAccess', done => {
-      dataAccess.add = function add(booking: Booking): Promise<Booking> {
+      dataAccess.add = (booking: Booking) => {
         return new Promise((resolve, reject) => {
           done();
         });
@@ -61,7 +67,7 @@ describe('Booking Service', () => {
     });
 
     it('Should reject the promise if the room is taken', (done) => {
-      dataAccess.get = function get(booking: { roomID: number, date: Date }): Promise<Booking[]> {
+      dataAccess.get = (booking: { roomID: number, date: Date }) => {
         return new Promise((resolve, reject) => {
           resolve([
             {
@@ -100,7 +106,7 @@ describe('Booking Service', () => {
     });
 
     it('Should call the get method of the dataAccess', done => {
-      dataAccess.get = function get(booking: Booking): Promise<Booking[]> {
+      dataAccess.get = (booking: Booking) => {
         return new Promise((resolve, reject) => {
           done();
         });

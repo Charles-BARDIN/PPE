@@ -14,7 +14,10 @@ export interface IUserDataAccess {
     country: string
   }): Promise<User>;
 
-  get(id: number): Promise<User>;
+  getUserByCredentials(credentials:{
+    mail: string,
+    password: string
+  }): Promise<User>;
 
   update(user: {
     id: number,

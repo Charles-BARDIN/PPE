@@ -27,7 +27,7 @@ export class UserService {
     return new Promise((resolve, reject) => {
       this._data.checkIfUserExists(user_input.mail)
         .then((res) => {
-          if (!res) {
+          if (res) {
             this._logger.log(`Mail ${user_input.mail} already taken`);
             reject(`Mail ${user_input.mail} already taken`);
             // TODO: check if this can cause issue for next Promise
@@ -52,17 +52,17 @@ export class UserService {
     });
   }
 
-  public getUser(id: number): Promise<User> {
+  public login(credentials: { mail: string, password: string }): Promise<User> {
     return new Promise((resolve, reject) => {
-      this._data.get(id)
-        .then((user: User) => {
-          if (!user) {
-            reject('User not found');
-            return;
+      this._data.getUserByCredentials(credentials)
+        .then(user => {
+          if (user) {
+            resolve(user);
+          } else {
+            reject();
           }
-
-          resolve(user);
         })
+        .catch(reject);
     });
   }
 
