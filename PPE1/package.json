@@ -21,9 +21,9 @@
     "link:core": "cd ../m2l-core && npm link",
     "link:logger": "cd ../m2l-node-logger && npm link && npm link m2l-core",
     "link:clib": "cd client/client-lib && npm link && npm link m2l-core",
-    "link:capp": "cd client/client-app && npm link m2l-core && npm link client-lib",
-    "link:slib": "cd server/server-lib && npm link && npm link m2l-core && npm link m2l-node-logger",
-    "link:sapp": "cd server/server-app && npm link m2l-core && npm link m2l-node-logger && npm link server-lib",
+    "link:capp": "cd client/client-app && npm link m2l-core client-lib",
+    "link:slib": "cd server/server-lib && npm link && npm link m2l-core m2l-node-logger",
+    "link:sapp": "cd server/server-app && npm link m2l-core m2l-node-logger server-lib",
 
     "install:all": "npm run install:core && npm run install:logger && npm run install:clib && npm run install:capp && npm run install:slib && npm run install:sapp",
     "install:core": "cd ../m2l-core && npm i",
