@@ -25,13 +25,13 @@ describe('User Service', () => {
         town: string,
         country: string
       }) => {
-        return new Promise(resolve => resolve());
+        return new Promise(resolve => resolve(new User(user)));
       },
       getUserByCredentials: (credentials: {
         mail: string,
         password: string
       }) => {
-        return new Promise(resolve => resolve());
+        return new Promise(resolve => resolve(new User(user)));
       },
       update: (user: {
         id: number,
@@ -44,7 +44,7 @@ describe('User Service', () => {
         town?: string,
         country?: string
       }) => {
-        return new Promise(resolve => resolve());
+        return new Promise(resolve => resolve(new User(user)));
       }
     }
 
@@ -80,7 +80,7 @@ describe('User Service', () => {
     it('Should call the checkIfUserExists method of the dataAccess', done => {
       dataAccess.checkIfUserExists = () => {
         return new Promise(() => {
-          done()
+          done();
         });
       };
 
@@ -97,14 +97,17 @@ describe('User Service', () => {
       userService.addUser(user);
     });
 
-    it('Should reject the promise if the user already exists', () => {
+    it('Should reject the promise if the user already exists', done => {
       dataAccess.checkIfUserExists = () => {
         return new Promise(resolve => {
           resolve(true);
         });
       };
 
-      userService.addUser(user);
+      userService.addUser(user)
+        .catch(() => {
+          done();
+        });
     });
   });
 
@@ -121,6 +124,7 @@ describe('User Service', () => {
       dataAccess.getUserByCredentials = () => {
         return new Promise(resolve => {
           done();
+          resolve(new User(user));
         });
       };
 
