@@ -1,22 +1,22 @@
 <template>
-    <div class="jumbotron notopnobottom">
+    <div class="inscription">
       <h1>Inscription</h1>
       <form>
         <div>
-          <label for="lastname" class="labelo">Nom</label>
+          <label for="lastname">Nom</label>
           <input type="text" name="lastname" class="space" />
         </div>
         <div>
-          <label for="firstname" class="labelo">Prénom</label>
+          <label for="firstname">Prénom</label>
           <input type="text" name="firstname" class="space" />
         </div>
         <div>
-          <label for="numberstreet" class="labelo">N°</label>
+          <label for="numberstreet">N°</label>
           <input type="number" min="0" name="numberstreet" class="space"/>
         </div>
         <div>
-          <label for="labelStreet" class="labelo">Voie</label>
-          <select name="labelStreet" id="labelStreet" class="spaceSelect">
+          <label for="labelStreet">Voie</label>
+          <select name="labelStreet" id="labelStreet">
             <option value="blanck" selected> </option>
             <option value="rue">Rue</option>
             <option value="ruelle">Ruelle</option>
@@ -27,16 +27,16 @@
           </select>
         </div>
         <div>
-          <label for="adress" class="labelo">Adresse</label>
+          <label for="adress">Adresse</label>
           <input type="text" name="adress" class="space" />
         </div>
         <div>
-          <label for="city" class="labelo">Ville</label>
+          <label for="city">Ville</label>
           <input type="text" name="city" class="space" />
         </div>
         <div>
-          <label for="country" class="labelo">Pays</label>
-          <select name="country" id="country" class="spaceSelect">
+          <label for="country">Pays</label>
+          <select name="country" id="country">
               <option value="france" selected>France</option>
               <option value="allemagne">Allemagne</option>
               <option value="luxembourg">Luxembourg</option>
@@ -45,30 +45,40 @@
           </select>
         </div>
         <div>
-          <label for="mail" class="labelo">Adresse mail</label>
+          <label for="mail">Adresse mail</label>
           <input type="email" name="email" class="space" />
         </div>
         <div>
-          <label for="name" class="labelo">Téléphone</label>
+          <label for="name">Téléphone</label>
           <input type="text" name="name" class="space" />
         </div>
         <div>
-          <label for="name" class="labelo">Mot de passe</label>
+          <label for="name">Mot de passe</label>
           <input type="password" name="name" class="space" />
         </div>
         <div>
-          <label for="name" class="labelo">Confirmation</label>
+          <label for="name">Confirmation</label>
           <input type="confirm" name="name" class="space" />
         </div>
 
-        <input type="submit" value="S'inscrire" />
+        <M2LButton label="Inscription" v-bind:action="register" />
       </form>
   </div>
 </template>
 
 <script>
+  import M2LButton from '@/components/M2LButton'
+
   export default {
-    name: 'inscription'
+    name: 'inscription',
+    methods: {
+      register: () => {
+        console.log('registered')
+      }
+    },
+    components: {
+      M2LButton
+    }
   }
 </script>
 

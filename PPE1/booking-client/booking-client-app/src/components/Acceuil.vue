@@ -1,7 +1,9 @@
 <template>
-      <div class="jumbotron notopnobottom">
+    <div class="accueil">
       <h1>M2L Accueil</h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique repellat in sed aliquam voluptates, cumque atque
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique repellat in sed aliquam voluptates, cumque atque
         libero suscipit soluta, necessitatibus labore ex deserunt dicta ullam ducimus vel. Harum, numquam, vero. Lorem ipsum
         dolor sit amet, consectetur adipisicing elit. Similique repellat in sed aliquam voluptates, cumque atque libero suscipit
         soluta, necessitatibus labore ex deserunt dicta ullam ducimus vel. Harum, numquam, vero. Lorem ipsum dolor sit amet,
@@ -14,38 +16,32 @@
         Similique repellat in sed aliquam voluptates, cumque atque libero suscipit soluta, necessitatibus labore ex deserunt
         dicta ullam ducimus vel. Harum, numquam, vero.
       </p>
-       <p class="getaway"><a class="btn btn-lg btn-success" href="#" role="button">Réserver une salle</a></p>
-      </div>
+
+       <M2LButton label="Réserver une salle" v-bind:action="bookARoom" />
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'header',
-  data () {
-    return {
-      msg: 'Hello world'
+  import M2LButton from '@/components/M2LButton'
+
+  import router from '@/router'
+
+  export default {
+    name: 'accueil',
+    components: {
+        M2LButton
+    },
+    methods: {
+      bookARoom: () => {
+        router.push('reservation')
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+  h1 {
+    font-weight: normal;
+  }
 </style>

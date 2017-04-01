@@ -1,59 +1,42 @@
 <template>
-<div class="jumbotron notopnobottom">
+<div class="reservation">
       <h1>Réservation</h1>
 
-      <form action="">
+      <form>
         <select name="room" id="room" class="spacebetween">
-                    <option value="amphiteatre">amphiteatre</option>
-                    <option value="reunion">Salle de réunion</option>
-                    <option value="convivial">Salle de convivialité</option>
-                </select>
+            <option value="amphiteatre">amphiteatre</option>
+            <option value="reunion">Salle de réunion</option>
+            <option value="convivial">Salle de convivialité</option>
+        </select>
         <datepicker></datepicker>
-        <br>
-        <input type="submit" class="btn btn-lg btn-success" value="Enregistrer ma réservation">
+
+        <M2LButton label="Enregistrer ma réservation" v-bind:action="book" />
       </form>
     </div>
   </div>
-    
 </template>
 
 <script>
-
 import Datepicker from 'vuejs-datepicker';
-
+import M2LButton from '@/components/M2LButton';
 
 export default {
-  name: 'header',
-  data () {
-    return {
-      msg: 'Hello world'
-    }
-  }, 
+  name: 'reservation', 
   components: {
-      Datepicker
+      Datepicker,
+      M2LButton
+  },
+  methods: {
+    book: () => {
+      console.log('Booked');
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1 {
   font-weight: normal;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-
-
 </style>
