@@ -1,0 +1,42 @@
+{
+  "name": "booking-server-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --project ./tsconfig.json",
+    "prebuild": "npm run -s clean",
+    "postbuild": "npm run -s clean:tmp",
+    "build:t": "tsc --project ./tsconfig.spec.json",
+    "prebuild:t": "npm run -s prebuild",
+    "build:w": "tsc -w",
+    "prebuild:w": "npm run -s prebuild",
+    "test": "mocha build/**/*.spec.js",
+    "pretest": "npm run -s build:t",
+    "clean": "npm run -s clean:build && npm run -s clean:tmp",
+    "clean:build": "rimraf -r ./build/*",
+    "clean:tmp": "rimraf -r ./.tmp",
+    "dev": "concurrently \"npm run build:w\" \"nodemon .\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.0.35",
+    "express": "^4.14.1",
+    "mysql": "^2.13.0",
+    "m2l-core": "../../../m2l-core",
+    "m2l-node-logger": "../../../m2l-node-logger",
+    "booking-server-lib": "../booking-server-lib"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "typescript": "^2.2.1",
+    "@types/chai": "^3.4.35",
+    "@types/mocha": "^2.2.40",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "rimraf": "^2.6.1",
+    "concurrently": "^3.4.0"
+  }
+}
