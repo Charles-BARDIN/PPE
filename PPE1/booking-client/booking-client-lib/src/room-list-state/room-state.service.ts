@@ -3,7 +3,7 @@ import { Room } from 'm2l-core';
 import { IRoomGateway } from './i-room-gateway.interface';
 import { IRoomController } from './i-room-controller.interface';
 
-class RoomService {
+export class RoomService {
   private _roomGateway: IRoomGateway;
   private _controller: IRoomController;
 
