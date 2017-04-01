@@ -16,8 +16,6 @@
     "clean:dist": "rimraf -r ./dist/*"
   },
   "dependencies": {
-    "m2l-core": "../../../m2l-core",
-    "m2l-node-logger": "../../../m2l-node-logger"
   },
   "devDependencies": {
     "typescript": "^2.2.1",

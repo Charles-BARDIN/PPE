@@ -16,7 +16,6 @@
     "clean:dist": "rimraf -r ./dist/*"
   },
   "dependencies": {
-    "m2l-core": "../m2l-core"
   },
   "devDependencies": {
     "@types/node": "^7.0.8",

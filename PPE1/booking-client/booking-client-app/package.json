@@ -9,7 +9,6 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "booking-client-lib": "../booking-client-lib",
     "vue": "^2.2.2",
     "vue-router": "^2.2.0"
   },
