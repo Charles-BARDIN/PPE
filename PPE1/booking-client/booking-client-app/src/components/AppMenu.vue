@@ -41,7 +41,7 @@ export default {
           }
         },
         {
-          label: 'Inscriptions',
+          label: 'Inscription',
           action: () => {
             router.push('inscription')
           }
