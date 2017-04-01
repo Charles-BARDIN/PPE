@@ -1,55 +1,17 @@
 <template>
   <div id="app">
-    <AppMenu v-bind:items="menuItems" />
+    <AppMenu />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import router from '@/router';
-
 import AppMenu from '@/components/AppMenu';
 
 export default {
   name: 'app',
   components: {
       AppMenu
-  },
-  data () {
-    return {
-      menuItems: [
-        {
-          label: 'Acceuil',
-          action: () => {
-            router.push('/')
-          }
-        },
-        {
-          label: 'Salles',
-          action: () => {
-            router.push('salle')
-          }
-        },
-        {
-          label: 'Réservation',
-          action: () => {
-            router.push('reservation')
-          }
-        },
-        {
-          label: 'Inscriptions',
-          action: () => {
-            router.push('inscription')
-          }
-        },
-        {
-          label: 'Profile',
-          action: () => {
-            router.push('profil')
-          }
-        },
-      ]
-    }
   }
 }
 </script>

@@ -2,22 +2,59 @@
   <div class="app-menu">
   <div class="masthead borderbottom">
       <span class="logo">
-          <router-link to="/"><img src="../assets/ligue.png" alt="logo"></router-link>
-        </span>
+        <router-link to="/"><img src="../assets/ligue.png" alt="logo"></router-link>
+      </span>
       <nav class="menu">
         <ul class="nav nav-justified">
           <li class="biggermenu" v-for="item in items"><a v-on:click="item.action">{{ item.label }}</a></li>
         </ul>
       </nav>
     </div>
-    </div>
+  </div>
     
 </template>
 
 <script>
+import router from '@/router';
+
 export default {
   name: 'app-menu',
-  props: ['items']
+  data () {
+    return {
+      items: [
+        {
+          label: 'Acceuil',
+          action: () => {
+            router.push('/')
+          }
+        },
+        {
+          label: 'Salles',
+          action: () => {
+            router.push('salle')
+          }
+        },
+        {
+          label: 'Réservation',
+          action: () => {
+            router.push('reservation')
+          }
+        },
+        {
+          label: 'Inscriptions',
+          action: () => {
+            router.push('inscription')
+          }
+        },
+        {
+          label: 'Profile',
+          action: () => {
+            router.push('profil')
+          }
+        },
+      ]
+    }
+  }
 }
 </script>
 
