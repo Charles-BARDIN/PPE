@@ -13,7 +13,7 @@ export class IndexStateService {
     this._auth = config.authService;
   }
 
-  public goToBookingState() {
+  public goToBookingState(): void {
     if(this._auth.userIsConnected()) {
       this._nav.goTo('booking');
     } else {
