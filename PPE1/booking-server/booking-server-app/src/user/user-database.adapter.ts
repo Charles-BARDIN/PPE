@@ -2,14 +2,20 @@ import { User } from "m2l-core";
 
 import { IUserDataAccess } from 'booking-server-lib';
 
+import { Database } from '../common';
+
 export class UserDatabaseAdapter implements IUserDataAccess {
-  constructor() { }
+  private _db: Database;
+
+  constructor(config: { database: Database }) {
+    this._db = config.database;
+  }
 
   public checkIfUserExists(mail: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
 
     });
-  }
+  };
 
   public add(user: {
     firstname: string,
@@ -24,13 +30,16 @@ export class UserDatabaseAdapter implements IUserDataAccess {
     return new Promise((resolve, reject) => {
 
     });
-  }
+  };
 
-  public get(id: number): Promise<User> {
+  public getUserByCredentials(credentials: {
+    mail: string,
+    password: string
+  }): Promise<User> {
     return new Promise((resolve, reject) => {
 
     });
-  }
+  };
 
   public update(user: {
     id: number,
@@ -46,5 +55,5 @@ export class UserDatabaseAdapter implements IUserDataAccess {
     return new Promise((resolve, reject) => {
 
     });
-  }
+  };
 }

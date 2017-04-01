@@ -4,12 +4,14 @@ import { BookingService } from 'booking-server-lib';
 
 import { BookingDatabaseAdapter } from './booking-database.adapter';
 
+import { Database } from '../common';
+
 export class BookingAdapter {
   private _bookingService: BookingService;
   private _logger: ILogger;
 
-  constructor(config: { logger: ILogger }) {
-    const dataAccess = new BookingDatabaseAdapter();
+  constructor(config: { logger: ILogger, database: Database }) {
+    const dataAccess = new BookingDatabaseAdapter({ database: config.database });
 
     this._bookingService = new BookingService({ logger: config.logger, dataAccess });
     this._logger = config.logger;
