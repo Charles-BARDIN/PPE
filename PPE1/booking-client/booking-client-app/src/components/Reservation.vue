@@ -3,12 +3,15 @@
       <h1>Réservation</h1>
 
       <form>
-        <select name="room" id="room" class="spacebetween">
-            <option value="amphiteatre">amphiteatre</option>
-            <option value="reunion">Salle de réunion</option>
-            <option value="convivial">Salle de convivialité</option>
-        </select>
-        <datepicker></datepicker>
+        <div>
+          <span>Salle</span>
+          <SallePicker class="inputs" v-bind:on-selected-room-change="changeSelectedRoom" />
+        </div>
+
+        <div>
+          <span>Date</span>
+          <datepicker class="inputs" v-model="booking.date"></datepicker>
+        </div>
 
         <M2LButton label="Enregistrer ma réservation" v-bind:action="book" />
       </form>
@@ -19,24 +22,45 @@
 <script>
 import Datepicker from 'vuejs-datepicker';
 import M2LButton from '@/components/M2LButton';
+import SallePicker from '@/components/SallePicker';
 
 export default {
   name: 'reservation', 
   components: {
       Datepicker,
-      M2LButton
+      M2LButton,
+      SallePicker
+  },
+  data () {
+    return {
+      booking: {
+        room: null,
+        date: null
+      }
+    }
   },
   methods: {
-    book: () => {
-      console.log('Booked');
+    book: function() {
+      console.log('Booked for room', this.booking.room.label, new Date(this.booking.date + 'UTC'))
+    },
+    changeSelectedRoom: function(newRoom) {
+      this.booking.room = newRoom
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1 {
   font-weight: normal;
+}
+
+.inputs {
+  margin: 6px;
+  margin-bottom: 10px;
+}
+
+span {
+  display: block;
 }
 </style>
