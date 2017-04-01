@@ -1,4 +1,3 @@
 node_modules
-build
-PPE1/client/client-app/dist
+dist
 npm-debug.log

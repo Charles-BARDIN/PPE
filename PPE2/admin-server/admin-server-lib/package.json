@@ -10,10 +10,10 @@
     "prebuild:t": "npm run -s prebuild",
     "build:w": "tsc -w",
     "prebuild:w": "npm run -s prebuild",
-    "test": "mocha build/**/*.spec.js",
+    "test": "mocha dist/**/*.spec.js",
     "pretest": "npm run -s build:t",
-    "clean": "npm run -s clean:build",
-    "clean:build": "rimraf -r ./build/*"
+    "clean": "npm run -s clean:dist",
+    "clean:dist": "rimraf -r ./dist/*"
   },
   "dependencies": {
     "m2l-core": "../../../m2l-core",
