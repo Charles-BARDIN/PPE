@@ -2,7 +2,7 @@
   "name": "m2l-node-logger",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index",
   "scripts": {
     "build": "tsc --project ./tsconfig.json",
     "prebuild": "npm run -s clean",
