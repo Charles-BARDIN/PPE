@@ -18,7 +18,7 @@ class RoomService {
     return this._roomGateway.getRooms();
   }
 
-  public onRoomSelectionChange(newRoom: Room) {
+  public changeRoomSelection(newRoom: Room) {
     this._controller.displayRoomDescription(newRoom);
   }
 }
