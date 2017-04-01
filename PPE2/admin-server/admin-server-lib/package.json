@@ -12,7 +12,7 @@
     "prebuild:w": "npm run -s prebuild",
     "test": "mocha build/**/*.spec.js",
     "pretest": "npm run -s build:t",
-    "clean": "npm run -s clean:build && npm run -s clean:tmp",
+    "clean": "npm run -s clean:build",
     "clean:build": "rimraf -r ./build/*"
   },
   "dependencies": {
