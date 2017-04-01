@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Acceuil from '@/components/Acceuil'
 import Inscription from '@/components/Inscription'
-import Profil from '@/components/Profil'
+import Profile from '@/components/Profile'
 import Reservation from '@/components/Reservation'
 import Salle from '@/components/Salle'
 
@@ -21,9 +21,9 @@ export default new Router({
       component : Inscription  
     },
     {
-      path : '/profil', 
-      name : 'Profil', 
-      component : Profil
+      path : '/profile', 
+      name : 'Profile', 
+      component : Profile
     },
     {
       path : '/reservation',

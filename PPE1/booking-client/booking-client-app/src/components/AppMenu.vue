@@ -1,11 +1,14 @@
 <template>
-  <div class="app-menu masthead borderbottom">
-    <span class="logo">
-      <router-link to="/"><img src="../assets/ligue.png" alt="logo"></router-link>
+  <div class="app-menu">
+    <span>
+      <router-link to="/">
+        <img src="../assets/ligue.png" alt="logo">
+      </router-link>
     </span>
-    <nav class="menu">
-      <ul class="nav nav-justified">
-        <li class="biggermenu" v-for="item in items"><a v-on:click="item.action">{{ item.label }}</a></li>
+
+    <nav>
+      <ul>
+        <li v-for="item in items"><a v-on:click="item.action">{{ item.label }}</a></li>
       </ul>
     </nav>
   </div>
@@ -46,7 +49,7 @@ export default {
         {
           label: 'Profile',
           action: () => {
-            router.push('profil')
+            router.push('profile')
           }
         },
       ]

@@ -1,5 +1,5 @@
 <template>
-<div class="jumbotron notopnobottom">
+<div class="profile">
           <h1>Modifier mon profil</h1>
           <form action="">
             <label for="lastname" class="labelo">Nom </label>: 
@@ -39,32 +39,13 @@
 
 <script>
 export default {
-  name: 'header',
-  data () {
-    return {
-      msg: 'Hello world'
-    }
-  }
+  name: 'profile'
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1 {
   font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
 }
 </style>
