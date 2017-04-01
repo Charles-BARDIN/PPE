@@ -1,6 +1,6 @@
 import { User } from "m2l-core";
 
-import { IUserDataAccess } from 'server-lib';
+import { IUserDataAccess } from 'booking-server-lib';
 
 export class UserDatabaseAdapter implements IUserDataAccess {
   constructor() { }

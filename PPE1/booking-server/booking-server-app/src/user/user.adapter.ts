@@ -1,6 +1,6 @@
 import { User, ILogger } from 'm2l-core';
 
-import { UserService } from 'server-lib';
+import { UserService } from 'booking-server-lib';
 
 import { UserDatabaseAdapter } from './user-database.adapter';
 

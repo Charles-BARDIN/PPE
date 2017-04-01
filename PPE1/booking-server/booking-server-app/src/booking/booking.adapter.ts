@@ -1,6 +1,6 @@
 import { Booking, ILogger } from 'm2l-core';
 
-import { BookingService } from 'server-lib';
+import { BookingService } from 'booking-server-lib';
 
 import { BookingDatabaseAdapter } from './booking-database.adapter';
 

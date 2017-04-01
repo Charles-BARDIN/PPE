@@ -1,6 +1,6 @@
 import { Room, ILogger } from "m2l-core";
 
-import { RoomService } from 'server-lib';
+import { RoomService } from 'booking-server-lib';
 
 import { RoomDatabaseAdapter } from './room-database.adapter';
 
