@@ -1,7 +1,7 @@
 import { INavigationAccess } from './i-navigation-access.interface';
 import { IAuthAccess } from './i-auth-access.interface';
 
-export class IndexStateController {
+export class IndexStateService {
   private _nav: INavigationAccess
   private _auth: IAuthAccess
 
