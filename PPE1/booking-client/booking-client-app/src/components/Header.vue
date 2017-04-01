@@ -23,7 +23,7 @@ export default {
   name: 'header',
   data () {
     return {
-      msg: 'Connard'
+      msg: 'Hello world'
     }
   }
 }

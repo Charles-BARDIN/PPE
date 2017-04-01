@@ -1,7 +1,6 @@
 {
   "name": "booking-m2l",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "directories": {
     "doc": "doc"
@@ -10,13 +9,11 @@
     "preinit": "npm install",
     "init": "npm run link && npm run install:all",
     "postinit": "npm run build:dep",
-
     "test": "npm run test:logger & npm run test:clib & npm run test:slib & npm run test:sapp",
     "test:logger": "cd ../m2l-node-logger && npm test",
     "test:clib": "cd booking-client/booking-client-lib && npm test",
     "test:slib": "cd booking-server/booking-server-lib && npm test",
     "test:sapp": "cd booking-server/booking-server-app && npm test",
-    
     "link": "npm run link:core && npm run link:logger && npm run link:clib && npm run link:capp && npm run link:slib && npm run link:sapp",
     "link:core": "cd ../m2l-core && npm link",
     "link:logger": "cd ../m2l-node-logger && npm link && npm link m2l-core",
@@ -24,7 +21,6 @@
     "link:capp": "cd booking-client/booking-client-app && npm link m2l-core booking-client-lib",
     "link:slib": "cd booking-server/booking-server-lib && npm link && npm link m2l-core m2l-node-logger",
     "link:sapp": "cd booking-server/booking-server-app && npm link m2l-core m2l-node-logger booking-server-lib",
-
     "install:all": "npm run install:capp &&  npm run install:sapp && npm run install:clib && npm run install:slib && npm run install:logger && npm run install:core",
     "install:core": "cd ../m2l-core && npm i",
     "install:logger": "cd ../m2l-node-logger && npm i",
@@ -32,7 +28,6 @@
     "install:capp": "cd booking-client/booking-client-app && npm i",
     "install:slib": "cd booking-server/booking-server-lib && npm i",
     "install:sapp": "cd booking-server/booking-server-app && npm i",
-
     "build": "npm run build:core && npm run build:logger && npm run build:clib && npm run build:capp && npm run build:slib && npm run build:sapp",
     "build:dep": "npm run build:core && npm run build:logger && npm run build:clib && npm run build:slib",
     "build:core": "cd ../m2l-core && npm run build",
@@ -41,7 +36,6 @@
     "build:capp": "cd booking-client/booking-client-app && npm run build",
     "build:slib": "cd booking-server/booking-server-lib && npm run build",
     "build:sapp": "cd booking-server/booking-server-app && npm run build",
-
     "dev": "concurrently \"npm run dev:core\" \"npm run dev:logger\" \"npm run dev:clib\" \"npm run dev:capp\" \"npm run dev:slib\" \"npm run dev:sapp\"",
     "dev:core": "cd ../m2l-core && npm run build:w",
     "dev:logger": "cd ../m2l-node-logger && npm run build:w",
@@ -54,6 +48,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^3.4.0"
-  }
+    "concurrently": "^3.4.0",
+    "vuejs-datepicker": "^0.6.5"
+  },
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "vue": "^2.2.6"
+  },
+  "description": ""
 }
