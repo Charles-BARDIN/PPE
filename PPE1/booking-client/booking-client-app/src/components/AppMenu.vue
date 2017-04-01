@@ -1,17 +1,14 @@
 <template>
-  <div class="app-menu">
-  <div class="masthead borderbottom">
-      <span class="logo">
-        <router-link to="/"><img src="../assets/ligue.png" alt="logo"></router-link>
-      </span>
-      <nav class="menu">
-        <ul class="nav nav-justified">
-          <li class="biggermenu" v-for="item in items"><a v-on:click="item.action">{{ item.label }}</a></li>
-        </ul>
-      </nav>
-    </div>
+  <div class="app-menu masthead borderbottom">
+    <span class="logo">
+      <router-link to="/"><img src="../assets/ligue.png" alt="logo"></router-link>
+    </span>
+    <nav class="menu">
+      <ul class="nav nav-justified">
+        <li class="biggermenu" v-for="item in items"><a v-on:click="item.action">{{ item.label }}</a></li>
+      </ul>
+    </nav>
   </div>
-    
 </template>
 
 <script>
