@@ -6,7 +6,6 @@
   "scripts": {
     "build": "tsc --project ./tsconfig.json",
     "prebuild": "npm run -s clean",
-    "postbuild": "npm run -s clean:tmp",
     "build:t": "tsc --project ./tsconfig.spec.json",
     "prebuild:t": "npm run -s prebuild",
     "build:w": "tsc -w",
@@ -14,8 +13,7 @@
     "test": "mocha build/**/*.spec.js",
     "pretest": "npm run -s build:t",
     "clean": "npm run -s clean:build && npm run -s clean:tmp",
-    "clean:build": "rimraf -r ./build/*",
-    "clean:tmp": "rimraf -r ./.tmp"
+    "clean:build": "rimraf -r ./build/*"
   },
   "dependencies": {
     "@types/node": "^7.0.8",
