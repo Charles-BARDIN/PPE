@@ -1,6 +1,6 @@
 <template>
     <div class="jumbotron notopnobottom">
-            <h1>M2L-Reservation</h1>
+            <h1>Liste des salles</h1>
             <div class="flexcenter">
                 <form action="">
                     <select name="room" id="room">
@@ -9,7 +9,6 @@
                     <option value="convivial">Salle de convivialité</option>
                 </select>
                 </form>
-                <img src="../../../booking-client-app/src/assets/ligue.png" alt="desc">
             </div>
         </div>
 </template>

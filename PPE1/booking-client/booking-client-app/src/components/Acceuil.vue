@@ -1,6 +1,6 @@
 <template>
       <div class="jumbotron notopnobottom">
-      <h1>M2L-Reservation</h1>
+      <h1>M2L Accueil</h1>
       <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique repellat in sed aliquam voluptates, cumque atque
         libero suscipit soluta, necessitatibus labore ex deserunt dicta ullam ducimus vel. Harum, numquam, vero. Lorem ipsum
         dolor sit amet, consectetur adipisicing elit. Similique repellat in sed aliquam voluptates, cumque atque libero suscipit

@@ -1,6 +1,6 @@
 <template>
 <div class="jumbotron notopnobottom">
-      <h1>M2L-Reservation</h1>
+      <h1>Réservation</h1>
 
       <form action="">
         <select name="room" id="room" class="spacebetween">
@@ -28,9 +28,10 @@ export default {
     return {
       msg: 'Hello world'
     }
-  }, components: {
-        Datepicker
-    }
+  }, 
+  components: {
+      Datepicker
+  }
 }
 </script>
 
