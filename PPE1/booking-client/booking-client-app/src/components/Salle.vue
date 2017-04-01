@@ -2,11 +2,7 @@
     <div class="salle">
       <h1>Liste des salles</h1>
 
-      <form action="">
-        <select name="room" id="room" v-model="selectedRoomLabel">
-          <option v-for="room in rooms">{{ room.label }}</option>
-        </select>
-      </form>
+      <SallePicker v-bind:on-selected-room-change="changeSelectedRoom" />
 
       <div class="room-description">
         {{ selectedRoom.description }}
@@ -15,40 +11,26 @@
 </template>
 
 <script>
+  import SallePicker from '@/components/SallePicker'
+
   export default {
     name: 'salle',
-    data () {
-      return {
-        rooms: [
-          {
-            label: 'Amphithéâtre',
-            img: '',
-            description: 'Description Amphithéâtre'
-          },
-          {
-            label: 'Salle de réunion',
-            img: '',
-            description: 'Description Salle de réunion'
-          },
-          {
-            label: 'Salle de convivialité',
-            img: '',
-            description: 'Description Salle de convivialité'
-          }
-        ],
-        selectedRoom: {},
-        selectedRoomLabel: ''
+    methods: {
+      changeSelectedRoom: function(newRoom) {
+        this.selectedRoom = newRoom;
       }
     },
-    watch: {
-      selectedRoomLabel: function(newRoom) {
-        this.selectedRoom = this.rooms.filter(room => room.label === newRoom)[0]
+    data () {
+      return { 
+        selectedRoom: {}
       }
+    },
+    components: {
+      SallePicker
     }
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   h1 {
     font-weight: normal;
