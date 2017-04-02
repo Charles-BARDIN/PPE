@@ -1,13 +1,13 @@
-import { INavigationAccess } from './i-navigation-access.interface';
-import { IAuthAccess } from './i-auth-access.interface';
+import { IIndexNavigationAccess } from './i-index-navigation-access.interface';
+import { IIndexAuthAccess } from './i-index-auth-access.interface';
 
 export class IndexStateService {
-  private _nav: INavigationAccess
-  private _auth: IAuthAccess
+  private _nav: IIndexNavigationAccess
+  private _auth: IIndexAuthAccess
 
   constructor(config: {
-    navigationService: INavigationAccess,
-    authService: IAuthAccess
+    navigationService: IIndexNavigationAccess,
+    authService: IIndexAuthAccess
   }) {
     this._nav = config.navigationService;
     this._auth = config.authService;

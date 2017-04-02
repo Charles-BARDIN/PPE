@@ -1,3 +1,3 @@
 export * from './index-state.service';
-export * from './i-navigation-access.interface';
-export * from './i-auth-access.interface';
+export * from './i-index-navigation-access.interface';
+export * from './i-index-auth-access.interface';

@@ -1,13 +1,13 @@
 import { IRouter } from './i-router.interface';
-import { IAuthAccess } from './i-auth-access.interface';
+import { INavigationAuthAccess } from './i-navigation-auth-access.interface';
 
 export class NavigationService {
   private _router: IRouter
-  private _auth: IAuthAccess
+  private _auth: INavigationAuthAccess
 
   constructor(config: {
     navTool: IRouter,
-    authAccess: IAuthAccess
+    authAccess: INavigationAuthAccess
   }) {
     
   }

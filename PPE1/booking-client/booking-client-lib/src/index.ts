@@ -7,3 +7,4 @@ export * from './profile-state';
 export * from './register-state';
 export * from './room-list-state';
 export * from './session';
+export * from './gateway';
