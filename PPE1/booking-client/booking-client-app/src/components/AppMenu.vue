@@ -42,7 +42,8 @@ export default {
   name: 'app-menu',
   data () {
     return {
-      items: navigationService.getMenuItems(),
+      // items: navigationService.getMenuItems(),
+      items: [],
       showLoginModal: false,
       showLogoutModal: false
     }
