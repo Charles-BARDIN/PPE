@@ -13,13 +13,17 @@ export class RegisterService {
   private _nav: IRegisterNavAccess;
 
   constructor(config: {
-    validator: IRegisterValidator,
-    controller: IRegisterController,
     navigation: IRegisterNavAccess
   }) {
-    this._validator = config.validator;
-    this._controller = config.controller;
     this._nav = config.navigation;
+  }
+
+  set validator(validator: IRegisterValidator) {
+    this._validator = validator;
+  }
+
+  set controller(controller: IRegisterController) {
+    this._controller = controller;
   }
 
   public register(newUser: {
@@ -87,7 +91,7 @@ export class RegisterService {
       }
     }
 
-    if(user.password !== user.confirm) {
+    if (user.password !== user.confirm) {
       res.valid = false;
       res.faults.push('ERR_REGISTER_PASSWORD_MATCH');
     }

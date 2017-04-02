@@ -6,6 +6,9 @@
       </router-link>
     </span>
 
+    <Login v-if="showLoginModal" @close-login="showLoginModal = false" />
+    <Logout v-if="showLogoutModal" @close-logout="showLogoutModal = false" />
+
     <nav>
       <ul>
         <li v-for="item in items"><a v-on:click="onMenuClick(item)">{{ item | menuItem }}</a></li>
@@ -19,7 +22,8 @@ import Vue from 'vue';
 
 import router from '@/router';
 
-import { navigationService } from '@/lib-adapters';
+import Login from '@/components/Login';
+import Logout from '@/components/Logout';
 
 Vue.filter('menuItem', function (value) {
   const filter = {
@@ -38,13 +42,19 @@ export default {
   name: 'app-menu',
   data () {
     return {
-      items: navigationService.getMenuItems()
+      items: navigationService.getMenuItems(),
+      showLoginModal: false,
+      showLogoutModal: false
     }
   },
   methods: {
     onMenuClick: (item) => {
-      navigationService.onItemMenuClick(item);
+      // navigationService.onItemMenuClick(item);
     }
+  },
+  components: {
+      Login,
+      Logout
   }
 }
 </script>

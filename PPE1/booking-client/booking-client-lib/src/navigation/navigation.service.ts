@@ -12,11 +12,11 @@ export class NavigationService implements IIndexNavAccess, IRegisterNavAccess, I
   private _states: { name: string, appStates: string[] }[]
 
   constructor(config: {
-    navTool: IRouter,
-    authAccess: INavigationAuthAccess
+    router: IRouter,
+    authentification: INavigationAuthAccess
   }) {
-    this._router = config.navTool;
-    this._auth = config.authAccess;
+    this._router = config.router;
+    this._auth = config.authentification;
     this._states = [
       {
         name: 'index',

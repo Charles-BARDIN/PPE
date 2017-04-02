@@ -8,13 +8,13 @@ export class ProfileService {
   private _validator: IProfileValidator;
 
   constructor(config: {
-    controller: IProfileController,
-    authentification: IProfileAuthAccess,
-    validator: IProfileValidator
+    authentification: IProfileAuthAccess
   }) {
     this._auth = config.authentification;
-    this._controller = config.controller;
-    this._validator = config.validator;
+  }
+
+  set validator(validator: IProfileValidator) {
+    this._validator = validator;
   }
 
   public onPageLoad() {

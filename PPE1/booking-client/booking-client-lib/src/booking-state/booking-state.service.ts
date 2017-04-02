@@ -11,12 +11,14 @@ export class BookingService {
 
   constructor(config: {
     authentification: IBookingAuthAccess,
-    gateway: IBookingGateway,
-    controller: IBookingController
+    gateway: IBookingGateway
   }) {
     this._auth = config.authentification;
     this._gateway = config.gateway;
-    this._controller = config.controller;
+  }
+
+  set controller(controller: IBookingController) {
+    this._controller = controller;
   }
 
   public onPageLoad() {

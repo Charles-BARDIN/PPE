@@ -11,7 +11,7 @@ import AppMenu from '@/components/AppMenu';
 export default {
   name: 'app',
   components: {
-      AppMenu
+      AppMenu,
   }
 }
 </script>

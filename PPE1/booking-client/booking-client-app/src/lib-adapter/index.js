@@ -1,63 +1,19 @@
-const lib = require('booking-client-lib');
+import { BookingClientLib } from 'booking-client-lib';
 
-import router from '@/router';
+import router from './router.adapter';
+import Gateway from './gateway.adapter';
 
-const stateTranslator = {
-  index: '/',
-  booking: 'booking',
-  room: 'room',
-  register: 'register',
-  profil: 'profil',
-  login: 'login',
-  logout: 'logout',
+const gateway = new Gateway();
+
+const hash = value => {
+  return `H@$H3D_${value}_V@LU3`;
 };
 
-const gateway = new lib.ServerGateway();
-const hash = input => input;
-
-const authentification = new lib.AuthService({
-  gateway,
-  hash
+const bookingClientLib = new BookingClientLib({
+  hash,
+  router
 });
 
-const bookingService = new lib.BookingService({
-  authentification,
-  gateway,
-  controller
-});
+bookingClientLib.setGateway(gateway);
 
-const indexService = new lib.IndexService({
-  navigation,
-  authentification
-});
-
-const loginService = new lib.LoginService({
-  authentification,
-  navigation,
-  validator,
-  controller
-});
-
-const logoutService = new lib.LogoutService({
-  authentification,
-  navigation
-});
-
-const profileService = new lib.ProfileService({
-  controller,
-  authentification,
-  validator
-});
-
-const registerService = new lib.RegisterService({
-  validator,
-  controller,
-  navigation
-});
-
-const roomListService = new lib.RoomService({
-  gateway,
-  controller
-});
-
-export {};
+export default bookingClientLib;

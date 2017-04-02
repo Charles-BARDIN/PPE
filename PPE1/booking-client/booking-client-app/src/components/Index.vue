@@ -26,7 +26,9 @@
 
   import router from '@/router'
 
-  import { indexStateService } from '@/lib-adapters' 
+  import bookingClientLib from '@/lib-adapter'
+
+  const indexService = bookingClientLib.getIndexService();
 
   export default {
     name: 'index',
@@ -35,7 +37,7 @@
     },
     methods: {
       bookARoom: () => {
-        indexStateService.goToBookingState();
+        indexService.goToBookingState();
       }
     }
   }

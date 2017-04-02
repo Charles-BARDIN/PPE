@@ -4,19 +4,21 @@ import { IRoomGateway } from '.';
 import { IRoomController } from '.';
 
 export class RoomService {
-  private _roomGateway: IRoomGateway;
+  private _gateway: IRoomGateway;
   private _controller: IRoomController;
 
   constructor(config: {
-    gateway: IRoomGateway,
-    controller: IRoomController
+    gateway: IRoomGateway
   }) {
-    this._roomGateway = config.gateway;
-    this._controller = config.controller;
+    this._gateway = config.gateway;
+  }
+
+  set controller(controller: IRoomController) {
+    this._controller = controller;
   }
 
   public onPageLoad() {
-    this._roomGateway.getRooms()
+    this._gateway.getRooms()
       .then(rooms => {
         this._controller.setRoomList(rooms);
       })

@@ -12,13 +12,17 @@ export class LoginService {
   constructor(config: {
     authentification: ILoginAuthAccess,
     navigation: ILoginNavAccess,
-    validator: ILoginValidator,
-    controller: ILoginController
   }) {
     this._auth = config.authentification;
     this._nav = config.navigation;
-    this._validator = config.validator;
-    this._controller = config.controller;
+  }
+
+  set controller (controller: ILoginController) {
+    this._controller = controller;
+  }
+
+  set validator(validator: ILoginValidator) {
+    this._validator = validator;
   }
 
   public login(credentials: { mail: string, password: string }) {
