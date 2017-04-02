@@ -3,10 +3,14 @@ import { User } from 'm2l-core';
 import { INavigationAuthAccess } from '../navigation';
 import { IIndexAuthAccess } from '../index-state';
 import { IAuthRegisterAccess } from '../register-state';
+import { IBookingAuthAccess } from '../booking-state';
+import { ILoginAuthAccess } from '../login-state';
+import { ILogoutAuthAccess } from '../logout-state';
+import { IProfileAuthAccess } from '../profile-state';
 
 import { IAuthGateway } from './i-auth-gateway.interface';
 
-export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IAuthRegisterAccess {
+export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IAuthRegisterAccess, IBookingAuthAccess, ILoginAuthAccess, ILogoutAuthAccess, IProfileAuthAccess {
   private _gateway: IAuthGateway;
   private _user: User;
   private _hash: Function;
@@ -22,10 +26,10 @@ export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IAu
   public login(credentials: { mail: string, password: string }): Promise<boolean> {
     return new Promise((resolve, reject) => {
       if (!credentials.mail) {
-        reject('Please fill the "mail" field');
+        reject('ERR_LOGIN_MAIL_REQUIRED');
         return;
       } else if (!credentials.password) {
-        reject('Please fill the "password" field');
+        reject('ERR_LOGIN_PASSWORD_REQUIRED');
         return;
       }
 
@@ -71,7 +75,31 @@ export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IAu
         .then(user => {
           this._user = user;
 
-          resolve(User);
+          resolve(user);
+        })
+        .catch(err => reject(err));
+    });
+  }
+
+  public modifyUser(user: {
+    id: number,
+    address?: string,
+    town?: string,
+    zip?: string,
+    country?: string,
+    mail?: string,
+    password?: string,
+    confirm?: string,
+    phone?: string
+  }): Promise<User> {
+    return new Promise((resolve, reject) => {
+      user.password = this._hash(user.password);
+
+      this._gateway.modifyUser(user)
+        .then(user => {
+          this._user = user;
+
+          resolve(user);
         })
         .catch(err => reject(err));
     });
@@ -79,5 +107,13 @@ export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IAu
 
   public userIsConnected(): boolean {
     return this._user != null;
+  }
+
+  public getUserID(): number {
+    return this._user.id;
+  }
+
+  public getUser(): User {
+    return this._user;
   }
 }

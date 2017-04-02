@@ -31,11 +31,12 @@ export class RegisterService {
     country: string,
     mail: string,
     password: string,
+    confirm: string,
     phone?: string,
   }) {
     this._controller.hideErrors();
 
-    let validation = this._validateUser(newUser);
+    let validation = this._validateUserRegistration(newUser);
 
     if (!validation.valid) {
       this._controller.showValidationErrors(validation.faults);
@@ -51,7 +52,7 @@ export class RegisterService {
       });
   }
 
-  private _validateUser(user: {
+  private _validateUserRegistration(user: {
     lastname: string,
     firstname: string,
     address: string,
@@ -60,8 +61,9 @@ export class RegisterService {
     country: string,
     mail: string,
     phone?: string,
-    password: string
-  }): { valid: boolean, faults: { property: string, err: string[] }[] } {
+    password: string,
+    confirm: string
+  }): { valid: boolean, faults: string[] } {
     let res = {
       valid: true,
       faults: []
@@ -74,21 +76,20 @@ export class RegisterService {
         case 'mail':
           if (!user[property] || !this._validator.isMail(user[property])) {
             res.valid = false;
-            res.faults.push({
-              property,
-              err: ['Invalid format']
-            })
+            res.faults.push('ERR_REGISTER_MAIL_FORMAT');
           }
           break;
         default:
           if (!user[property]) {
             res.valid = false;
-            res.faults.push({
-              property,
-              err: ['Required']
-            })
+            res.faults.push('ERR_REGISTER_' + property.toUpperCase() + '_REQUIRED');
           }
       }
+    }
+
+    if(user.password !== user.confirm) {
+      res.valid = false;
+      res.faults.push('ERR_REGISTER_PASSWORD_MATCH');
     }
 
     return res;

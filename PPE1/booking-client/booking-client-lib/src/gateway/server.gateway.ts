@@ -1,8 +1,10 @@
-import { User } from 'm2l-core';
+import { User, Room, Booking } from 'm2l-core';
 
 import { IAuthGateway } from '../session';
+import { IBookingGateway } from '../booking-state';
+import { IRoomGateway } from '../room-list-state';
 
-export class ServerGateway implements IAuthGateway {
+export class ServerGateway implements IAuthGateway, IBookingGateway, IRoomGateway {
   constructor() {
 
   }
@@ -28,6 +30,34 @@ export class ServerGateway implements IAuthGateway {
     country: string,
     mail: string,
     password: string,
+    phone?: string
+  }): Promise<User> {
+    return new Promise((resolve, reject) => {
+
+    });
+  }
+
+  public getRooms(): Promise<Room[]> {
+    return new Promise((resolve, reject) => {
+
+    });
+  }
+
+  public bookARoom(booking: { roomID: number, date: Date, userID: number }): Promise<Booking> {
+    return new Promise((resolve, reject) => {
+
+    });
+  }
+
+  public modifyUser(user: {
+    id: number,
+    address?: string,
+    town?: string,
+    zip?: string,
+    country?: string,
+    mail?: string,
+    password?: string,
+    confirm?: string,
     phone?: string
   }): Promise<User> {
     return new Promise((resolve, reject) => {
