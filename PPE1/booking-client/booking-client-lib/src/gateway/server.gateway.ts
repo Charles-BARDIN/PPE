@@ -1,4 +1,6 @@
-export class ServerGateway {
+import { IAuthGateway } from '../session';
+
+export class ServerGateway implements IAuthGateway{
   constructor() {
     
   }

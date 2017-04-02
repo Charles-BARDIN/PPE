@@ -1,7 +1,9 @@
+import { IIndexNavigationAccess } from '../index-state';
+
 import { IRouter } from './i-router.interface';
 import { INavigationAuthAccess } from './i-navigation-auth-access.interface';
 
-export class NavigationService {
+export class NavigationService implements IIndexNavigationAccess{
   private _router: IRouter
   private _auth: INavigationAuthAccess
 
