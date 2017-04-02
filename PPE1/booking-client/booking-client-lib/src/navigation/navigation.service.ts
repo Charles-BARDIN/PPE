@@ -7,6 +7,7 @@ import { INavigationAuthAccess } from './i-navigation-auth-access.interface';
 export class NavigationService implements IIndexNavigationAccess, IRegisterNavigationAccess {
   private _router: IRouter
   private _auth: INavigationAuthAccess
+  private _states: { name: string, appStates: string[] }[]
 
   constructor(config: {
     navTool: IRouter,
@@ -14,74 +15,84 @@ export class NavigationService implements IIndexNavigationAccess, IRegisterNavig
   }) {
     this._router = config.navTool;
     this._auth = config.authAccess;
+    this._states = [
+      {
+        name: 'index',
+        appStates: [
+          'connected',
+          'not_connected'
+        ]
+      },
+      {
+        name: 'room',
+        appStates: [
+          'connected',
+          'not_connected'
+        ]
+      },
+      {
+        name: 'login',
+        appStates: [
+          'not_connected'
+        ]
+      },
+      {
+        name: 'register',
+        appStates: [
+          'not_connected'
+        ]
+      },
+      {
+        name: 'booking',
+        appStates: [
+          'connected'
+        ]
+      },
+      {
+        name: 'profile',
+        appStates: [
+          'connected'
+        ]
+      },
+      {
+        name: 'logout',
+        appStates: [
+          'connected'
+        ]
+      }
+    ]
   }
 
-  public goTo(state: string) {
-    this._router.go(state);
+  public goTo(stateName: string) {
+    let appState = this._auth.userIsConnected() ? 'connected' : 'not_connected';
+    let stateToGo = this._states.filter(state => state.name === stateName)[0];
+
+    let isAKnownState = stateToGo != null;
+    if(!isAKnownState) {
+      this._router.go('index');
+      return;
+    }
+
+    let isAuthorized = stateToGo.appStates.indexOf(appState) !== -1;
+    if(!isAuthorized) {
+      this._router.go('login');
+      return;
+    }
+
+    this._router.go(stateName);
   }
 
-  public getMenuItems(): {
-    label: string,
-    action: Function
-  }[] {
-    return this._auth.userIsConnected()
-      ? [
-        {
-          label: 'Acceuil',
-          action: () => {
-            this.goTo('index')
-          }
-        },
-        {
-          label: 'Salles',
-          action: () => {
-            this.goTo('room')
-          }
-        },
-        {
-          label: 'Réservation',
-          action: () => {
-            this.goTo('booking')
-          }
-        },
-        {
-          label: 'Profile',
-          action: () => {
-            this.goTo('profile')
-          }
-        },
-        {
-          label: 'Déconnexion',
-          action: () => {
-            this.goTo('logout')
-          }
-        },
-      ]
-      : [
-        {
-          label: 'Acceuil',
-          action: () => {
-            this.goTo('index')
-          }
-        },
-        {
-          label: 'Salles',
-          action: () => {
-            this.goTo('room')
-          }
-        },
-        {
-          label: 'Connexion',
-          action: () => {
-            this.goTo('login')
-          }
-        },
-        {
-          label: 'Inscription',
-          action: () => {
-            this.goTo('register')
-          }
-        }
-      ]
+  public onItemMenuClick(item: string) {
+    this.goTo(item);
+  }
+
+  public getMenuItems(): string[]{
+    let appState = this._auth.userIsConnected() ? 'connected' : 'not_connected';
+
+    return this._states.filter(state => state.appStates.indexOf(appState) !== -1)
+      .reduce((prev, curr) => {
+        prev.push(curr.name);
+        return prev;
+      }, []);
   }
 };
