@@ -26,6 +26,8 @@
 
   import router from '@/router'
 
+  import { indexStateService } from '@/lib-adapters' 
+
   export default {
     name: 'accueil',
     components: {
@@ -33,7 +35,7 @@
     },
     methods: {
       bookARoom: () => {
-        router.push('reservation')
+        indexStateService.goToBookingState();
       }
     }
   }

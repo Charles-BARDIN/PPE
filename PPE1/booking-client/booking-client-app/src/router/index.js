@@ -8,33 +8,43 @@ import Salle from '@/components/Salle'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
-      path : '/', 
-      name : 'Acceuil', 
-      component : Acceuil
+      path: '/',
+      name: 'Acceuil',
+      component: Acceuil
     },
     {
-      path : '/inscription', 
-      name : 'Inscription' , 
-      component : Inscription  
+      path: '/inscription',
+      name: 'Inscription',
+      component: Inscription
     },
     {
-      path : '/profile', 
-      name : 'Profile', 
-      component : Profile
+      path: '/profile',
+      name: 'Profile',
+      component: Profile
     },
     {
-      path : '/reservation',
-      name : 'reservation', 
-      component : Reservation
+      path: '/reservation',
+      name: 'reservation',
+      component: Reservation
     },
     {
-      path : '/salle' , 
-      name : 'salle', 
-      component : Salle 
+      path: '/salle',
+      name: 'salle',
+      component: Salle
     }
-
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if(to.name != null) {
+    next(true);
+    return;
+  }
+
+  next('/');
+});
+
+export default router;
