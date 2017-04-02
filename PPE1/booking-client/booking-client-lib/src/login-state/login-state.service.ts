@@ -1,7 +1,7 @@
-import { ILoginAuthAccess } from './i-login-auth-access.interface';
-import { ILoginValidator } from './i-login-validator.interface';
-import { ILoginController } from './i-login-controller.interface';
-import { ILoginNavAccess } from './i-login-nav-access.interface';
+import { ILoginAuthAccess } from '.';
+import { ILoginValidator } from '.';
+import { ILoginController } from '.';
+import { ILoginNavAccess } from '.';
 
 export class LoginService {
   private _auth: ILoginAuthAccess;
@@ -10,13 +10,13 @@ export class LoginService {
   private _controller: ILoginController;
 
   constructor(config: {
-    authService: ILoginAuthAccess,
-    navService: ILoginNavAccess,
+    authentification: ILoginAuthAccess,
+    navigation: ILoginNavAccess,
     validator: ILoginValidator,
     controller: ILoginController
   }) {
-    this._auth = config.authService;
-    this._nav = config.navService;
+    this._auth = config.authentification;
+    this._nav = config.navigation;
     this._validator = config.validator;
     this._controller = config.controller;
   }

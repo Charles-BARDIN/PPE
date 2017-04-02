@@ -1,25 +1,25 @@
 import { User } from 'm2l-core';
 
-import { IRegisterValidator } from './i-register-validator.interface';
-import { IAuthRegisterAccess } from './i-auth-register-access.interface';
-import { IRegisterController } from './i-register-controller.interface';
-import { IRegisterNavigationAccess } from './i-register-navigation-access.interface';
+import { IRegisterValidator } from '.';
+import { IRegisterAuthAccess } from '.';
+import { IRegisterController } from '.';
+import { IRegisterNavAccess } from '.';
 
 export class RegisterService {
   private _validator: IRegisterValidator;
   private _hash: Function;
-  private _auth: IAuthRegisterAccess;
+  private _auth: IRegisterAuthAccess;
   private _controller: IRegisterController;
-  private _nav: IRegisterNavigationAccess;
+  private _nav: IRegisterNavAccess;
 
   constructor(config: {
     validator: IRegisterValidator,
     controller: IRegisterController,
-    navigationService: IRegisterNavigationAccess
+    navigation: IRegisterNavAccess
   }) {
     this._validator = config.validator;
     this._controller = config.controller;
-    this._nav = config.navigationService;
+    this._nav = config.navigation;
   }
 
   public register(newUser: {

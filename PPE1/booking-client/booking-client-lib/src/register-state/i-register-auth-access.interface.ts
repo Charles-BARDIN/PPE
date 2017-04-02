@@ -1,6 +1,6 @@
 import { User } from 'm2l-core';
 
-export interface IAuthRegisterAccess {
+export interface IRegisterAuthAccess {
   registerUser(user: {
     lastname: string,
     firstname: string,

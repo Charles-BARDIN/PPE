@@ -1,6 +1,6 @@
-import { IProfileController } from './i-profile-controller.interface'
-import { IProfileAuthAccess } from './i-profile-auth-access.interface'
-import { IProfileValidator } from './i-profile-validator.interface'
+import { IProfileController } from '.';
+import { IProfileAuthAccess } from '.';
+import { IProfileValidator } from '.';
 
 export class ProfileService {
   private _controller: IProfileController;
@@ -9,10 +9,10 @@ export class ProfileService {
 
   constructor(config: {
     controller: IProfileController,
-    authService: IProfileAuthAccess,
+    authentification: IProfileAuthAccess,
     validator: IProfileValidator
   }) {
-    this._auth = config.authService;
+    this._auth = config.authentification;
     this._controller = config.controller;
     this._validator = config.validator;
   }

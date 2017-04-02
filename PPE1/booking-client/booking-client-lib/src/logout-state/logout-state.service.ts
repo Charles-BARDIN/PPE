@@ -1,16 +1,16 @@
-import { ILogoutAuthAccess } from './i-logout-auth-access.interface';
-import { ILogoutNavAccess } from './i-logout-nav-access.interface';
+import { ILogoutAuthAccess } from '.';
+import { ILogoutNavAccess } from '.';
 
 export class LogoutService {
   private _auth: ILogoutAuthAccess;
   private _nav: ILogoutNavAccess;
 
   constructor(config: {
-    authService: ILogoutAuthAccess,
-    navService: ILogoutNavAccess,
+    authentification: ILogoutAuthAccess,
+    navigation: ILogoutNavAccess,
   }) {
-    this._auth = config.authService;
-    this._nav = config.navService;
+    this._auth = config.authentification;
+    this._nav = config.navigation;
   }
 
   public logout() {

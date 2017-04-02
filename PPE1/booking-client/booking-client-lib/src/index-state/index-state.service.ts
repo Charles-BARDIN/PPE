@@ -1,16 +1,16 @@
-import { IIndexNavigationAccess } from './i-index-navigation-access.interface';
-import { IIndexAuthAccess } from './i-index-auth-access.interface';
+import { IIndexNavAccess } from '.';
+import { IIndexAuthAccess } from '.';
 
-export class IndexStateService {
-  private _nav: IIndexNavigationAccess
+export class IndexService {
+  private _nav: IIndexNavAccess
   private _auth: IIndexAuthAccess
 
   constructor(config: {
-    navigationService: IIndexNavigationAccess,
-    authService: IIndexAuthAccess
+    navigation: IIndexNavAccess,
+    authentification: IIndexAuthAccess
   }) {
-    this._nav = config.navigationService;
-    this._auth = config.authService;
+    this._nav = config.navigation;
+    this._auth = config.authentification;
   }
 
   public goToBookingState(): void {

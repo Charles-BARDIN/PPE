@@ -1,17 +1,18 @@
 import { Room } from 'm2l-core';
 
-import { IRoomGateway } from './i-room-gateway.interface';
-import { IRoomController } from './i-room-controller.interface';
+import { IRoomGateway } from '.';
+import { IRoomController } from '.';
 
 export class RoomService {
   private _roomGateway: IRoomGateway;
   private _controller: IRoomController;
 
   constructor(config: {
-    roomGateway: IRoomGateway,
-    roomController: IRoomController
+    gateway: IRoomGateway,
+    controller: IRoomController
   }) {
-    this._roomGateway = config.roomGateway;
+    this._roomGateway = config.gateway;
+    this._controller = config.controller;
   }
 
   public onPageLoad() {

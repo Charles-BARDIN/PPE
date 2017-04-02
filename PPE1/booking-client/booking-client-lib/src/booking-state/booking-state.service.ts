@@ -1,8 +1,8 @@
 import { Booking } from 'm2l-core';
 
-import { IBookingAuthAccess } from './i-booking-auth-access.interface';
-import { IBookingGateway } from './i-booking-gateway.interface';
-import { IBookingController } from './i-booking-controller.interface';
+import { IBookingAuthAccess } from '.';
+import { IBookingGateway } from '.';
+import { IBookingController } from '.';
 
 export class BookingService {
   private _auth: IBookingAuthAccess;
@@ -10,12 +10,12 @@ export class BookingService {
   private _controller: IBookingController;
 
   constructor(config: {
-    authService: IBookingAuthAccess,
-    roomGateway: IBookingGateway,
+    authentification: IBookingAuthAccess,
+    gateway: IBookingGateway,
     controller: IBookingController
   }) {
-    this._auth = config.authService;
-    this._gateway = config.roomGateway;
+    this._auth = config.authentification;
+    this._gateway = config.gateway;
     this._controller = config.controller;
   }
 
