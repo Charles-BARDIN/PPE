@@ -14,8 +14,12 @@ export class RoomService {
     this._roomGateway = config.roomGateway;
   }
 
-  public getRooms(): Promise<Room[]> {
-    return this._roomGateway.getRooms();
+  public onPageLoad() {
+    this._roomGateway.getRooms()
+      .then(rooms => {
+        this._controller.setRoomList(rooms);
+      })
+      .catch((err: string) => this._controller.displayRoomListError(err));
   }
 
   public changeRoomSelection(newRoom: Room) {

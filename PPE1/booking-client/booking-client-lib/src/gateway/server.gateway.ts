@@ -18,4 +18,20 @@ export class ServerGateway implements IAuthGateway {
 
     });
   }
+
+  public registerUser(user: {
+    lastname: string,
+    firstname: string,
+    address: string,
+    town: string,
+    zip: string,
+    country: string,
+    mail: string,
+    password: string,
+    phone?: string
+  }): Promise<User> {
+    return new Promise((resolve, reject) => {
+
+    });
+  }
 }
