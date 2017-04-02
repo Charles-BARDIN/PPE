@@ -1,8 +1,8 @@
 <template>
-    <div class="salle">
+    <div class="room">
       <h1>Liste des salles</h1>
 
-      <SallePicker v-bind:on-selected-room-change="changeSelectedRoom" />
+      <RoomPicker v-bind:on-selected-room-change="changeSelectedRoom" />
 
       <div class="room-description">
         {{ selectedRoom.description }}
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-  import SallePicker from '@/components/SallePicker'
+  import RoomPicker from '@/components/RoomPicker'
 
   export default {
-    name: 'salle',
+    name: 'room',
     methods: {
       changeSelectedRoom: function(newRoom) {
         this.selectedRoom = newRoom;
@@ -26,7 +26,7 @@
       }
     },
     components: {
-      SallePicker
+      RoomPicker
     }
   }
 </script>

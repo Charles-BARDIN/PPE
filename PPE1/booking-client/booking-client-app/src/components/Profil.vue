@@ -1,5 +1,5 @@
 <template>
-<div class="profile">
+<div class="profil">
           <h1>Modifier mon profil</h1>
           <form action="">
             <label for="lastname" class="labelo">Nom </label>: 
@@ -39,11 +39,10 @@
 
 <script>
 export default {
-  name: 'profile'
+  name: 'profil'
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1 {
   font-weight: normal;

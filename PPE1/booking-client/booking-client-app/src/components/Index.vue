@@ -1,5 +1,5 @@
 <template>
-    <div class="accueil">
+    <div class="index">
       <h1>M2L Accueil</h1>
 
       <p>
@@ -29,7 +29,7 @@
   import { indexStateService } from '@/lib-adapters' 
 
   export default {
-    name: 'accueil',
+    name: 'index',
     components: {
         M2LButton
     },
@@ -41,7 +41,6 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   h1 {
     font-weight: normal;

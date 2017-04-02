@@ -1,12 +1,12 @@
 <template>
-  <select class="salle-picker" id="room" v-model="selectedRoomLabel">
+  <select class="room-picker" id="room" v-model="selectedRoomLabel">
     <option v-for="room in rooms">{{ room.label }}</option>
   </select>
 </template>
 
 <script>
   export default {
-    name: 'salle-picker',
+    name: 'room-picker',
     data () {
       return {
         rooms: [

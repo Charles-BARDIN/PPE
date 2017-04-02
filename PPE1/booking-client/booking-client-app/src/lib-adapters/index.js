@@ -3,14 +3,13 @@ const lib = require('booking-client-lib');
 import router from '@/router';
 
 const stateTranslator = {
-  booking: 'reservation',
+  booking: 'booking',
   index: '/',
-  room: 'salle',
-  register: 'inscription',
-  profile: 'profile',
-  // TODO: change
-  login: 'connxion',
-  logout: 'deconnexion',
+  room: 'room',
+  register: 'register',
+  profil: 'profil',
+  login: 'login',
+  logout: 'logout',
 
 };
 
