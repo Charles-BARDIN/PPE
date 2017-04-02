@@ -18,7 +18,7 @@ export class AuthService  implements INavigationAuthAccess, IIndexAuthAccess{
     this._hash = config.hash;
   }
 
-  login(credentials: { mail: string, password: string }): Promise<boolean> {
+  public login(credentials: { mail: string, password: string }): Promise<boolean> {
     return new Promise((resolve, reject) => {
       if(!credentials.mail) {
         reject('Please fill the "mail" field');
@@ -41,7 +41,7 @@ export class AuthService  implements INavigationAuthAccess, IIndexAuthAccess{
     })
   }
 
-  logout(): Promise<boolean> {
+  public logout(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this._gateway.logout(this._user.id)
         .then(res => {
@@ -52,7 +52,7 @@ export class AuthService  implements INavigationAuthAccess, IIndexAuthAccess{
     })
   }
 
-  userIsConnected(): boolean {
+  public userIsConnected(): boolean {
     return this._user != null;
   }
 }

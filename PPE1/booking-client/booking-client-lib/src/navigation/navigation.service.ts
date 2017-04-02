@@ -15,11 +15,11 @@ export class NavigationService implements IIndexNavigationAccess{
     this._auth = config.authAccess;
   }
 
-  goTo(state: string) {
+  public goTo(state: string) {
     this._router.go(state);
   }
 
-  getMenuItems(): {
+  public getMenuItems(): {
     label: string,
     action: Function
   }[] {
