@@ -17,53 +17,19 @@
 <script>
 import router from '@/router';
 
+import { navigationService } from '@/lib-adapters';
+
 export default {
   name: 'app-menu',
   data () {
     return {
-      items: [
-        {
-          label: 'Acceuil',
-          action: () => {
-            router.push('/')
-          }
-        },
-        {
-          label: 'Salles',
-          action: () => {
-            router.push('salle')
-          }
-        },
-        {
-          label: 'Réservation',
-          action: () => {
-            router.push('reservation')
-          }
-        },
-        {
-          label: 'Inscription',
-          action: () => {
-            router.push('inscription')
-          }
-        },
-        {
-          label: 'Profile',
-          action: () => {
-            router.push('profile')
-          }
-        },
-      ]
+      items: navigationService.getMenuItems()
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
 ul {
   list-style-type: none;
   padding: 0;

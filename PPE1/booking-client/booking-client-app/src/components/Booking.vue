@@ -1,35 +1,34 @@
 <template>
-<div class="reservation">
-      <h1>Réservation</h1>
+<div class="booking">
+  <h1>Réservation</h1>
 
-      <form>
-        <div>
-          <span>Salle</span>
-          <SallePicker class="inputs" v-bind:on-selected-room-change="changeSelectedRoom" />
-        </div>
-
-        <div>
-          <span>Date</span>
-          <datepicker class="inputs" v-model="booking.date"></datepicker>
-        </div>
-
-        <M2LButton label="Enregistrer ma réservation" v-bind:action="book" />
-      </form>
+  <form>
+    <div>
+      <span>Salle</span>
+      <RoomPicker class="inputs" v-bind:on-selected-room-change="changeSelectedRoom" />
     </div>
-  </div>
+
+    <div>
+      <span>Date</span>
+      <datepicker class="inputs" v-model="booking.date"></datepicker>
+    </div>
+
+    <M2LButton label="Enregistrer ma réservation" v-bind:action="book" />
+  </form>
+</div>
 </template>
 
 <script>
 import Datepicker from 'vuejs-datepicker';
 import M2LButton from '@/components/M2LButton';
-import SallePicker from '@/components/SallePicker';
+import RoomPicker from '@/components/RoomPicker';
 
 export default {
-  name: 'reservation', 
+  name: 'booking', 
   components: {
       Datepicker,
       M2LButton,
-      SallePicker
+      RoomPicker
   },
   data () {
     return {

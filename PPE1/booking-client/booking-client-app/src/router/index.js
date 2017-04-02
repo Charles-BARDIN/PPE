@@ -1,40 +1,50 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Acceuil from '@/components/Acceuil'
-import Inscription from '@/components/Inscription'
-import Profile from '@/components/Profile'
-import Reservation from '@/components/Reservation'
-import Salle from '@/components/Salle'
+import Index from '@/components/Index'
+import Register from '@/components/Register'
+import Profil from '@/components/Profil'
+import Booking from '@/components/Booking'
+import Room from '@/components/Room'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
-      path : '/', 
-      name : 'Acceuil', 
-      component : Acceuil
+      path: '/',
+      name: 'Index',
+      component: Index
     },
     {
-      path : '/inscription', 
-      name : 'Inscription' , 
-      component : Inscription  
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     {
-      path : '/profile', 
-      name : 'Profile', 
-      component : Profile
+      path: '/profil',
+      name: 'Profil',
+      component: Profil
     },
     {
-      path : '/reservation',
-      name : 'reservation', 
-      component : Reservation
+      path: '/booking',
+      name: 'Booking',
+      component: Booking
     },
     {
-      path : '/salle' , 
-      name : 'salle', 
-      component : Salle 
+      path: '/room',
+      name: 'Room',
+      component: Room
     }
-
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if(to.name != null) {
+    next(true);
+    return;
+  }
+
+  next('/');
+});
+
+export default router;
