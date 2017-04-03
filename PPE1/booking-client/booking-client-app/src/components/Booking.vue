@@ -48,7 +48,7 @@ export default {
     const showValidationErrors = this.showValidationErrors;
     const showConfirmation = this.showConfirmation;
     const showBackendError = this.showBackendError;
-    const hideErrors = this.hideErrors;
+    const hideMesssages = this.hideMesssages;
 
     const controller = {
       setRoomList,
@@ -56,7 +56,7 @@ export default {
       showValidationErrors,
       showConfirmation,
       showBackendError,
-      hideErrors,
+      hideMesssages,
     };
 
     bookingService.controller = controller;
@@ -93,8 +93,9 @@ export default {
     showBackendError: function(err) {
       this.errors = [err];      
     },
-    hideErrors: function() {
+    hideMesssages: function() {
       this.errors = [];
+      this.confirm = false;
     },
     showConfirmation: function() {
       this.confirm = true

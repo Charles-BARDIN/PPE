@@ -42,7 +42,7 @@ export class BookingService {
     roomID: number,
     date: Date
   }) {
-    this._controller.hideErrors();
+    this._controller.hideMesssages();
 
     let errors = [];
     if (!booking.roomID) {

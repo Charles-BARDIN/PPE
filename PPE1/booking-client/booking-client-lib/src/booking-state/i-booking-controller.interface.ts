@@ -6,5 +6,5 @@ export interface IBookingController {
   showValidationErrors(errors: string[]): void;
   showConfirmation(): void;
   showBackendError(err: string): void;
-  hideErrors(): void;
+  hideMesssages(): void;
 }
