@@ -95,7 +95,6 @@ export default {
       this.confirm = true
     },
     changeSelectedRoom: function(newRoom) {
-      console.log(newRoom.id)
       this.booking.roomID = newRoom.id;
     }
   }
