@@ -20,21 +20,14 @@
                   <label>Mot de passe</label>
                   <input type="password" v-model="password" required />
                 </div>
-
-                <div>
-                </div>
               </form>
             </div>
 
             <div v-for="err in errors">{{ err | error }}</div>
 
             <div class="modal-footer">
-              <button class="modal-default-button" @click="oncancel">
-                Annuler
-              </button>
-              <button class="modal-default-button" @click="onlogin">
-                OK
-              </button>
+              <M2LButton label="Annuler" class="button" v-bind:action="oncancel" />
+              <M2LButton label="OK" class="button" v-bind:action="onlogin" />
             </div>
           </div>
         </div>
@@ -45,6 +38,7 @@
 
 <script>
   import bookingClientLib from '@/lib-adapter'
+  import M2LButton from '@/components/M2LButton'
 
   const loginService = bookingClientLib.getLoginService();
   
@@ -100,6 +94,9 @@
         mail: '',
         password: ''
       };
+    },
+    components: {
+      M2LButton
     }
   };
 </script>
@@ -123,7 +120,7 @@
 }
 
 .modal-container {
-  width: 300px;
+  width: 310px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -139,11 +136,25 @@
 }
 
 .modal-body {
-  margin: 20px 0;
+  margin-top: 20px;
 }
 
-.modal-default-button {
-  
+.modal-footer {
+  text-align: right;
+}
+
+label {
+  display: inline-block;
+  width: 110px;
+  text-align: left;
+}
+
+form div {
+  padding: 6px;
+}
+
+.button {
+  margin-left: 10px;
 }
 
 /*

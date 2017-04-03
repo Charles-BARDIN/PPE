@@ -14,12 +14,8 @@
             </div>
 
             <div class="modal-footer">
-              <button class="modal-default-button" @click="oncancel">
-                Annuler
-              </button>
-              <button class="modal-default-button" @click="onlogout">
-                OK
-              </button>
+              <M2LButton class="button" label="Annuler" v-bind:action="oncancel" />
+              <M2LButton class="button" label="OK" v-bind:action="onlogout" />
             </div>
           </div>
         </div>
@@ -30,6 +26,7 @@
 
 <script>
   import bookingClientLib from '@/lib-adapter'
+  import M2LButton from '@/components/M2LButton'
 
   const logoutService = bookingClientLib.getLogoutService();
   
@@ -43,6 +40,9 @@
       oncancel: function() {
         this.onCancel();
       }
+    },
+    components: {
+      M2LButton
     }
   };
 </script>
@@ -77,16 +77,20 @@
 }
 
 .modal-header h3 {
-  margin-top: 0;
+  margin: 20px 0;
   color: #42b983;
 }
 
 .modal-body {
-  margin: 20px 0;
+  margin-top: 20px;
 }
 
-.modal-default-button {
-  
+.modal-footer {
+  text-align: right;
+}
+
+.button {
+  margin-left: 10px;
 }
 
 /*
