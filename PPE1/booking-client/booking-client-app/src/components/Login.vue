@@ -26,6 +26,8 @@
               </form>
             </div>
 
+            <div v-for="err in errors">{{ err | error }}</div>
+
             <div class="modal-footer">
               <button class="modal-default-button" @click="oncancel">
                 Annuler
@@ -34,8 +36,6 @@
                 OK
               </button>
             </div>
-
-            <div v-for="err in errors">{{ err }}</div>
           </div>
         </div>
       </div>
@@ -143,7 +143,7 @@
 }
 
 .modal-default-button {
-  float: right;
+  
 }
 
 /*

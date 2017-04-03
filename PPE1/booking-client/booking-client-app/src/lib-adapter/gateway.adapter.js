@@ -4,7 +4,7 @@ export default class Gateway {
   }
 
   login(credentials) {
-    return this._http(`POST`, `/login`, credentials)
+    return this._http(`POST`, `/login`, credentials);
   }
 
   logout() {
@@ -30,11 +30,7 @@ export default class Gateway {
   _http(verb, url, argument) {
     return new Promise((resolve, reject) => {
       const req = new XMLHttpRequest();
-
-      if (argument) {
-        xmlhttp.setRequestHeader("Content-Type", "application/json");
-        argument = JSON.stringify(argument);
-      }
+      const hasArg = !!argument;
 
       req.onreadystatechange = function (event) {
         if (this.readyState === XMLHttpRequest.DONE) {
@@ -60,6 +56,12 @@ export default class Gateway {
       };
 
       req.open(verb, `${this._baseUrl}${url}`, true);
+
+      if (hasArg) {
+        argument = JSON.stringify(argument);
+        req.setRequestHeader("Content-Type", "application/json");
+      }
+
       req.send(argument);
     });
   }

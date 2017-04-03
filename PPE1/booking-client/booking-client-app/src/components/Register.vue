@@ -3,7 +3,7 @@
     <Profil mode="new" v-bind:onConfirm="register" />
 
     <div v-for="error in errors">
-      {{ error }}
+      {{ error | error }}
     </div>
   </div>
 </template>
@@ -13,6 +13,11 @@
   import Profil from '@/components/Profil'
 
   import bookingClientLib from '@/lib-adapter'
+  import { errorFilter } from '@/common';
+  import Vue from 'vue';
+
+
+  Vue.filter('error', errorFilter);
 
   const registerService = bookingClientLib.getRegisterService();
 

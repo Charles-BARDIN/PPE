@@ -24,17 +24,7 @@ export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IRe
   }
 
   public login(credentials: { mail: string, password: string }): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      if (!credentials.mail) {
-        reject('ERR_LOGIN_MAIL_REQUIRED');
-        return;
-      } else if (!credentials.password) {
-        reject('ERR_LOGIN_PASSWORD_REQUIRED');
-        return;
-      }
-
-      credentials.password = this._hash(credentials);
-
+    return new Promise((resolve, reject) => {credentials.password = this._hash(credentials);
       this._gateway.login(credentials)
         .then(user => {
           this._user = user;

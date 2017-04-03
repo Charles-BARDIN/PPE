@@ -16,7 +16,7 @@
     <M2LButton label="Enregistrer ma réservation" v-bind:action="book" />
   </form>
 
-  <div v-for="err in errors">{{ err }}</div>
+  <div v-for="err in errors">{{ err | error }}</div>
   <div v-if="confirm">Votre réservation a bien été effectuée.</div>
 </div>
 </template>
@@ -27,6 +27,11 @@ import bookingClientLib from '@/lib-adapter'
 import Datepicker from 'vuejs-datepicker';
 import M2LButton from '@/components/M2LButton';
 import RoomPicker from '@/components/RoomPicker';
+import { errorFilter } from '@/common';
+import Vue from 'vue';
+
+
+Vue.filter('error', errorFilter);
 
 const bookingService = bookingClientLib.getBookingService();
 

@@ -6,7 +6,7 @@
       Profil modifié avec succès !
     </div>
     <div v-for="err in errors">
-      {{ err }}
+      {{ err | error }}
     </div>
   </div>
 </template>
@@ -16,6 +16,11 @@
   import Profil from '@/components/Profil'
   
   import bookingClientLib from '@/lib-adapter'
+  import { errorFilter } from '@/common';
+  import Vue from 'vue';
+
+
+  Vue.filter('error', errorFilter);
 
   const profilService = bookingClientLib.getProfilService();
 

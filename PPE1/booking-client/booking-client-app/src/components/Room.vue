@@ -4,6 +4,10 @@
 
       <RoomPicker v-bind:on-selected-room-change="changeSelectedRoom" v-bind:rooms="rooms" />
 
+      <div>
+        {{ error | error }}
+      </div>
+
       <div class="room-description">
         {{ selectedRoom.description }}
       </div>
@@ -11,9 +15,12 @@
 </template>
 
 <script>
+  import Vue from 'vue';
   import bookingClientLib from '@/lib-adapter';
+  import RoomPicker from '@/components/RoomPicker';
+  import { errorFilter } from '@/common';
 
-  import RoomPicker from '@/components/RoomPicker'
+  Vue.filter('error', errorFilter);
 
   const roomService = bookingClientLib.getRoomService();
 
@@ -50,7 +57,8 @@
     data () {
       return { 
         selectedRoom: {},
-        rooms: []
+        rooms: [],
+        error: ''
       }
     },
     components: {

@@ -84,7 +84,6 @@ export class RegisterService {
       'mail',
       'phone',
       'password',
-      'confirm',
     ].forEach(property => {
       switch (property) {
         case 'phone':

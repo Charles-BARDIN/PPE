@@ -86,7 +86,7 @@
 }
 
 .modal-default-button {
-  float: right;
+  
 }
 
 /*
