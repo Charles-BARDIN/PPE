@@ -10,8 +10,8 @@
       <ul>
         <li v-for="item in items"><a v-on:click="onMenuClick(item)">{{ item | menuItem }}</a></li>
 
-        <Login v-bind:showModal="showLogin" v-bind:onLogin="closeDialog" />
-        <Logout v-bind:showModal="showLogout" v-bind:onLogout="closeDialog" />
+        <Login v-bind:showModal="showLogin" v-bind:onLogin="closeDialog" v-bind:onCancel="closeDialog" />
+        <Logout v-bind:showModal="showLogout" v-bind:onLogout="closeDialog" v-bind:onCancel="closeDialog" />
       </ul>
     </nav>
   </div>

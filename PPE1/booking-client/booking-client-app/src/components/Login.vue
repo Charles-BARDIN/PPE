@@ -27,6 +27,9 @@
             </div>
 
             <div class="modal-footer">
+              <button class="modal-default-button" @click="oncancel">
+                Annuler
+              </button>
               <button class="modal-default-button" @click="onlogin">
                 OK
               </button>
@@ -47,7 +50,7 @@
   
   export default {
     name: 'login',
-    props: ['showModal', 'onLogin'],
+    props: ['showModal', 'onCancel'],
     created: function () {
       const validateMail = this.validateMail;
       const showValidationErrors = this.showValidationErrors;
@@ -67,6 +70,11 @@
     methods: {
       onlogin: function() {
         loginService.login({ mail: this.mail, password: this.password });
+        this.mail = '';
+        this.password = '';
+      },
+      oncancel: function() {
+        this.onCancel();
       },
       validateMail: function(mail) {
         return mail.match(/^(.)+@.+\.(.)+$/);
