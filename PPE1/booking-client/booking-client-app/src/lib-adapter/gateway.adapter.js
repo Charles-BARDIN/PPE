@@ -27,7 +27,11 @@ export default class Gateway {
 
   registerUser(user) {
     return new Promise((resolve, reject) => {
-
+      let copy = Object.assign({}, user);
+      copy.id = 1;
+      copy.password = undefined;
+      copy.confirm = undefined;
+      resolve(copy);
     });
   }
 
