@@ -23,7 +23,7 @@ const router = new Router({
       component: Register
     },
     {
-      path: '/profil',
+      path: '/profile',
       name: 'Profile',
       component: Profile
     },
