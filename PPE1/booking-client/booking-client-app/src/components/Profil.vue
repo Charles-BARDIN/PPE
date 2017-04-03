@@ -67,7 +67,7 @@
     </div>
     <div>
       <label>Confirmation</label>
-      <input type="confirm" v-model="formUser.confirm" />
+      <input type="password" v-model="formUser.confirm" />
     </div>
 
     <M2LButton v-bind:label="mode === 'new' ? 'Inscription' : 'Modifier le profil'" v-bind:action="onconfirm" />
