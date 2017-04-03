@@ -10,7 +10,7 @@ export default class Gateway {
         firstname: 'John',
         lastname: 'Doe',
         mail: credentials.mail,
-        phone: '',
+        phone: '+33600000000',
         address: '11 rue des peupliers',
         zip: '75000',
         town: 'Paris',

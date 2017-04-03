@@ -17,6 +17,10 @@ export class ProfileService {
     this._validator = validator;
   }
 
+  set controller(controller: IProfileController) {
+    this._controller = controller;
+  }
+
   public onPageLoad() {
     this._controller.setUserProfile(this._auth.getUser());
   }
