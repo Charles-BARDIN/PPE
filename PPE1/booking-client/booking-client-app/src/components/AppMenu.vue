@@ -44,7 +44,7 @@ export default {
   components: {
       Login
   },
-  data () {
+  created: function() {
     bookingClientLib.getRouter().openModal = state => {
       if(state === 'login') {
         this.showLogin = true;
@@ -52,7 +52,8 @@ export default {
         this.showLogout = true;
       }
     }
-
+  },
+  data () {
     return { 
       showLogin: false,
       showLogout: false,
