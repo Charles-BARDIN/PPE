@@ -23,5 +23,6 @@
     box-shadow: 5px 5px rgba(0, 0, 0, 0.8);
     border-radius: 10px;
     cursor: pointer;
+    user-select: none;
   }
 </style>

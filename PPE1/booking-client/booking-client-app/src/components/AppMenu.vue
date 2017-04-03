@@ -91,6 +91,7 @@ li {
   display: inline-block;
   margin: 0 10px;
   cursor: pointer;
+  user-select: none;
 }
 
 a {
