@@ -22,7 +22,7 @@
 
   Vue.filter('error', errorFilter);
 
-  const profilService = bookingClientLib.getProfilService();
+  const profilService = bookingClientLib.profilService;
 
   export default {
     name: 'register',

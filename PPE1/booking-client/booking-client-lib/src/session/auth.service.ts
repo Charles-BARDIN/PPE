@@ -23,6 +23,14 @@ export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IRe
     this._hash = config.hash;
   }
 
+  get user(): User {
+    return this._user;
+  }
+
+  get userID(): number {
+    return this._user.id;
+  }
+
   public login(credentials: { mail: string, password: string }): Promise<boolean> {
     return new Promise((resolve, reject) => {credentials.password = this._hash(credentials);
       this._gateway.login(credentials)
@@ -99,13 +107,5 @@ export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IRe
 
   public userIsConnected(): boolean {
     return this._user != null;
-  }
-
-  public getUserID(): number {
-    return this._user.id;
-  }
-
-  public getUser(): User {
-    return this._user;
   }
 }

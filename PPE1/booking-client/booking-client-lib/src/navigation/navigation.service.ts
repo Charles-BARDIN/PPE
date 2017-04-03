@@ -67,6 +67,10 @@ export class NavigationService implements IIndexNavAccess, IRegisterNavAccess, I
     ]
     this._setMenuItems();
   }
+  
+  get menuItems(): string[] {
+    return this._menuItems;
+  }
 
   public goTo(stateName: string) {
     this._setMenuItems();
@@ -107,7 +111,4 @@ export class NavigationService implements IIndexNavAccess, IRegisterNavAccess, I
     );
   }
 
-  public getMenuItems(): string[] {
-    return this._menuItems;
-  }
 };

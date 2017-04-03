@@ -40,7 +40,7 @@
   import bookingClientLib from '@/lib-adapter'
   import M2LButton from '@/components/M2LButton'
 
-  const loginService = bookingClientLib.getLoginService();
+  const loginService = bookingClientLib.loginService;
   
   export default {
     name: 'login',

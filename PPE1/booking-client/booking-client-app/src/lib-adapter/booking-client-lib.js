@@ -15,8 +15,8 @@ const hash = value => {
 
 const bookingClientLib = new BookingClientLib();
 
-bookingClientLib.setHash(hash);
-bookingClientLib.setGateway(gateway);
-bookingClientLib.setRouter(router);
+bookingClientLib.hash = hash;
+bookingClientLib.gateway = gateway;
+bookingClientLib.router = router;
 
 export default bookingClientLib;

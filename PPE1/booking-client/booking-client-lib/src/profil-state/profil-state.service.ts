@@ -22,7 +22,7 @@ export class ProfilService {
   }
 
   public onPageLoad() {
-    this._controller.setUserProfil(this._auth.getUser());
+    this._controller.setUserProfil(this._auth.user);
   }
 
   public modifyUser(modifiedUser: {

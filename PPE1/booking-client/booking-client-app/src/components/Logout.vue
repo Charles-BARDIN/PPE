@@ -28,7 +28,7 @@
   import bookingClientLib from '@/lib-adapter'
   import M2LButton from '@/components/M2LButton'
 
-  const logoutService = bookingClientLib.getLogoutService();
+  const logoutService = bookingClientLib.logoutService;
   
   export default {
     name: 'logout',

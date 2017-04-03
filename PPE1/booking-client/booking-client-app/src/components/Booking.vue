@@ -33,7 +33,7 @@ import Vue from 'vue';
 
 Vue.filter('error', errorFilter);
 
-const bookingService = bookingClientLib.getBookingService();
+const bookingService = bookingClientLib.bookingService;
 
 export default {
   name: 'booking', 

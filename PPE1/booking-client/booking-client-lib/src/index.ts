@@ -48,11 +48,11 @@ export class BookingClientLib {
     this._gateway = config.gateway;
   }
   
-  public getRouter(): IRouter {
+  get router(): IRouter {
     return this._router;
   };
 
-  public getAuthService(): AuthService {
+  get authService(): AuthService {
     if (this._authService instanceof AuthService) {
       return this._authService;
     }
@@ -69,7 +69,7 @@ export class BookingClientLib {
     return this._authService;
   }
 
-  public getBookingService(): BookingService {
+  get bookingService(): BookingService {
     if (this._bookingService instanceof BookingService) {
       return this._bookingService;
     }
@@ -79,79 +79,79 @@ export class BookingClientLib {
     }
 
     this._bookingService = new BookingService({
-      authentification: this.getAuthService(),
+      authentification: this.authService,
       gateway: this._gateway,
-      navigation: this.getNavigationService()
+      navigation: this.navigationService
     });
 
     return this._bookingService;
   }
 
-  public getIndexService(): IndexService {
+  get indexService(): IndexService {
     if (this._indexService instanceof IndexService) {
       return this._indexService;
     }
 
     this._indexService = new IndexService({
-      navigation: this.getNavigationService(),
-      authentification: this.getAuthService()
+      navigation: this.navigationService,
+      authentification: this.authService
     });
 
     return this._indexService;
   }
 
-  public getLoginService(): LoginService {
+  get loginService(): LoginService {
     if (this._loginService instanceof LoginService) {
       return this._loginService;
     }
 
     this._loginService = new LoginService({
-      authentification: this.getAuthService(),
-      navigation: this.getNavigationService()
+      authentification: this.authService,
+      navigation: this.navigationService
     });
 
     return this._loginService;
   }
 
-  public getLogoutService(): LogoutService {
+  get logoutService(): LogoutService {
     if (this._logoutService instanceof LogoutService) {
       return this._logoutService;
     }
 
     this._logoutService = new LogoutService({
-      authentification: this.getAuthService(),
-      navigation: this.getNavigationService()
+      authentification: this.authService,
+      navigation: this.navigationService
     });
 
     return this._logoutService;
   }
 
-  public getProfilService(): ProfilService {
+  get profilService(): ProfilService {
     if (this._profilService instanceof ProfilService) {
       return this._profilService;
     }
 
     this._profilService = new ProfilService({
-      authentification: this.getAuthService()
+      authentification: this.authService
     });
 
     return this._profilService;
   }
 
-  public getRegisterService(): RegisterService {
+  get registerService(): RegisterService {
     if (this._registerService instanceof RegisterService) {
       return this._registerService;
     }
 
     this._registerService = new RegisterService({
-      navigation: this.getNavigationService(),
-      authentification: this.getAuthService()
+      navigation: this.navigationService,
+      authentification: this.authService
     });
 
     return this._registerService;
   }
 
-  public getRoomService(): RoomService {
+  get roomService(): RoomService {
     if (this._roomService instanceof RoomService) {
       return this._roomService;
     }
@@ -167,28 +167,28 @@ export class BookingClientLib {
     return this._roomService;
   }
 
-  public setGateway(gateway: IGateway) {
-    this._gateway = gateway;
-  }
-
-  public setHash(hash: Function) {
-    this._hash = hash;
-  }
-
-  public setRouter(router: IRouter) {
-    this._router = router;
-  }
-
-  public getNavigationService(): NavigationService {
+  get navigationService(): NavigationService {
     if (this._navigationService instanceof NavigationService) {
       return this._navigationService;
     }
 
     this._navigationService = new NavigationService({
       router: this._router,
-      authentification: this.getAuthService()
+      authentification: this.authService
     });
 
     return this._navigationService;
+  }
+
+  set gateway(gateway: IGateway) {
+    this._gateway = gateway;
+  }
+
+  set hash(hash: Function) {
+    this._hash = hash;
+  }
+
+  set router(router: IRouter) {
+    this._router = router;
   }
 }

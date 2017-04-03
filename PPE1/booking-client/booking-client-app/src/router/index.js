@@ -49,6 +49,6 @@ router.beforeEach((to, from, next) => {
   next('/');
 });
 
-bookingClientLib.getRouter().vueRouter = router;
+bookingClientLib.router.vueRouter = router;
 
 export default router;

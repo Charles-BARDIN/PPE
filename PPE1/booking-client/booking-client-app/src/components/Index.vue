@@ -28,7 +28,7 @@
 
   import bookingClientLib from '@/lib-adapter'
 
-  const indexService = bookingClientLib.getIndexService();
+  const indexService = bookingClientLib.indexService;
 
   export default {
     name: 'index',

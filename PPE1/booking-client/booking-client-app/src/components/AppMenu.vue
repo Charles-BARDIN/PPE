@@ -24,7 +24,7 @@ import bookingClientLib from '@/lib-adapter';
 import Login from '@/components/Login';
 import Logout from '@/components/Logout';
 
-const navService = bookingClientLib.getNavigationService();
+const navService = bookingClientLib.navigationService;
 
 Vue.filter('menuItem', function (value) {
   const filter = {
@@ -45,7 +45,7 @@ export default {
       Login
   },
   created: function() {
-    bookingClientLib.getRouter().openModal = state => {
+    bookingClientLib.router.openModal = state => {
       if(state === 'login') {
         this.showLogin = true;
       } else {
@@ -53,7 +53,7 @@ export default {
       }
     }
 
-    bookingClientLib.getRouter().closeModal = () => {
+    bookingClientLib.router.closeModal = () => {
       this.showLogin = false;
       this.showLogout = false;
     }
@@ -62,7 +62,7 @@ export default {
     return { 
       showLogin: false,
       showLogout: false,
-      items: navService.getMenuItems()
+      items: navService.menuItems
     }
   },
   methods: {

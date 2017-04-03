@@ -22,7 +22,7 @@
 
   Vue.filter('error', errorFilter);
 
-  const roomService = bookingClientLib.getRoomService();
+  const roomService = bookingClientLib.roomService;
 
   export default {
     name: 'room',

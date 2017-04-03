@@ -63,7 +63,7 @@ export class BookingService {
     }
 
     let book = new Booking({
-      userID: this._auth.getUserID(),
+      userID: this._auth.userID,
       roomID: booking.roomID,
       date: booking.date
     })

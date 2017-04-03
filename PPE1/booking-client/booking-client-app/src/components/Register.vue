@@ -19,7 +19,7 @@
 
   Vue.filter('error', errorFilter);
 
-  const registerService = bookingClientLib.getRegisterService();
+  const registerService = bookingClientLib.registerService;
 
   export default {
     name: 'register',

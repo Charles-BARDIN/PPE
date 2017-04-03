@@ -2,13 +2,13 @@ import * as mySql from 'mysql';
 
 export class Database {
   private _connection: mySql.IConnection;
-  private _config: { host: string, user: string, password: string, database: string };
+  private _config: { host: string, user: string, password: string, database?: string };
 
   constructor(config: {
     host: string,
     user: string,
     password: string,
-    database: string
+    database?: string
   }) {
     this._config = config;
 
@@ -23,6 +23,10 @@ export class Database {
       if (err) throw new Error(err.stack);
       this._init();
     });
+  }
+
+  set database(database: string) {
+    this._config.database = database;
   }
 
   private _init() {

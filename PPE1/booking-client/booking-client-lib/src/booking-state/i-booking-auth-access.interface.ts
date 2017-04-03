@@ -1,4 +1,4 @@
 export interface IBookingAuthAccess {
-  getUserID(): number;
+  userID: number;
   userIsConnected(): boolean;
 }
