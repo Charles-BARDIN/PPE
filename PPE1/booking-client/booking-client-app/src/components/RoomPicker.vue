@@ -7,10 +7,6 @@
 </template>
 
 <script>
-  import bookingClientLib from '@/lib-adapter';
-
-  const roomService = bookingClientLib.getRoomService();
-
   export default {
     name: 'room-picker',
     data () {
