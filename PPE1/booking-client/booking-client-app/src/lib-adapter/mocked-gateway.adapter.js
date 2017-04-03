@@ -1,4 +1,4 @@
-export default class Gateway {
+export default class MockedGateway {
   constructor() {
 
   }
