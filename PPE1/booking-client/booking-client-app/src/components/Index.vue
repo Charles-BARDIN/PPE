@@ -17,7 +17,7 @@
         dicta ullam ducimus vel. Harum, numquam, vero.
       </p>
 
-       <M2LButton label="Réserver une salle" v-bind:action="bookARoom" />
+       <M2LButton label="Réserver une salle" v-bind:action="onBookingButtonClick" />
     </div>
 </template>
 
@@ -36,7 +36,7 @@
         M2LButton
     },
     methods: {
-      bookARoom: () => {
+      onBookingButtonClick: () => {
         indexService.goToBookingState();
       }
     }
