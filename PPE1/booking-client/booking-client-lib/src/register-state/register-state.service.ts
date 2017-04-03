@@ -73,8 +73,19 @@ export class RegisterService {
       valid: true,
       faults: []
     };
-
-    for (let property in user) {
+    
+    [
+      'lastname',
+      'firstname',
+      'address',
+      'town',
+      'zip',
+      'country',
+      'mail',
+      'phone',
+      'password',
+      'confirm',
+    ].forEach(property => {
       switch (property) {
         case 'phone':
           break;
@@ -90,7 +101,7 @@ export class RegisterService {
             res.faults.push('ERR_REGISTER_' + property.toUpperCase() + '_REQUIRED');
           }
       }
-    }
+    });
 
     if (user.password !== user.confirm) {
       res.valid = false;

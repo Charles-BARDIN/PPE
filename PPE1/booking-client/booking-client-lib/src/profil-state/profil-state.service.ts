@@ -72,7 +72,18 @@ export class ProfilService {
       faults: []
     };
 
-    for (let property in user) {
+    [
+      'id',
+      'address',
+      'town',
+      'zip',
+      'country',
+      'mail',
+      'oldPassword',
+      'password',
+      'confirm',
+      'phone',
+    ].forEach(property => {
       switch (property) {
         case 'mail':
           if (user[property] && !this._validator.isMail(user[property])) {
@@ -81,7 +92,7 @@ export class ProfilService {
           }
           break;
       }
-    }
+    });
 
     if (user.password && !user.oldPassword) {
       res.valid = false;
