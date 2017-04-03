@@ -13,9 +13,11 @@ export class RegisterService {
   private _nav: IRegisterNavAccess;
 
   constructor(config: {
-    navigation: IRegisterNavAccess
+    navigation: IRegisterNavAccess,
+    authentification: IRegisterAuthAccess
   }) {
     this._nav = config.navigation;
+    this._auth = config.authentification;
   }
 
   set validator(validator: IRegisterValidator) {

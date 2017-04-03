@@ -144,7 +144,8 @@ export class BookingClientLib {
     }
 
     this._registerService = new RegisterService({
-      navigation: this.getNavigationService()
+      navigation: this.getNavigationService(),
+      authentification: this.getAuthService()
     });
 
     return this._registerService;
