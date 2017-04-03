@@ -1,34 +1,39 @@
 <template>
-  <transition name="modal">
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
+  <div v-if="showModal">
+    <transition name="modal">
+      <div class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-container">
 
-          <div class="modal-header">
-            Logout
-          </div>
+            <div class="modal-header">
+              Logout
+            </div>
 
-          <div class="modal-body">
-            Voulez vous vraiment vous déconnecter ?
-          </div>
+            <div class="modal-body">
+              Voulez-vous vraiment vous déconnecter ?
+            </div>
 
-          <div class="modal-footer">
-            <button class="modal-default-button" @click="$emit('close-logout')">
-              Se déconnecter
-            </button>
-            <button class="modal-default-button" @click="$emit('close-logout')">
-              Annuler
-            </button>
+            <div class="modal-footer">
+              <button class="modal-default-button" @click="onlogout">
+                OK
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <script>
   export default {
-    name: 'logout'
+    name: 'login',
+    props: ['showModal', 'onLogout'],
+    methods: {
+      onlogout: function() {
+        this.onLogout();
+      }
+    }
   };
 </script>
 
@@ -69,6 +74,19 @@
 .modal-body {
   margin: 20px 0;
 }
+
+.modal-default-button {
+  float: right;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
 
 .modal-enter {
   opacity: 0;

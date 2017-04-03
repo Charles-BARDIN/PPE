@@ -1,44 +1,52 @@
 <template>
-  <transition name="modal">
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
+  <div v-if="showModal">
+    <transition name="modal">
+      <div class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-container">
 
-          <div class="modal-header">
-            Login
-          </div>
+            <div class="modal-header">
+              Login
+            </div>
 
-          <div class="modal-body">
-            <form>
-              <div>
-                <label>Mail</label>
-                <input type="mail" required />
-              </div>
+            <div class="modal-body">
+              <form>
+                <div>
+                  <label>Mail</label>
+                  <input type="mail" required />
+                </div>
 
-              <div>
-                <label>Mot de passe</label>
-                <input type="password" required />
-              </div>
+                <div>
+                  <label>Mot de passe</label>
+                  <input type="password" required />
+                </div>
 
-              <div>
-              </div>
-            </form>
-          </div>
+                <div>
+                </div>
+              </form>
+            </div>
 
-          <div class="modal-footer">
-            <button class="modal-default-button" @click="$emit('close-login')">
-              OK
-            </button>
+            <div class="modal-footer">
+              <button class="modal-default-button" @click="onlogin">
+                OK
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <script>
   export default {
-    name: 'login'
+    name: 'login',
+    props: ['showModal', 'onLogin'],
+    methods: {
+      onlogin: function() {
+        this.onLogin();
+      }
+    }
   };
 </script>
 

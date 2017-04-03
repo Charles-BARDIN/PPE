@@ -23,9 +23,8 @@ export {
 
 export class BookingClientLib {
   private _hash: Function;
-  private _router: IRouter;
   private _gateway: IGateway;
-
+  private _router: IRouter;
 
   private _authService: AuthService;
   private _bookingService: BookingService;
@@ -38,22 +37,20 @@ export class BookingClientLib {
 
   private _navigationService: NavigationService;
 
-  constructor(config: {
-    hash: Function,
-    router: IRouter,
+  constructor(config?: {
+    hash?: Function,
+    router?: IRouter,
     gateway?: IGateway
   }) {
-    if (!config.hash) {
-      console.error('A hash function must be provided');
-    }
-    if (!config.router) {
-      console.error('A router function must be provided');
-    }
-
+    if(!config) return;
     this._hash = config.hash;
     this._router = config.router;
     this._gateway = config.gateway;
   }
+  
+  public getRouter(): IRouter {
+    return this._router;
+  };
 
   public getAuthService(): AuthService {
     if (this._authService instanceof AuthService) {
@@ -95,7 +92,7 @@ export class BookingClientLib {
     }
 
     this._indexService = new IndexService({
-      navigation: this._getNavigationService(),
+      navigation: this.getNavigationService(),
       authentification: this.getAuthService()
     });
 
@@ -109,7 +106,7 @@ export class BookingClientLib {
 
     this._loginService = new LoginService({
       authentification: this.getAuthService(),
-      navigation: this._getNavigationService()
+      navigation: this.getNavigationService()
     });
 
     return this._loginService;
@@ -122,7 +119,7 @@ export class BookingClientLib {
 
     this._logoutService = new LogoutService({
       authentification: this.getAuthService(),
-      navigation: this._getNavigationService()
+      navigation: this.getNavigationService()
     });
 
     return this._logoutService;
@@ -146,7 +143,7 @@ export class BookingClientLib {
     }
 
     this._registerService = new RegisterService({
-      navigation: this._getNavigationService()
+      navigation: this.getNavigationService()
     });
 
     return this._registerService;
@@ -172,7 +169,15 @@ export class BookingClientLib {
     this._gateway = gateway;
   }
 
-  private _getNavigationService(): NavigationService {
+  public setHash(hash: Function) {
+    this._hash = hash;
+  }
+
+  public setRouter(router: IRouter) {
+    this._router = router;
+  }
+
+  public getNavigationService(): NavigationService {
     if (this._navigationService instanceof NavigationService) {
       return this._navigationService;
     }

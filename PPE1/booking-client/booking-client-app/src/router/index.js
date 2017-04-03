@@ -1,8 +1,10 @@
 import Vue from 'vue'
+import bookingClientLib from '@/lib-adapter'
+
 import Router from 'vue-router'
 import Index from '@/components/Index'
 import Register from '@/components/Register'
-import Profil from '@/components/Profil'
+import Profile from '@/components/Profile'
 import Booking from '@/components/Booking'
 import Room from '@/components/Room'
 
@@ -22,8 +24,8 @@ const router = new Router({
     },
     {
       path: '/profil',
-      name: 'Profil',
-      component: Profil
+      name: 'Profile',
+      component: Profile
     },
     {
       path: '/booking',
@@ -46,5 +48,7 @@ router.beforeEach((to, from, next) => {
 
   next('/');
 });
+
+bookingClientLib.getRouter().vueRouter = router;
 
 export default router;

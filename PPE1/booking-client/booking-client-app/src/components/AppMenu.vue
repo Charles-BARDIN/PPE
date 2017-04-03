@@ -6,12 +6,12 @@
       </router-link>
     </span>
 
-    <Login v-if="showLoginModal" @close-login="showLoginModal = false" />
-    <Logout v-if="showLogoutModal" @close-logout="showLogoutModal = false" />
-
     <nav>
       <ul>
         <li v-for="item in items"><a v-on:click="onMenuClick(item)">{{ item | menuItem }}</a></li>
+
+        <Login v-bind:showModal="showLogin" v-bind:onLogin="closeDialog" />
+        <Logout v-bind:showModal="showLogout" v-bind:onLogout="closeDialog" />
       </ul>
     </nav>
   </div>
@@ -19,11 +19,12 @@
 
 <script>
 import Vue from 'vue';
-
-import router from '@/router';
+import bookingClientLib from '@/lib-adapter';
 
 import Login from '@/components/Login';
 import Logout from '@/components/Logout';
+
+const navService = bookingClientLib.getNavigationService();
 
 Vue.filter('menuItem', function (value) {
   const filter = {
@@ -40,17 +41,31 @@ Vue.filter('menuItem', function (value) {
 
 export default {
   name: 'app-menu',
+  components: {
+      Login
+  },
   data () {
-    return {
-      // items: navigationService.getMenuItems(),
-      items: [],
-      showLoginModal: false,
-      showLogoutModal: false
+    bookingClientLib.getRouter().openModal = state => {
+      if(state === 'login') {
+        this.showLogin = true;
+      } else {
+        this.showLogout = true;
+      }
+    }
+
+    return { 
+      showLogin: false,
+      showLogout: false,
+      items: navService.getMenuItems()
     }
   },
   methods: {
-    onMenuClick: (item) => {
-      // navigationService.onItemMenuClick(item);
+    closeDialog: function() {
+      this.showLogin = false;
+      this.showLogout = false;
+    },
+    onMenuClick: function (item) {
+       navService.onItemMenuClick(item)
     }
   },
   components: {
