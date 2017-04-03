@@ -5,7 +5,7 @@
   <form>
     <div>
       <span>Salle</span>
-      <RoomPicker class="inputs" v-bind:on-selected-room-change="changeSelectedRoom" />
+      <RoomPicker v-bind:on-selected-room-change="changeSelectedRoom" v-bind:rooms="rooms" />
     </div>
 
     <div>
@@ -15,6 +15,9 @@
 
     <M2LButton label="Enregistrer ma réservation" v-bind:action="book" />
   </form>
+
+  <div v-for="err in errors">{{ err }}</div>
+  <div v-if="confirm">Votre réservation a bien été effectuée.</div>
 </div>
 </template>
 
@@ -35,22 +38,65 @@ export default {
       RoomPicker
   },
   created: function() {
+    const setRoomList = this.setRoomList;
+    const displayRoomListError = this.displayRoomListError;
+    const showValidationErrors = this.showValidationErrors;
+    const showConfirmation = this.showConfirmation;
+    const showBackendError = this.showBackendError;
+    const hideErrors = this.hideErrors;
+
+    const controller = {
+      setRoomList,
+      displayRoomListError,
+      showValidationErrors,
+      showConfirmation,
+      showBackendError,
+      hideErrors,
+    };
+
+    bookingService.controller = controller;
+
     bookingService.onPageLoad();
   },
   data () {
     return {
       booking: {
-        room: null,
+        roomID: null,
         date: null
-      }
+      },
+      rooms: [],
+      confirm: false,
+      errors: []
     }
   },
   methods: {
     book: function() {
-      console.log('Booked for room', this.booking.room.label, new Date(this.booking.date + 'UTC'))
+      bookingService.bookARoom(this.booking);
     },
     changeSelectedRoom: function(newRoom) {
       this.booking.room = newRoom
+    },
+    setRoomList: function(list) {
+      this.rooms = list;
+    },
+    displayRoomListError: function(error) {
+      this.errors = [error];
+    },
+    showValidationErrors: function(errors) {
+      this.errors = errors;
+    },
+    showBackendError: function(err) {
+      this.errors = [err];      
+    },
+    hideErrors: function() {
+      this.errors = [];
+    },
+    showConfirmation: function() {
+      this.confirm = true
+    },
+    changeSelectedRoom: function(newRoom) {
+      console.log(newRoom.id)
+      this.booking.roomID = newRoom.id;
     }
   }
 }

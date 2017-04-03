@@ -42,8 +42,9 @@ export class BookingService {
     roomID: number,
     date: Date
   }) {
-    let errors = [];
+    this._controller.hideErrors();
 
+    let errors = [];
     if (!booking.roomID) {
       errors.push('ERR_BOOKING_ROOM_REQUIRED');
     }

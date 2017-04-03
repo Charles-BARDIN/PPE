@@ -46,7 +46,11 @@ export default class Gateway {
 
   bookARoom(booking) {
     return new Promise((resolve, reject) => {
-
+      resolve({
+        roomID: booking.roomID,
+        userID: 1,
+        date: booking.date
+      });
     });
   }
 
