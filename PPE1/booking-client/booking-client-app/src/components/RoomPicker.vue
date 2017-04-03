@@ -1,40 +1,48 @@
 <template>
-  <select class="room-picker" id="room" v-model="selectedRoomLabel">
-    <option v-for="room in rooms">{{ room.label }}</option>
-  </select>
+  <div>
+    <select class="room-picker" id="room">
+      <option v-for="room in rooms">{{ room.label }}</option>
+    </select>
+    <div>
+      {{ error }}
+    </div>
+  </div>
 </template>
 
 <script>
+  import bookingClientLib from '@/lib-adapter';
+
+  const roomService = bookingClientLib.getRoomService();
+
   export default {
     name: 'room-picker',
+    created: function() {
+      const displayRoomListError = this.displayRoomListError;
+      const setRoomList = this.setRoomList;
+
+      const controller = {
+        displayRoomListError,
+        setRoomList
+      }
+      roomService.controller = controller;
+      roomService.onPageLoad();
+    },
     data () {
       return {
-        rooms: [
-          {
-            label: 'Amphithéâtre',
-            img: '',
-            description: 'Description Amphithéâtre'
-          },
-          {
-            label: 'Salle de réunion',
-            img: '',
-            description: 'Description Salle de réunion'
-          },
-          {
-            label: 'Salle de convivialité',
-            img: '',
-            description: 'Description Salle de convivialité'
-          }
-        ],
+        rooms: [],
+        error: undefined,
         selectedRoomLabel: ''
       }
     },
-    props: ['onSelectedRoomChange'],
-    watch: {
-      selectedRoomLabel: function(newRoom) {
-        this.onSelectedRoomChange(this.rooms.filter(room => room.label === newRoom)[0]);
+    methods: {
+      displayRoomListError: function (err) {
+        this.error = err;
+      },
+      setRoomList: function (list) {
+        this.rooms=list;
       }
-    }
+    },
+    props: ['onSelectedRoomChange']
   }
 </script>
 
