@@ -43,8 +43,7 @@ export class RegisterService {
     this._controller.hideErrors();
 
     let validation = this._validateUserRegistration(newUser);
-
-    if (!validation.valid) {
+    if (!(validation.valid)) {
       this._controller.showValidationErrors(validation.faults);
       return;
     }
