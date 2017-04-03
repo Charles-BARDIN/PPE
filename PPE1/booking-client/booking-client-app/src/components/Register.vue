@@ -34,7 +34,6 @@
     },
     methods: {
       register: (user) => {
-        console.log('registered');
         registerService.register(user)
       },
       showValidationErrors: function(errors) {
