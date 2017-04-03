@@ -5,7 +5,7 @@ module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
   proxyTable: {
       '/api': {
-        target: 'http://localhost:1000',
+        target: 'http://localhost:9090',
         changeOrigin: true
       }
     }
