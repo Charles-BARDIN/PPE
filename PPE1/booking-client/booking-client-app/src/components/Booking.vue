@@ -61,8 +61,8 @@ export default {
   data () {
     return {
       booking: {
-        roomID: null,
-        date: null
+        roomID: undefined,
+        date: undefined
       },
       rooms: [],
       confirm: false,

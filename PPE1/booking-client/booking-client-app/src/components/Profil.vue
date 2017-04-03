@@ -107,7 +107,7 @@ export default {
   methods: {
     onconfirm: function() {
       let userCopy = {
-        id: this.user ? this.user.id : null,
+        id: this.user ? this.user.id : undefined,
         firstname: this.user ? this.user.firstname : this.formUser.firstname,
         lastname: this.user ? this.user.lastname : this.formUser.lastname,
         address: [
@@ -122,7 +122,7 @@ export default {
         phone: this.formUser.phone,
         password: this.formUser.password,
         confirm: this.formUser.confirm,
-        oldPassword: this.mode === 'edit' ? this.formUser.oldPassword : null,
+        oldPassword: this.mode === 'edit' ? this.formUser.oldPassword : undefined,
       };
       
       this.onConfirm(userCopy);
