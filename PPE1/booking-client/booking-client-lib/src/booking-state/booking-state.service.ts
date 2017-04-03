@@ -3,18 +3,22 @@ import { Booking } from 'm2l-core';
 import { IBookingAuthAccess } from '.';
 import { IBookingGateway } from '.';
 import { IBookingController } from '.';
+import { IBookingNavAccess } from '.';
 
 export class BookingService {
   private _auth: IBookingAuthAccess;
+  private _nav: IBookingNavAccess;
   private _gateway: IBookingGateway;
   private _controller: IBookingController;
 
   constructor(config: {
     authentification: IBookingAuthAccess,
-    gateway: IBookingGateway
+    gateway: IBookingGateway,
+    navigation: IBookingNavAccess
   }) {
     this._auth = config.authentification;
     this._gateway = config.gateway;
+    this._nav = config.navigation;
   }
 
   set controller(controller: IBookingController) {
@@ -22,11 +26,16 @@ export class BookingService {
   }
 
   public onPageLoad() {
+    if(!this._auth.userIsConnected()) {
+      this._nav.goTo('index');
+    }
+
     let rooms = this._gateway.getRooms()
       .then(rooms => {
         this._controller.setRoomList(rooms);
       })
       .catch((err: string) => this._controller.displayRoomListError(err));
+
   }
 
   public bookARoom(booking: {

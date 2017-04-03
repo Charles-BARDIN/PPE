@@ -80,7 +80,8 @@ export class BookingClientLib {
 
     this._bookingService = new BookingService({
       authentification: this.getAuthService(),
-      gateway: this._gateway
+      gateway: this._gateway,
+      navigation: this.getNavigationService()
     });
 
     return this._bookingService;

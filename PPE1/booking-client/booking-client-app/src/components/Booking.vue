@@ -19,9 +19,13 @@
 </template>
 
 <script>
+import bookingClientLib from '@/lib-adapter'
+
 import Datepicker from 'vuejs-datepicker';
 import M2LButton from '@/components/M2LButton';
 import RoomPicker from '@/components/RoomPicker';
+
+const bookingService = bookingClientLib.getBookingService();
 
 export default {
   name: 'booking', 
@@ -29,6 +33,9 @@ export default {
       Datepicker,
       M2LButton,
       RoomPicker
+  },
+  created: function() {
+    bookingService.onPageLoad();
   },
   data () {
     return {
