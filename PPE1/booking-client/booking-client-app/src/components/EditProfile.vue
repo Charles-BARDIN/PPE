@@ -3,7 +3,7 @@
     <Profile mode="edit" v-bind:onConfirm="editUser" v-bind:user="user" />
 
     <div v-if="showConfirm">
-      Profile modifié avec succès !
+      Profil modifié avec succès !
     </div>
     <div v-for="err in errors">
       {{ err }}

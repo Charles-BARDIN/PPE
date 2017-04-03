@@ -70,7 +70,7 @@
       <input type="confirm" v-model="formUser.confirm" />
     </div>
 
-    <M2LButton v-bind:label="mode === 'new' ? 'Inscription' : 'Modifier le profile'" v-bind:action="onconfirm" />
+    <M2LButton v-bind:label="mode === 'new' ? 'Inscription' : 'Modifier le profil'" v-bind:action="onconfirm" />
   </form>
 </div>
 </template>
@@ -130,7 +130,7 @@ export default {
   },
   data () {
     return {
-      title: this.mode === 'edit' ? 'Modifier le profile' : 'Inscription',
+      title: this.mode === 'edit' ? 'Modifier le profil' : 'Inscription',
       formUser: {
         address: {}
       }
