@@ -21,7 +21,7 @@ export default class Gateway {
 
   logout() {
     return new Promise((resolve, reject) => {
-
+      resolve(true);
     });
   }
 

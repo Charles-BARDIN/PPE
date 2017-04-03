@@ -14,6 +14,9 @@
             </div>
 
             <div class="modal-footer">
+              <button class="modal-default-button" @click="oncancel">
+                Annuler
+              </button>
               <button class="modal-default-button" @click="onlogout">
                 OK
               </button>
@@ -26,12 +29,19 @@
 </template>
 
 <script>
+  import bookingClientLib from '@/lib-adapter'
+
+  const logoutService = bookingClientLib.getLogoutService();
+  
   export default {
-    name: 'login',
-    props: ['showModal', 'onLogout'],
+    name: 'logout',
+    props: ['showModal', 'onCancel'],
     methods: {
       onlogout: function() {
-        this.onLogout();
+        logoutService.logout({ mail: this.mail, password: this.password });
+      },
+      oncancel: function() {
+        this.onCancel();
       }
     }
   };
