@@ -1,5 +1,5 @@
 <template>
-  <Profile mode="new" v-bind:onConfirm="register" />
+  <Profile mode="edit" v-bind:onConfirm="editUser" />
 </template>
 
 <script>
@@ -9,7 +9,7 @@
   export default {
     name: 'register',
     methods: {
-      register: () => {
+      editUser: () => {
         console.log('registered')
       }
     },

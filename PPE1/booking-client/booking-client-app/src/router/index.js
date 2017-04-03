@@ -4,7 +4,7 @@ import bookingClientLib from '@/lib-adapter'
 import Router from 'vue-router'
 import Index from '@/components/Index'
 import Register from '@/components/Register'
-import Profile from '@/components/Profile'
+import EditProfile from '@/components/EditProfile'
 import Booking from '@/components/Booking'
 import Room from '@/components/Room'
 
@@ -25,7 +25,7 @@ const router = new Router({
     {
       path: '/profile',
       name: 'Profile',
-      component: Profile
+      component: EditProfile
     },
     {
       path: '/booking',
