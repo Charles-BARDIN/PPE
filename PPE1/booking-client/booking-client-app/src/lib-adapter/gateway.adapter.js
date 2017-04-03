@@ -1,6 +1,8 @@
+import config from '../config';
+
 export default class Gateway {
   constructor() {
-    this._baseUrl = 'http://localhost:9000/api/v1.0.0';
+    this._baseUrl = config.apiBaseUrl;
   }
 
   login(credentials) {
@@ -42,7 +44,7 @@ export default class Gateway {
             let rep;
             try {
               rep = JSON.parse(this.responseText);
-            } catch(err) {
+            } catch (err) {
               console.log('BAD_FORMAT');
               reject('ERR_GATEWAY_ANSWER_FORMAT');
               return;

@@ -5,8 +5,13 @@
   "author": "Charles BARDIN <charles.bardin.pro@gmail.com>",
   "private": true,
   "scripts": {
+    "predev": "npm run config:dev",
     "dev": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "prebuild": "npm run config:prod",
+    "build": "node build/build.js",
+    "config": "node ./build/generate-config",
+    "config:dev": "npm run config -- dev",
+    "config:prod": "npm run config -- prod"
   },
   "dependencies": {
     "vue": "^2.2.2",
