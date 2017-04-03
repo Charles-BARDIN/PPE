@@ -1,5 +1,5 @@
 <template>
-<div class="profil">
+<div class="profile">
           <h1>Modifier mon profil</h1>
           <form action="">
             <label for="lastname" class="labelo">Nom </label>: 
@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name: 'profil'
+  name: 'profile'
 }
 </script>
 
