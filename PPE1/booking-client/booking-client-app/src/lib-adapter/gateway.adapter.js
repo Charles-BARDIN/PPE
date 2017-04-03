@@ -27,7 +27,8 @@ export default class Gateway {
         {
           id: 1,
           label: 'Amphithéâtre',
-          img: ''
+          img: '',
+          description: 'Amphi description'
         }
       ]);
     });

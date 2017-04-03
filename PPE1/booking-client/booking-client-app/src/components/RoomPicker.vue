@@ -1,11 +1,8 @@
 <template>
   <div>
-    <select class="room-picker" id="room">
+    <select class="room-picker" id="room" v-model="selectedRoom">
       <option v-for="room in rooms">{{ room.label }}</option>
     </select>
-    <div>
-      {{ error }}
-    </div>
   </div>
 </template>
 
@@ -16,33 +13,17 @@
 
   export default {
     name: 'room-picker',
-    created: function() {
-      const displayRoomListError = this.displayRoomListError;
-      const setRoomList = this.setRoomList;
-
-      const controller = {
-        displayRoomListError,
-        setRoomList
-      }
-      roomService.controller = controller;
-      roomService.onPageLoad();
-    },
     data () {
       return {
-        rooms: [],
-        error: undefined,
-        selectedRoomLabel: ''
+        selectedRoom: {}
       }
     },
-    methods: {
-      displayRoomListError: function (err) {
-        this.error = err;
-      },
-      setRoomList: function (list) {
-        this.rooms=list;
+    watch: {
+      selectedRoom: function(newRoom) {
+        this.onSelectedRoomChange(this.rooms.filter(room => room.label === newRoom)[0]);
       }
     },
-    props: ['onSelectedRoomChange']
+    props: ['onSelectedRoomChange', 'rooms']
   }
 </script>
 

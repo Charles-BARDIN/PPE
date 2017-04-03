@@ -2,7 +2,7 @@
     <div class="room">
       <h1>Liste des salles</h1>
 
-      <RoomPicker v-bind:on-selected-room-change="changeSelectedRoom" />
+      <RoomPicker v-bind:on-selected-room-change="changeSelectedRoom" v-bind:rooms="rooms" />
 
       <div class="room-description">
         {{ selectedRoom.description }}
@@ -11,18 +11,46 @@
 </template>
 
 <script>
+  import bookingClientLib from '@/lib-adapter';
+
   import RoomPicker from '@/components/RoomPicker'
+
+  const roomService = bookingClientLib.getRoomService();
 
   export default {
     name: 'room',
+    created: function (){
+      const displayRoomListError = this.displayRoomListError;
+      const setRoomList = this.setRoomList;
+      const displayRoomDescription = this.displayRoomDescription;
+
+      const controller = {
+        displayRoomListError,
+        setRoomList,
+        displayRoomDescription
+      };
+
+      roomService.controller = controller;
+      roomService.onPageLoad();
+    },
     methods: {
       changeSelectedRoom: function(newRoom) {
-        this.selectedRoom = newRoom;
+        roomService.changeRoomSelection(newRoom);
+      },
+      displayRoomDescription: function (room) {
+        this.selectedRoom = room;
+      },
+      displayRoomListError: function (err) {
+        this.error = err;
+      },
+      setRoomList: function (list) {
+        this.rooms = list;
       }
     },
     data () {
       return { 
-        selectedRoom: {}
+        selectedRoom: {},
+        rooms: []
       }
     },
     components: {
