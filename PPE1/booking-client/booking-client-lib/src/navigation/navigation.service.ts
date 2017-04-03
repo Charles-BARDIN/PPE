@@ -7,14 +7,16 @@ import { IRouter } from '.';
 import { INavigationAuthAccess } from '.';
 
 export class NavigationService implements IIndexNavAccess, IRegisterNavAccess, ILogoutNavAccess, ILoginNavAccess {
-  private _router: IRouter
-  private _auth: INavigationAuthAccess
-  private _states: { name: string, appStates: string[] }[]
+  private _router: IRouter;
+  private _auth: INavigationAuthAccess;
+  private _states: { name: string, appStates: string[] }[];
+  private _menuItems: string[];
 
   constructor(config: {
     router: IRouter,
     authentification: INavigationAuthAccess
   }) {
+    
     this._router = config.router;
     this._auth = config.authentification;
     this._states = [
@@ -63,20 +65,23 @@ export class NavigationService implements IIndexNavAccess, IRegisterNavAccess, I
         ]
       }
     ]
+    this._setMenuItems();
   }
 
   public goTo(stateName: string) {
-    let appState = this._auth.userIsConnected() ? 'connected' : 'not_connected';
+    this._setMenuItems();
     let stateToGo = this._states.filter(state => state.name === stateName)[0];
 
     let isAKnownState = stateToGo != null;
     if(!isAKnownState) {
+      console.log('unknown')
       this._router.go('index');
       return;
     }
-
-    let isAuthorized = stateToGo.appStates.indexOf(appState) !== -1;
+    console.log(this._menuItems, stateName)
+    let isAuthorized = this._menuItems.indexOf(stateName) !== -1;
     if(!isAuthorized) {
+      console.log('unauthorized')
       this._router.go('login');
       return;
     }
@@ -88,13 +93,23 @@ export class NavigationService implements IIndexNavAccess, IRegisterNavAccess, I
     this.goTo(item);
   }
 
-  public getMenuItems(): string[]{
+  private _setMenuItems(){
     let appState = this._auth.userIsConnected() ? 'connected' : 'not_connected';
+    if(!this._menuItems) {
+      this._menuItems = [];
+    }
 
-    return this._states.filter(state => state.appStates.indexOf(appState) !== -1)
+    this._menuItems.splice(0);
+    this._menuItems.push(
+      ...this._states.filter(state => state.appStates.indexOf(appState) !== -1)
       .reduce((prev, curr) => {
         prev.push(curr.name);
         return prev;
-      }, []);
+      }, [])
+    );
+  }
+
+  public getMenuItems(): string[] {
+    return this._menuItems;
   }
 };
