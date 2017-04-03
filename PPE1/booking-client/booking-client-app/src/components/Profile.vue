@@ -65,7 +65,7 @@
       <input type="confirm" class="space" />
     </div>
 
-    <M2LButton label="Inscription" v-bind:action="onConfirm" />
+    <M2LButton v-bind:label="mode === 'new' ? 'Inscription' : 'Modifier le profile'" v-bind:action="onConfirm" />
   </form>
 </div>
 </template>
