@@ -1,5 +1,5 @@
 <template>
-<div class="profile">
+<div class="profil">
   <h1>{{ title }}</h1>
   <form>
     <div>
@@ -79,7 +79,7 @@
 import M2LButton from '@/components/M2LButton';
 
 export default {
-  name: 'profile',
+  name: 'profil',
   props: ['mode', 'onConfirm', 'user'],
   created: function() {
     if(this.user) {

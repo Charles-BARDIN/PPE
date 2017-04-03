@@ -2,19 +2,19 @@ import { BookingService, IBookingGateway, IBookingController } from './booking-s
 import { IndexService } from './index-state';
 import { LoginService, ILoginController, ILoginValidator } from './login-state';
 import { LogoutService } from './logout-state';
-import { ProfileService, IProfileController, IProfileValidator } from './profile-state';
+import { ProfilService, IProfilController, IProfilValidator } from './profil-state';
 import { RegisterService, IRegisterController, IRegisterValidator } from './register-state';
 import { RoomService, IRoomGateway, IRoomController } from './room-list-state';
 import { AuthService, IAuthGateway } from './session';
 import { NavigationService, IRouter } from './navigation';
 
 export interface IGateway extends IAuthGateway, IBookingGateway, IRoomGateway { };
-export interface IValidator extends ILoginValidator, IProfileValidator, IRegisterValidator { };
+export interface IValidator extends ILoginValidator, IProfilValidator, IRegisterValidator { };
 
 export {
   IBookingController,
   ILoginController,
-  IProfileController,
+  IProfilController,
   IRegisterController,
   IRoomController,
 
@@ -31,7 +31,7 @@ export class BookingClientLib {
   private _indexService: IndexService;
   private _loginService: LoginService;
   private _logoutService: LogoutService;
-  private _profileService: ProfileService;
+  private _profilService: ProfilService;
   private _registerService: RegisterService;
   private _roomService: RoomService;
 
@@ -126,16 +126,16 @@ export class BookingClientLib {
     return this._logoutService;
   }
 
-  public getProfileService(): ProfileService {
-    if (this._profileService instanceof ProfileService) {
-      return this._profileService;
+  public getProfilService(): ProfilService {
+    if (this._profilService instanceof ProfilService) {
+      return this._profilService;
     }
 
-    this._profileService = new ProfileService({
+    this._profilService = new ProfilService({
       authentification: this.getAuthService()
     });
 
-    return this._profileService;
+    return this._profilService;
   }
 
   public getRegisterService(): RegisterService {

@@ -33,7 +33,7 @@ Vue.filter('menuItem', function (value) {
     login: 'Connexion',
     register: 'Inscription',
     booking: 'Réservation',
-    profile: 'Profil',
+    profil: 'Profil',
     logout: 'Déconnexion'
   }
   return filter[value] || '';

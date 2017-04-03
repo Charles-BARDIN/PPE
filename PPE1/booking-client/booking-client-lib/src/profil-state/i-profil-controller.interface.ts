@@ -1,9 +1,9 @@
 import { User } from 'm2l-core';
 
-export interface IProfileController {
+export interface IProfilController {
   hideTexts(): void;
   showValidationErrors(errors: string[]): void;
   showBackendError(err: string): void;
-  setUserProfile(user: User): void;
+  setUserProfil(user: User): void;
   showModifyConfirmation(): void;
 }

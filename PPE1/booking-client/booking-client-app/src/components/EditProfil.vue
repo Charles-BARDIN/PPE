@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Profile mode="edit" v-bind:onConfirm="editUser" v-bind:user="user" />
+    <Profil mode="edit" v-bind:onConfirm="editUser" v-bind:user="user" />
 
     <div v-if="showConfirm">
       Profil modifié avec succès !
@@ -13,11 +13,11 @@
 
 <script>
   import M2LButton from '@/components/M2LButton'
-  import Profile from '@/components/Profile'
+  import Profil from '@/components/Profil'
   
   import bookingClientLib from '@/lib-adapter'
 
-  const profileService = bookingClientLib.getProfileService();
+  const profilService = bookingClientLib.getProfilService();
 
   export default {
     name: 'register',
@@ -26,7 +26,7 @@
       const hideTexts = this.hideTexts;
       const showValidationErrors = this.showValidationErrors;
       const showBackendError = this.showBackendError;
-      const setUserProfile = this.setUserProfile;
+      const setUserProfil = this.setUserProfil;
       const showModifyConfirmation = this.showModifyConfirmation;
 
       const validator = {
@@ -36,18 +36,18 @@
         hideTexts,
         showValidationErrors,
         showBackendError,
-        setUserProfile,
+        setUserProfil,
         showModifyConfirmation,
       };
 
-      profileService.validator = validator;
-      profileService.controller = controller;
+      profilService.validator = validator;
+      profilService.controller = controller;
 
-      profileService.onPageLoad();
+      profilService.onPageLoad();
     },
     methods: {
       editUser: user => {
-        profileService.modifyUser(user);
+        profilService.modifyUser(user);
       },
       isMail: function(mail) {
         return mail.match(/^(.)+@.+\.(.)+$/);
@@ -62,7 +62,7 @@
       showBackendError: function(err) {
         this.errors = [err];
       },
-      setUserProfile: function(user) {
+      setUserProfil: function(user) {
         this.user = user
       },
       showModifyConfirmation: function() {
@@ -71,7 +71,7 @@
     },
     components: {
       M2LButton,
-      Profile
+      Profil
     },
     data () {
       return {

@@ -1,6 +1,6 @@
 import { User } from 'm2l-core';
 
-export interface IProfileAuthAccess {
+export interface IProfilAuthAccess {
   modifyUser(user: {
     id: number,
     address?: string,
