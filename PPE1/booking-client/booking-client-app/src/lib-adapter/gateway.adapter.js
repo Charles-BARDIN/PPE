@@ -5,7 +5,17 @@ export default class Gateway {
 
   login(credentials) {
     return new Promise((resolve, reject) => {
-
+      resolve({
+        id: 1,
+        firstname: 'John',
+        lastname: 'Doe',
+        mail: credentials.mail,
+        phone: '',
+        address: '11 rue des peupliers',
+        zip: '75000',
+        town: 'Paris',
+        country: 'France'
+      });
     });
   }
 

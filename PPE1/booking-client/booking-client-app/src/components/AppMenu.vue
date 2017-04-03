@@ -52,6 +52,11 @@ export default {
         this.showLogout = true;
       }
     }
+
+    bookingClientLib.getRouter().closeModal = () => {
+      this.showLogin = false;
+      this.showLogout = false;
+    }
   },
   data () {
     return { 

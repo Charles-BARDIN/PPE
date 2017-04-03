@@ -13,12 +13,12 @@
               <form>
                 <div>
                   <label>Mail</label>
-                  <input type="mail" required />
+                  <input type="mail" v-model="mail" required />
                 </div>
 
                 <div>
                   <label>Mot de passe</label>
-                  <input type="password" required />
+                  <input type="password" v-model="password" required />
                 </div>
 
                 <div>
@@ -31,6 +31,8 @@
                 OK
               </button>
             </div>
+
+            <div v-for="err in errors">{{ err }}</div>
           </div>
         </div>
       </div>
@@ -39,13 +41,49 @@
 </template>
 
 <script>
+  import bookingClientLib from '@/lib-adapter'
+
+  const loginService = bookingClientLib.getLoginService();
+  
   export default {
     name: 'login',
     props: ['showModal', 'onLogin'],
+    created: function () {
+      const validateMail = this.validateMail;
+      const showValidationErrors = this.showValidationErrors;
+      const showBackendError = this.showBackendError;
+
+      const controller = {
+        showValidationErrors,
+        showBackendError
+      };
+      const validator = {
+        validateMail
+      };
+
+      loginService.controller = controller;
+      loginService.validator = validator;
+    },
     methods: {
       onlogin: function() {
-        this.onLogin();
+        loginService.login({ mail: this.mail, password: this.password });
+      },
+      validateMail: function(mail) {
+        return mail.match(/^(.)+@.+\.(.)+$/);
+      },
+      showValidationErrors: function(errors) {
+        this.errors = errors;
+      },
+      showBackendError: function(error) {
+        this.errors = [errors];
       }
+    },
+    data () {
+      return {
+        errors: [],
+        mail: '',
+        password: ''
+      };
     }
   };
 </script>
