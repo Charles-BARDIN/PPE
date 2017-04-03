@@ -1,5 +1,5 @@
 <template>
-<div class="profile">
+<div class="profil">
   <h1>{{ title }}</h1>
   <form>
     <div>
@@ -70,7 +70,7 @@
       <input type="confirm" v-model="formUser.confirm" />
     </div>
 
-    <M2LButton v-bind:label="mode === 'new' ? 'Inscription' : 'Modifier le profile'" v-bind:action="onconfirm" />
+    <M2LButton v-bind:label="mode === 'new' ? 'Inscription' : 'Modifier le profil'" v-bind:action="onconfirm" />
   </form>
 </div>
 </template>
@@ -79,7 +79,7 @@
 import M2LButton from '@/components/M2LButton';
 
 export default {
-  name: 'profile',
+  name: 'profil',
   props: ['mode', 'onConfirm', 'user'],
   created: function() {
     if(this.user) {
@@ -130,7 +130,7 @@ export default {
   },
   data () {
     return {
-      title: this.mode === 'edit' ? 'Modifier le profile' : 'Inscription',
+      title: this.mode === 'edit' ? 'Modifier le profil' : 'Inscription',
       formUser: {
         address: {}
       }

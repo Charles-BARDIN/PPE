@@ -1,28 +1,28 @@
-import { IProfileController } from '.';
-import { IProfileAuthAccess } from '.';
-import { IProfileValidator } from '.';
+import { IProfilController } from '.';
+import { IProfilAuthAccess } from '.';
+import { IProfilValidator } from '.';
 
-export class ProfileService {
-  private _controller: IProfileController;
-  private _auth: IProfileAuthAccess;
-  private _validator: IProfileValidator;
+export class ProfilService {
+  private _controller: IProfilController;
+  private _auth: IProfilAuthAccess;
+  private _validator: IProfilValidator;
 
   constructor(config: {
-    authentification: IProfileAuthAccess
+    authentification: IProfilAuthAccess
   }) {
     this._auth = config.authentification;
   }
 
-  set validator(validator: IProfileValidator) {
+  set validator(validator: IProfilValidator) {
     this._validator = validator;
   }
 
-  set controller(controller: IProfileController) {
+  set controller(controller: IProfilController) {
     this._controller = controller;
   }
 
   public onPageLoad() {
-    this._controller.setUserProfile(this._auth.getUser());
+    this._controller.setUserProfil(this._auth.getUser());
   }
 
   public modifyUser(modifiedUser: {

@@ -6,11 +6,11 @@ import { IRegisterAuthAccess } from '../register-state';
 import { IBookingAuthAccess } from '../booking-state';
 import { ILoginAuthAccess } from '../login-state';
 import { ILogoutAuthAccess } from '../logout-state';
-import { IProfileAuthAccess } from '../profile-state';
+import { IProfilAuthAccess } from '../profil-state';
 
 import { IAuthGateway } from '.';
 
-export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IRegisterAuthAccess, IBookingAuthAccess, ILoginAuthAccess, ILogoutAuthAccess, IProfileAuthAccess {
+export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IRegisterAuthAccess, IBookingAuthAccess, ILoginAuthAccess, ILogoutAuthAccess, IProfilAuthAccess {
   private _gateway: IAuthGateway;
   private _user: User;
   private _hash: Function;

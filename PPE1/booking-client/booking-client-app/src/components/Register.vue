@@ -1,10 +1,10 @@
 <template>
-  <Profile mode="new" v-bind:onConfirm="register" />
+  <Profil mode="new" v-bind:onConfirm="register" />
 </template>
 
 <script>
   import M2LButton from '@/components/M2LButton'
-  import Profile from '@/components/Profile'
+  import Profil from '@/components/Profil'
 
   export default {
     name: 'register',
@@ -15,7 +15,7 @@
     },
     components: {
       M2LButton,
-      Profile
+      Profil
     }
   }
 </script>

@@ -53,7 +53,7 @@ export class NavigationService implements IIndexNavAccess, IRegisterNavAccess, I
         ]
       },
       {
-        name: 'profile',
+        name: 'profil',
         appStates: [
           'connected'
         ]
