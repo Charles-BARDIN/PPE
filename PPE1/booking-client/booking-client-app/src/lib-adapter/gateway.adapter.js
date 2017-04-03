@@ -1,8 +1,6 @@
-import config from '../config';
-
 export default class Gateway {
-  constructor() {
-    this._baseUrl = config.apiBaseUrl;
+  constructor(baseUrl) {
+    this._baseUrl = baseUrl;
   }
 
   login(credentials) {

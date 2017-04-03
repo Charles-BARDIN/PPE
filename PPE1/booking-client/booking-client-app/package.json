@@ -9,9 +9,12 @@
     "dev": "node build/dev-server.js",
     "prebuild": "npm run config:prod",
     "build": "node build/build.js",
+    "premock": "npm run config:mock",
+    "mock": "node build/dev-server.js",
     "config": "node ./build/generate-config",
     "config:dev": "npm run config -- dev",
-    "config:prod": "npm run config -- prod"
+    "config:prod": "npm run config -- prod",
+    "config:mock": "npm run config -- mock"
   },
   "dependencies": {
     "vue": "^2.2.2",
