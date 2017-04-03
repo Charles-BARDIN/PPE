@@ -69,11 +69,19 @@
     },
     methods: {
       onlogin: function() {
-        loginService.login({ mail: this.mail, password: this.password });
+        const credentials = { mail: this.mail, password: this.password };
+
         this.mail = '';
         this.password = '';
+        this.errors = [];
+
+        loginService.login(credentials);
       },
       oncancel: function() {
+        this.mail = '';
+        this.password = '';
+        this.errors = [];
+
         this.onCancel();
       },
       validateMail: function(mail) {
