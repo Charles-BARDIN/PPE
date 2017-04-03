@@ -85,13 +85,13 @@
         this.onCancel();
       },
       validateMail: function(mail) {
-        return mail.match(/^(.)+@.+\.(.)+$/);
+        return mail.match(/^(.)+@(.)+\.(.)+$/);
       },
       showValidationErrors: function(errors) {
         this.errors = errors;
       },
       showBackendError: function(error) {
-        this.errors = [errors];
+        this.errors = [error];
       }
     },
     data () {
