@@ -1,9 +1,9 @@
 import { BookingClientLib } from 'booking-client-lib';
 
-import MockedGateway from './mocked-gateway.adapter';
+import Gateway from './gateway.adapter';
 import Router from './router.adapter';
 
-const gateway = new MockedGateway();
+const gateway = new Gateway();
 const router = new Router();
 
 const hash = value => {
