@@ -32,11 +32,12 @@ export class ProfileService {
     zip?: string,
     country?: string,
     mail?: string,
+    oldPassword?: string,
     password?: string,
     confirm?: string,
     phone?: string
   }) {
-    this._controller.hideErrors();
+    this._controller.hideTexts();
 
     let validation = this._validateUserModification(modifiedUser);
 
@@ -61,6 +62,7 @@ export class ProfileService {
     zip?: string,
     country?: string,
     mail?: string,
+    oldPassword?: string
     password?: string,
     confirm?: string,
     phone?: string
@@ -79,6 +81,11 @@ export class ProfileService {
           }
           break;
       }
+    }
+
+    if (user.password && !user.oldPassword) {
+      res.valid = false;
+      res.faults.push('ERR_MODIFYUSER_OLDPASSWORD_REQUIRED');
     }
 
     if (user.password && user.password !== user.confirm) {

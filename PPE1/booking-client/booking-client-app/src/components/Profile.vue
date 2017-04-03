@@ -3,20 +3,20 @@
   <h1>{{ title }}</h1>
   <form>
     <div>
-      <label for="lastname">Nom</label>
+      <label>Nom</label>
       <input type="text" v-if="mode === 'edit'" disabled v-model="formUser.fullname" />
       <input type="text" v-if="mode === 'new'" v-model="formUser.lastname" />
     </div>
     <div v-if="mode === 'new'">
-      <label for="firstname">Prénom</label>
+      <label>Prénom</label>
       <input type="text" v-model="formUser.firstname" />
     </div>
     <div>
-      <label for="numberstreet">N°</label>
+      <label>N°</label>
       <input type="number" min="1" v-model="formUser.address.number" />
     </div>
     <div>
-      <label for="labelStreet">Voie</label>
+      <label>Voie</label>
       <select id="labelStreet" v-model="formUser.address.type" >
         <option value="blanck" selected> </option>
         <option value="rue">Rue</option>
@@ -28,15 +28,19 @@
       </select>
     </div>
     <div>
-      <label for="adress">Adresse</label>
+      <label>Adresse</label>
       <input type="text" v-model="formUser.address.address" />
     </div>
     <div>
-      <label for="city">Ville</label>
+      <label>Code postal</label>
+      <input type="text" v-model="formUser.zip" />
+    </div>
+    <div>
+      <label>Ville</label>
       <input type="text" v-model="formUser.town" />
     </div>
     <div>
-      <label for="country">Pays</label>
+      <label>Pays</label>
       <select id="country"  v-model="formUser.country">
           <option value="France" selected>France</option>
           <option value="Allemagne">Allemagne</option>
@@ -46,27 +50,27 @@
       </select>
     </div>
     <div>
-      <label for="mail" >Adresse mail</label>
+      <label >Adresse mail</label>
       <input type="email" v-model="formUser.mail" />
     </div>
     <div>
-      <label for="name">Téléphone</label>
+      <label>Téléphone</label>
       <input type="text"  v-model="formUser.phone" />
     </div>
     <div v-if="mode === 'edit'">
-      <label for="name">Ancien mot de passe</label>
+      <label>Ancien mot de passe</label>
       <input type="password" v-model="formUser.oldPassword" />
     </div>
     <div>
-      <label for="name">Mot de passe</label>
+      <label>Mot de passe</label>
       <input type="password"  v-model="formUser.password" />
     </div>
     <div>
-      <label for="name">Confirmation</label>
+      <label>Confirmation</label>
       <input type="confirm" v-model="formUser.confirm" />
     </div>
 
-    <M2LButton v-bind:label="mode === 'new' ? 'Inscription' : 'Modifier le profile'" v-bind:action="onConfirm" />
+    <M2LButton v-bind:label="mode === 'new' ? 'Inscription' : 'Modifier le profile'" v-bind:action="onconfirm" />
   </form>
 </div>
 </template>
@@ -79,10 +83,10 @@ export default {
   props: ['mode', 'onConfirm', 'user'],
   created: function() {
     if(this.user) {
-      this.formUser = Object.assign({}, this.user);
-      this.formUser.fullname = `${this.user.firstname} ${this.user.lastname}`;
+      let userCopy = Object.assign({}, this.user);
+      userCopy.fullname = `${this.user.firstname} ${this.user.lastname}`;
 
-      let addressFields = this.formUser.address.split(' ');
+      let addressFields = userCopy.address.split(' ');
       const number = addressFields[0];
       addressFields.shift()
 
@@ -91,13 +95,39 @@ export default {
 
       const address = addressFields.join(' ');
 
-      this.formUser.address = {
+      userCopy.address = {
         number,
         type,
         address
       }
+
+      this.formUser = userCopy;
     }
   }, 
+  methods: {
+    onconfirm: function() {
+      let userCopy = {
+        id: this.user ? this.user.id : null,
+        firstname: this.user ? this.user.firstname : this.formUser.firstname,
+        lastname: this.user ? this.user.lastname : this.formUser.lastname,
+        address: [
+          this.formUser.address.number, 
+          this.formUser.address.type, 
+          this.formUser.address.address
+        ].join(' '),
+        town: this.formUser.town,
+        zip: this.formUser.zip,
+        country: this.formUser.country,
+        mail: this.formUser.mail,
+        phone: this.formUser.phone,
+        password: this.formUser.password,
+        confirm: this.formUser.confirm,
+        oldPassword: this.mode === 'edit' ? this.formUser.oldPassword : null,
+      };
+      
+      this.onConfirm(userCopy);
+    }
+  },
   data () {
     return {
       title: this.mode === 'edit' ? 'Modifier le profile' : 'Inscription',

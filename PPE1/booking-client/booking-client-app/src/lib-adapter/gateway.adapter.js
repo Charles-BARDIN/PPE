@@ -56,7 +56,12 @@ export default class Gateway {
 
   modifyUser(user) {
     return new Promise((resolve, reject) => {
+      let copy = Object.assign({}, user);
+      copy.password = undefined;
+      copy.confirm = undefined;
+      copy.oldPassword = undefined;
 
+      resolve(copy);
     });
   }
 }

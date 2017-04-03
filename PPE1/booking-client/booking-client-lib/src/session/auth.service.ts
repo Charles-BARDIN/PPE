@@ -90,10 +90,12 @@ export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IRe
     mail?: string,
     password?: string,
     confirm?: string,
+    oldPassword?: string,
     phone?: string
   }): Promise<User> {
     return new Promise((resolve, reject) => {
       user.password = this._hash(user.password);
+      user.oldPassword = this._hash(user.oldPassword);
 
       this._gateway.modifyUser(user)
         .then(user => {

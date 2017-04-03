@@ -1,5 +1,14 @@
 <template>
-  <Profile mode="edit" v-bind:onConfirm="editUser" v-bind:user="user" />
+  <div>
+    <Profile mode="edit" v-bind:onConfirm="editUser" v-bind:user="user" />
+
+    <div v-if="showConfirm">
+      Profile modifié avec succès !
+    </div>
+    <div v-for="err in errors">
+      {{ err }}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -14,7 +23,7 @@
     name: 'register',
     created: function() {
       const isMail = this.isMail;
-      const hideErrors = this.hideErrors;
+      const hideTexts = this.hideTexts;
       const showValidationErrors = this.showValidationErrors;
       const showBackendError = this.showBackendError;
       const setUserProfile = this.setUserProfile;
@@ -24,7 +33,7 @@
         isMail
       };
       const controller = {
-        hideErrors,
+        hideTexts,
         showValidationErrors,
         showBackendError,
         setUserProfile,
@@ -37,14 +46,15 @@
       profileService.onPageLoad();
     },
     methods: {
-      editUser: () => {
-        profileService.modifyUser(this.user);
+      editUser: user => {
+        profileService.modifyUser(user);
       },
       isMail: function(mail) {
         return mail.match(/^(.)+@.+\.(.)+$/);
       },
-      hideErrors: function() {
+      hideTexts: function() {
         this.errors = [];
+        this.showConfirm = false;
       },
       showValidationErrors: function(errors) {
         this.errors = errors;
@@ -53,11 +63,10 @@
         this.errors = [err];
       },
       setUserProfile: function(user) {
-        console.log(user)
         this.user = user
       },
       showModifyConfirmation: function() {
-
+        this.showConfirm = true;
       }
     },
     components: {
