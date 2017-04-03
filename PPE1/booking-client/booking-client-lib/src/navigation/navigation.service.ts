@@ -74,14 +74,12 @@ export class NavigationService implements IIndexNavAccess, IRegisterNavAccess, I
 
     let isAKnownState = stateToGo != null;
     if(!isAKnownState) {
-      console.log('unknown')
       this._router.go('index');
       return;
     }
-    console.log(this._menuItems, stateName)
+    
     let isAuthorized = this._menuItems.indexOf(stateName) !== -1;
     if(!isAuthorized) {
-      console.log('unauthorized')
       this._router.go('login');
       return;
     }
