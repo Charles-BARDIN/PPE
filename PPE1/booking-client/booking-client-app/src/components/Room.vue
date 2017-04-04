@@ -58,7 +58,7 @@
     data () {
       return { 
         selectedRoom: {},
-        rooms: [],
+        rooms: ["amphithéatre","Salle de réunion","Salle de convivialité"],
         error: ''
       }
     },
@@ -77,4 +77,5 @@
     text-align: justify;
     margin-top: 20px;
   }
+
 </style>

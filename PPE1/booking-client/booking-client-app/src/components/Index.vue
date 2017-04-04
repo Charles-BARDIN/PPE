@@ -3,18 +3,11 @@
       <h1>M2L Accueil</h1>
 
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique repellat in sed aliquam voluptates, cumque atque
-        libero suscipit soluta, necessitatibus labore ex deserunt dicta ullam ducimus vel. Harum, numquam, vero. Lorem ipsum
-        dolor sit amet, consectetur adipisicing elit. Similique repellat in sed aliquam voluptates, cumque atque libero suscipit
-        soluta, necessitatibus labore ex deserunt dicta ullam ducimus vel. Harum, numquam, vero. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit. Similique repellat in sed aliquam voluptates, cumque atque libero suscipit soluta,
-        necessitatibus labore ex deserunt dicta ullam ducimus vel. Harum, numquam, vero. Lorem ipsum dolor sit amet, consectetur
-        adipisicing elit. Similique repellat in sed aliquam voluptates, cumque atque libero suscipit soluta, necessitatibus
-        labore ex deserunt dicta ullam ducimus vel. Harum, numquam, vero. Lorem ipsum dolor sit amet, consectetur adipisicing
-        elit. Similique repellat in sed aliquam voluptates, cumque atque libero suscipit soluta, necessitatibus labore ex
-        deserunt dicta ullam ducimus vel. Harum, numquam, vero. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        Similique repellat in sed aliquam voluptates, cumque atque libero suscipit soluta, necessitatibus labore ex deserunt
-        dicta ullam ducimus vel. Harum, numquam, vero.
+        Bienvenue sur le site de réservations des salles de la M2L. <br>
+        Pour réserver une salle pour toutes vos activités, réunions, présentations, soirées de convenances, 
+        n'hésitez pas à contacter la maison des ligues 
+        de Lorraine ou à réserver votre salle directement sur notre site Web. <br>
+        Pour réserver une salle, veuillez vous authentifiez ou vous inscrire
       </p>
 
        <M2LButton label="Réserver une salle" v-bind:action="onBookingButtonClick" />
@@ -46,5 +39,9 @@
 <style scoped>
   h1 {
     font-weight: normal;
+  }
+  p {
+    font-size : large ;
+    
   }
 </style>
