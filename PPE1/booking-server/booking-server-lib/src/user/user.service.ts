@@ -28,10 +28,10 @@ export class UserService {
     return new Promise((resolve, reject) => {
       this._data.checkIfUserExists(user_input.mail)
         .then((res) => {
+          console.log(res);
           if (res) {
             this._logger.log(`Mail ${user_input.mail} already taken`);
-            reject(`Mail ${user_input.mail} already taken`);
-            // TODO: check if this can cause issue for next Promise
+            reject(`ERR_REGISTER_MAIL_TAKEN`);
             return;
           }
 

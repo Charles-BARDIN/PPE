@@ -19,7 +19,7 @@ export class UserDatabaseAdapter implements IUserDataAccess {
         WHERE user_mail = '${mail}'`
       )
         .then(user => {
-          resolve(!!user);
+          resolve(user.length !== 0);
         })
         .catch(err => {
           reject(err);
@@ -40,9 +40,12 @@ export class UserDatabaseAdapter implements IUserDataAccess {
   }): Promise<User> {
     return new Promise((resolve, reject) => {
       this._db.query(
-        `INSERT INTO user(user_firstname, user_lastname, user_mail, user_password, user_phone, user_adresse, user_zip, user_town, user_country)
+        `INSERT INTO user(user_firstname, user_name, user_mail, user_password, user_phone, user_adresse, user_zip, user_city, user_country)
         VALUES ('${user.firstname}', '${user.lastname}', '${user.mail}', '${user.password}', '${user.phone}', '${user.address}', '${user.zip}', '${user.town}', '${user.country}');`
       )
+        .then(() => {
+          return this._db.query(`SELECT * FROM user WHERE user_mail = '${user.mail}';`)
+        })
         .then(users => {
           resolve(this._createUserEntity(users[0]));
         })
