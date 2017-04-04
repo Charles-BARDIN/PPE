@@ -17,6 +17,7 @@
     "config:mock": "npm run config -- mock"
   },
   "dependencies": {
+    "crypto-js": "^3.1.9-1",
     "vue": "^2.2.2",
     "vue-router": "^2.2.0",
     "vuejs-datepicker": "^0.6.5"
