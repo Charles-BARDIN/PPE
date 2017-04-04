@@ -1,5 +1,6 @@
 import { BookingClientLib } from 'booking-client-lib';
 
+import Crypto from 'crypto-js';
 import Gateway from './gateway.adapter';
 import MockedGateway from './mocked-gateway.adapter';
 import Router from './router.adapter';
@@ -10,7 +11,7 @@ const gateway = config.isMock ? new MockedGateway() : new Gateway(config.apiBase
 const router = new Router();
 
 const hash = value => {
-  return `H@$H3D_${value}_V@LU3`;
+    return Crypto.SHA256(value).toString();
 };
 
 const bookingClientLib = new BookingClientLib();
