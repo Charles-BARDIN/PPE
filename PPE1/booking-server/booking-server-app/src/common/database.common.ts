@@ -61,9 +61,11 @@ export class Database {
         this.query(
           `CREATE TABLE IF NOT EXISTS booking(
             booking_date Date NOT NULL ,
-            user_id int REFERENCES user(user_id),
-            room_id int REFERENCES room(room_id),
-            PRIMARY KEY (user_id ,room_id )
+            user_id int NOT NULL,
+            room_id int NOT NULL,
+            PRIMARY KEY (user_id ,room_id),
+            CONSTRAINT FK_booking_user_id FOREIGN KEY (user_id) REFERENCES user(user_id),
+            CONSTRAINT FK_booking_room_id FOREIGN KEY (room_id) REFERENCES room(room_id)
           )ENGINE=InnoDB;`
         );
       })
