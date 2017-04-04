@@ -17,7 +17,7 @@ export class RoomAdapter {
     this._logger = config.logger;
   }
 
-  public get(id: number): Promise<{ room: Room, faults: string[] }> {
+  public get(id: number): Promise<Room> {
     return new Promise((resolve, reject) => {
 
     });

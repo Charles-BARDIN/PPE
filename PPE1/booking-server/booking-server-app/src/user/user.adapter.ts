@@ -18,44 +18,45 @@ export class UserAdapter {
   }
 
   add(user: {
-    username: string,
     firstname: string,
     lastname: string,
     mail: string,
-    phone: string,
+    password: string,
+    phone?: string,
     address: string,
     zip: string,
     town: string,
-    country: string
-  }): Promise<{ user: User, faults: string[] }> {
+    country: string,
+  }): Promise<User> {
     return new Promise((resolve, reject) => {
 
     });
   }
 
-  remove(username: string): Promise<{ user: User, faults: string[] }> {
+  remove(username: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
 
     });
   }
 
   update(user: {
-    username: string,
+    id: number,
     firstname?: string,
     lastname?: string,
     mail?: string,
+    password?: string,
     phone?: string,
     address?: string,
     zip?: string,
     town?: string,
     country?: string
-  }): Promise<{ user: User, faults: string[] }> {
+  }): Promise<User> {
     return new Promise((resolve, reject) => {
 
     });
   }
 
-  login(credentials: { username: string, password: string }): Promise<{ success: boolean, faults: string[] }> {
+  login(credentials: { mail: string, password: string }): Promise<User> {
     return new Promise((resolve, reject) => {
 
     });

@@ -6,14 +6,12 @@ import { UserAdapter } from '../user';
 
 import { Database } from '../common';
 
+import { Router } from './server.router';
+
 import * as express from 'express';
 
-import * as bodyParser from 'body-parser';
-
 export class Server {
-  private _booking: BookingAdapter;
-  private _room: RoomAdapter;
-  private _user: UserAdapter;
+  private _router: Router;
 
   private _logger: ILogger;
 
@@ -23,10 +21,16 @@ export class Server {
   constructor(config: {
     logger: ILogger, serverConfig: { port: string }, database: Database
   }) {
-    this._booking = new BookingAdapter({ logger: config.logger, database: config.database });
-    this._room = new RoomAdapter({ logger: config.logger, database: config.database });
-    this._user = new UserAdapter({ logger: config.logger, database: config.database });
+    const booking = new BookingAdapter({ logger: config.logger, database: config.database });
+    const room = new RoomAdapter({ logger: config.logger, database: config.database });
+    const user = new UserAdapter({ logger: config.logger, database: config.database });
 
+    this._router = new Router({
+      booking,
+      room,
+      user
+    });
+    
     this._logger = config.logger;
 
     this._server = express();
@@ -42,30 +46,6 @@ export class Server {
   }
 
   private _setApi() {
-    this._server.use(bodyParser.json());
-
-    this._server.post('/api/v1.0.0/login', (req, res) => {
-      
-    });
-
-    this._server.post('/api/v1.0.0/logout', (req, res) => {
-
-    });
-
-    this._server.post('/api/v1.0.0/user', (req, res) => {
-
-    });
-
-    this._server.get('/api/v1.0.0/room', (req, res) => {
-
-    });
-
-    this._server.post('/api/v1.0.0/booking', (req, res) => {
-
-    });
-
-    this._server.put('/api/v1.0.0/user/:id', (req, res) => {
-
-    });
+    this._server.use('/api/v1.0.0', this._router.expressRouter);
   }
 }

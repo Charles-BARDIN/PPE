@@ -19,9 +19,9 @@ export class BookingAdapter {
 
   public bookARoom(booking: {
     roomID: number,
-    user: string,
+    userID: number,
     date: Date
-  }): Promise<{ booking: Booking, faults: string[] }> {
+  }): Promise<Booking> {
     return new Promise((resolve, reject) => {
 
     });
@@ -29,15 +29,15 @@ export class BookingAdapter {
 
   public cancelBooking(booking: {
     roomID: number,
-    user: string,
+    userID: number,
     date: Date
-  }): Promise<{ success: boolean, faults: string[] }> {
+  }): Promise<boolean> {
     return new Promise((resolve, reject) => {
 
     });
   }
 
-  public getBookings(query: { room: number, limit?: Date }): Promise<{ bookings: Booking[], faults: string[] }> {
+  public getBookings(query?: { roomID: number, limit?: Date }): Promise<Booking[]> {
     return new Promise((resolve, reject) => {
 
     });
