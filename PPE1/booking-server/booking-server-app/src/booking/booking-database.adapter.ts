@@ -17,11 +17,11 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
         `INSERT INTO booking(booking_date, userID, roomID)
         VALUES (${booking.date}, ${booking.userID}, ${booking.roomID});`
       )
-        .then(() => {
-          resolve();
+        .then(booking => {
+          resolve(booking[0]);
         })
         .catch(err => {
-          reject();
+          reject(err);
         })
     });
   }
@@ -41,7 +41,7 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
           resolve(response);
         })
         .catch(err => {
-          reject();
+          reject(err);
         })
     });
   }
