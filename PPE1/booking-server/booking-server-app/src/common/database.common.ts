@@ -2,13 +2,13 @@ import * as mySql from 'mysql';
 
 export class Database {
   private _connection: mySql.IConnection;
-  private _config: { host: string, user: string, password: string, database?: string };
+  private _config: { host: string, user: string, password: string, database: string };
 
   constructor(config: {
     host: string,
     user: string,
     password: string,
-    database?: string
+    database: string
   }) {
     this._config = config;
 
@@ -30,9 +30,42 @@ export class Database {
   }
 
   private _init() {
-    this.query(`CREATE DATABASE IF NOT EXISTS ${this._config.database}`)
+    this.query(
+      `CREATE TABLE IF NOT EXISTS user(
+        user_id        int (11) Auto_increment  NOT NULL ,
+        user_password  Varchar (255) NOT NULL ,
+        user_name      Varchar (255) NOT NULL ,
+        user_firstname Varchar (255) NOT NULL ,
+        user_mail      Varchar (255) NOT NULL ,
+        user_phone          Varchar (20)  ,
+        user_adresse   Varchar (255) NOT NULL ,
+        user_city           Varchar (255) NOT NULL ,
+        user_zip            Varchar (25) NOT NULL ,
+        user_country        Varchar (225) NOT NULL ,
+        PRIMARY KEY (user_id),
+        UNIQUE (user_mail)
+      )ENGINE=InnoDB;`
+    )
       .then(() => {
-        
+        return this.query(
+          `CREATE TABLE IF NOT EXISTS room(
+            room_id          int (11) Auto_increment  NOT NULL ,
+            room_label       Varchar(25) NOT NULL ,
+            room_description Text NOT NULL ,
+            room_image       Varchar (25) ,
+            PRIMARY KEY (room_id)
+          )ENGINE=InnoDB;`
+        );
+      })
+      .then(() => {
+        this.query(
+          `CREATE TABLE IF NOT EXISTS booking(
+            booking_date Date NOT NULL ,
+            user_id int REFERENCES user(user_id),
+            room_id int REFERENCES room(room_id),
+            PRIMARY KEY (user_id ,room_id )
+          )ENGINE=InnoDB;`
+        );
       })
       .catch(err => {
         throw new Error(err.stack);
