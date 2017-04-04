@@ -7,7 +7,6 @@ import { IRegisterNavAccess } from '.';
 
 export class RegisterService {
   private _validator: IRegisterValidator;
-  private _hash: Function;
   private _auth: IRegisterAuthAccess;
   private _controller: IRegisterController;
   private _nav: IRegisterNavAccess;
