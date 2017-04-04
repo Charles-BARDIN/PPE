@@ -24,11 +24,11 @@ module.exports = {
   dev: {
     env: require('./dev.env'),
     port: 9000,
-    autoOpenBrowser: true,
+    autoOpenBrowser: false,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      'api/v1.0.0/*': {
+      '/api/v1.0.0': {
         target: 'http://localhost:9090'
       }
     },
