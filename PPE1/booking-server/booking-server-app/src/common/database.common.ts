@@ -74,7 +74,7 @@ export class Database {
       })
   }
 
-  public query(sql: string) {
+  public query(sql: string): Promise<any[]> {
     return new Promise((resolve, reject) => {
       this._connection.query(sql, (err, res) => {
         if (err) {
