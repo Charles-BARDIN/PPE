@@ -8,6 +8,8 @@ import { Database } from '../common';
 
 import * as express from 'express';
 
+import * as bodyParser from 'body-parser';
+
 export class Server {
   private _booking: BookingAdapter;
   private _room: RoomAdapter;
@@ -29,38 +31,41 @@ export class Server {
 
     this._server = express();
     this._config = config.serverConfig;
+
+    this._setApi();
   }
 
   public start() {
-    this._setApi();
     this._server.listen(this._config.port, () => {
       this._logger.log(`Listening on ${this._config.port}...`);
     })
   }
 
   private _setApi() {
-    this._server.post('/login', (req, res) => {
+    this._server.use(bodyParser.json());
 
-    });
-
-    this._server.post('/logout', (req, res) => {
+    this._server.post('/api/v1.0.0/login', (req, res) => {
       
     });
 
-    this._server.post('/user', (req, res) => {
-      
+    this._server.post('/api/v1.0.0/logout', (req, res) => {
+
     });
 
-    this._server.get('/room', (req, res) => {
-      
+    this._server.post('/api/v1.0.0/user', (req, res) => {
+
     });
 
-    this._server.post('/booking', (req, res) => {
-      
+    this._server.get('/api/v1.0.0/room', (req, res) => {
+
     });
 
-    this._server.put('/user/:id', (req, res) => {
-      
+    this._server.post('/api/v1.0.0/booking', (req, res) => {
+
+    });
+
+    this._server.put('/api/v1.0.0/user/:id', (req, res) => {
+
     });
   }
 }
