@@ -41,7 +41,7 @@ export class UserDatabaseAdapter implements IUserDataAccess {
     return new Promise((resolve, reject) => {
       this._db.query(
         `INSERT INTO user(user_firstname, user_lastname, user_mail, user_password, user_phone, user_address, user_zip, user_town, user_country)
-        VALUES (${user.firstname}, ${user.lastname}, ${user.mail}, ${user.phone}, ${user.address}, ${user.zip}, ${user.town}, ${user.country})`
+        VALUES (${user.firstname}, ${user.lastname}, ${user.mail}, ${user.password}, ${user.phone}, ${user.address}, ${user.zip}, ${user.town}, ${user.country});`
       )
         .then(users => {
           resolve(new User(users[0]));
@@ -61,7 +61,7 @@ export class UserDatabaseAdapter implements IUserDataAccess {
         `SELECT * 
         FROM user
         WHERE user_mail = ${credentials.mail}
-        AND user_password = ${credentials.password}`
+        AND user_password = ${credentials.password};`
       )
         .then(users => {
           resolve(users.length ? new User(users[0]) : undefined);
@@ -128,7 +128,7 @@ export class UserDatabaseAdapter implements IUserDataAccess {
     });
     query.pop();
 
-    query.push(`WHERE user_id = ${user.id}`);
+    query.push(`WHERE user_id = ${user.id};`);
 
     return query.join(' ');
   }
