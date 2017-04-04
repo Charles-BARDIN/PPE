@@ -10,6 +10,7 @@
     "prebuild:t": "npm run -s prebuild",
     "build:w": "tsc -w",
     "prebuild:w": "npm run -s prebuild",
+    "create:db": "node ./create-database",
     "test": "mocha dist/**/*.spec.js",
     "pretest": "npm run -s build:t",
     "clean": "npm run -s clean:dist",
