@@ -13,13 +13,25 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
 
   public add(booking: Booking): Promise<Booking> {
     return new Promise((resolve, reject) => {
-
+      this._db.query(``)
+        .then(() => {
+          resolve();
+        })
+        .catch(err => {
+          reject();
+        })
     });
   }
 
   public get(booking: { roomID: number, date?: Date }): Promise<Booking[]> {
     return new Promise((resolve, reject) => {
-
+      this._db.query(``)
+        .then(() => {
+          resolve();
+        })
+        .catch(err => {
+          reject();
+        })
     });
   }
 }

@@ -13,7 +13,13 @@ export class RoomDatabaseAdapter implements IRoomDataAccess {
 
   public getRoom(id: number): Promise<Room> {
     return new Promise((resolve, reject) => {
-
+      this._db.query(``)
+        .then(() => {
+          resolve();
+        })
+        .catch(err => {
+          reject();
+        })
     });
   }
 }
