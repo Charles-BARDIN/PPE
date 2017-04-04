@@ -12,5 +12,7 @@ export interface IProfilAuthAccess {
     confirm?: string,
     phone?: string
   }): Promise<User>;
+  userIsConnected(): boolean;
+  
   user: User;
 }

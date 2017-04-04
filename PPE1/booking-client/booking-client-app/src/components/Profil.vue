@@ -82,7 +82,7 @@ export default {
   name: 'profil',
   props: ['mode', 'onConfirm', 'user'],
   created: function() {
-    if(this.user) {
+    if(this.user && this.user.id) {
       let userCopy = Object.assign({}, this.user);
       userCopy.fullname = `${this.user.firstname} ${this.user.lastname}`;
 

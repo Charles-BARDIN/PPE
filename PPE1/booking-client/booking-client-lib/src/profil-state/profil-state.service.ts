@@ -1,16 +1,20 @@
 import { IProfilController } from '.';
 import { IProfilAuthAccess } from '.';
 import { IProfilValidator } from '.';
+import { IProfilNavAccess } from '.';
 
 export class ProfilService {
   private _controller: IProfilController;
   private _auth: IProfilAuthAccess;
   private _validator: IProfilValidator;
+  private _nav: IProfilNavAccess;
 
   constructor(config: {
-    authentification: IProfilAuthAccess
+    authentification: IProfilAuthAccess,
+    navigation: IProfilNavAccess
   }) {
     this._auth = config.authentification;
+    this._nav = config.navigation;
   }
 
   set validator(validator: IProfilValidator) {
@@ -22,6 +26,10 @@ export class ProfilService {
   }
 
   public onPageLoad() {
+    if(!this._auth.userIsConnected()) {
+      this._nav.goTo('index');
+    }
+
     this._controller.setUserProfil(this._auth.user);
   }
 

@@ -2,11 +2,12 @@ import { IIndexNavAccess } from '../index-state';
 import { IRegisterNavAccess } from '../register-state';
 import { ILoginNavAccess } from '../login-state';
 import { ILogoutNavAccess } from '../logout-state';
+import { IProfilNavAccess } from '../profil-state';
 
 import { IRouter } from '.';
 import { INavigationAuthAccess } from '.';
 
-export class NavigationService implements IIndexNavAccess, IRegisterNavAccess, ILogoutNavAccess, ILoginNavAccess {
+export class NavigationService implements IIndexNavAccess, IRegisterNavAccess, ILogoutNavAccess, ILoginNavAccess, IProfilNavAccess {
   private _router: IRouter;
   private _auth: INavigationAuthAccess;
   private _states: { name: string, appStates: string[] }[];

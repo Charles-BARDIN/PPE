@@ -25,7 +25,6 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
           resolve(booking[0]);
         })
         .catch(err => {
-          console.log(err)
           reject(err);
         })
     });
@@ -47,7 +46,6 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
           resolve(response);
         })
         .catch(err => {
-          console.log(err);
           reject(err);
         })
     });

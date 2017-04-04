@@ -132,7 +132,8 @@ export class BookingClientLib {
     }
 
     this._profilService = new ProfilService({
-      authentification: this.authService
+      authentification: this.authService,
+      navigation: this.navigationService
     });
 
     return this._profilService;
