@@ -2,7 +2,7 @@
     <div class="room">
       <h1>Liste des salles</h1>
 
-      <RoomPicker v-bind:on-selected-room-change="changeSelectedRoom" v-bind:rooms="rooms" />
+      <RoomPicker v-bind:on-selected-room-change="changeSelectedRoom" v-bind:rooms="rooms"/>
 
       <div>
         {{ error | error }}
@@ -57,7 +57,7 @@
     data () {
       return { 
         selectedRoom: {},
-        rooms: [],
+        rooms: ["amphithéatre","Salle de réunion","Salle de convivialité"],
         error: ''
       }
     },
@@ -76,4 +76,5 @@
     text-align: justify;
     margin-top: 20px;
   }
+
 </style>
