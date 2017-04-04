@@ -64,7 +64,7 @@ export class UserDatabaseAdapter implements IUserDataAccess {
         AND user_password = ${credentials.password}`
       )
         .then(users => {
-          resolve(users ? new User(users[0]) : undefined);
+          resolve(users.length ? new User(users[0]) : undefined);
         })
         .catch(err => {
           reject(err);
