@@ -1,3 +1,20 @@
+/**
+ * Server api :
+ *   VERB______URL________ACTION_____
+ *   POST | /login    | login
+ *   POST | /logout   | logout
+ *   POST | /user     | register user
+ *   GET  | /room     | get room list
+ *   POST | /booking  | book a room
+ *   PUT  | /user/:id | Modify profile
+ * 
+ * Response :
+ *   {
+ *    data: any,
+ *    faults: string[]
+ *   }
+ */
+
 const express = require('express');
 import * as bodyParser from 'body-parser';
 
@@ -99,11 +116,10 @@ export class Router {
         country?: string,
         mail?: string,
         password?: string,
-        confirm?: string,
         oldPassword?: string,
         phone?: string
       } = req.body;
-      modifiedUser.id = req.query;
+      modifiedUser.id = req.params.id;
 
       this._user.update(modifiedUser)
         .then(data => {
