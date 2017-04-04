@@ -16,7 +16,7 @@ export class RoomDatabaseAdapter implements IRoomDataAccess {
       this._db.query(
         `SELECT *
         FROM room
-        WHERE room_id = ${id}`
+        WHERE room_id = ${id};`
       )
         .then(room => {
           if(room.length) {
