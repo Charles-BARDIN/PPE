@@ -32,7 +32,7 @@ export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IRe
   }
 
   public login(credentials: { mail: string, password: string }): Promise<boolean> {
-    return new Promise((resolve, reject) => {credentials.password = this._hash(credentials);
+    return new Promise((resolve, reject) => {credentials.password = this._hash(credentials.password);
       this._gateway.login(credentials)
         .then(user => {
           this._user = user;
@@ -92,8 +92,10 @@ export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IRe
     phone?: string
   }): Promise<User> {
     return new Promise((resolve, reject) => {
-      user.password = this._hash(user.password);
-      user.oldPassword = this._hash(user.oldPassword);
+      if(user.password) {
+        user.password = this._hash(user.password);
+        user.oldPassword = this._hash(user.oldPassword);
+      }
 
       this._gateway.modifyUser(user)
         .then(user => {
