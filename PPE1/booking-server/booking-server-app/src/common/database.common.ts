@@ -63,7 +63,7 @@ export class Database {
             booking_date Date NOT NULL ,
             user_id int NOT NULL,
             room_id int NOT NULL,
-            PRIMARY KEY (user_id ,room_id),
+            PRIMARY KEY (room_id, booking_date),
             CONSTRAINT FK_booking_user_id FOREIGN KEY (user_id) REFERENCES user(user_id),
             CONSTRAINT FK_booking_room_id FOREIGN KEY (room_id) REFERENCES room(room_id)
           )ENGINE=InnoDB;`
@@ -81,7 +81,6 @@ export class Database {
           reject(err);
           return;
         }
-
         resolve(res);
       })
     })

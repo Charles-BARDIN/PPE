@@ -85,8 +85,7 @@ export class Router {
     });
 
     this._router.get('/room', (req, res) => {
-      const id: number = req.body;
-      this._room.get(id)
+      this._room.get()
         .then(data => {
           res.send({ faults: [], data })
         })

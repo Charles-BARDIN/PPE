@@ -19,18 +19,15 @@ export class BookingService {
     userID: number,
     date: Date
   }): Promise<Booking> {
-    // TODO: check user and room
-
     return new Promise((resolve, reject) => {
       this._data.get({ roomID: booking.roomID, date: booking.date })
         .then((bookings: Booking[]) => {
           if (bookings.length) {
-            reject('This room is already booked for this date');
+            reject('ERR_ROOM_ALREADY_BOOKED');
             return;
           }
 
           let book = new Booking(booking);
-
           return this._data.add(book);
         })
         .then(resolve)
@@ -39,7 +36,6 @@ export class BookingService {
   }
 
   public getBookings(filter: { roomID: number, date?: Date }): Promise<Booking[]> {
-    // TODO: add limit ?
     return new Promise((resolve, reject) => {
       this._data.get({ roomID: filter.roomID, date: filter.date })
         .then(resolve)

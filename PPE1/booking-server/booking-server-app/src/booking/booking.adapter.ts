@@ -23,7 +23,13 @@ export class BookingAdapter {
     date: Date
   }): Promise<Booking> {
     return new Promise((resolve, reject) => {
-
+      this._bookingService.bookARoom(booking)
+        .then(book => {
+          resolve(book);
+        })
+        .catch(errors => {
+          this._handleErrors(errors, reject);
+        });
     });
   }
 
@@ -39,7 +45,21 @@ export class BookingAdapter {
 
   public getBookings(query?: { roomID: number, limit?: Date }): Promise<Booking[]> {
     return new Promise((resolve, reject) => {
-
+      this._bookingService.getBookings(query)
+        .then(bookings => {
+          resolve(bookings);
+        })
+        .catch(errors => {
+          this._handleErrors(errors, reject);
+        })
     });
+  }
+
+  private _handleErrors(errors, reject) {
+    if (!Array.isArray(errors)) {
+      errors = [errors];
+    }
+
+    reject(errors || []);
   }
 }

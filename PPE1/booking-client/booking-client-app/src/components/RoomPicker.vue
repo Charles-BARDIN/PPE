@@ -1,7 +1,7 @@
 <template>
   <div>
     <select class="room-picker" id="room" v-model="selectedRoom">
-      <option v-for="room in rooms">{{ room.label }}</option>
+      <option v-for="room in rooms">{{ room.name }}</option>
     </select>
   </div>
 </template>
@@ -16,7 +16,7 @@
     },
     watch: {
       selectedRoom: function(newRoom) {
-        this.onSelectedRoomChange(this.rooms.filter(room => room.label === newRoom)[0]);
+        this.onSelectedRoomChange(this.rooms.filter(room => room.name === newRoom)[0]);
       }
     },
     props: ['onSelectedRoomChange', 'rooms']

@@ -72,7 +72,6 @@ export class BookingService {
       this._controller.showValidationErrors(errors);
       return;
     }
-
     this._gateway.bookARoom(book)
       .then(booking => {
         this._controller.showConfirmation();

@@ -14,10 +14,12 @@ export class RoomService {
     this._data = config.dataAccess;
   }
 
-  public getRoom(id: number): Promise<Room> {
+  public getRooms(): Promise<Room[]> {
     return new Promise((resolve, reject) => {
-      this._data.getRoom(id)
-        .then(resolve)
+      this._data.getRooms()
+        .then(rooms => {
+          resolve(rooms);
+        })
         .catch(err => {
           this._logger.error(err);
           reject(err);

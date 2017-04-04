@@ -101,6 +101,8 @@ export default {
         address
       }
 
+      userCopy.country = userCopy.country.charAt(0).toUpperCase() + userCopy.country.slice(1);
+
       this.formUser = userCopy;
     }
   }, 

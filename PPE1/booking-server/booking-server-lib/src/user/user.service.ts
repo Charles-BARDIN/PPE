@@ -15,14 +15,15 @@ export class UserService {
   }
 
   public addUser(user_input: {
-    firstname: string,
     lastname: string,
-    mail: string,
-    phone: string,
+    firstname: string,
     address: string,
-    zip: string,
     town: string,
-    country: string
+    zip: string,
+    country: string,
+    mail: string,
+    password: string,
+    phone?: string
   }): Promise<User> {
     return new Promise((resolve, reject) => {
       this._data.checkIfUserExists(user_input.mail)
@@ -59,10 +60,12 @@ export class UserService {
           if (user) {
             resolve(user);
           } else {
-            reject();
+            reject('INVALID_CREDENTIALS');
           }
         })
-        .catch(reject);
+        .catch(errors => {
+          reject()
+        });
     });
   }
 
@@ -75,7 +78,9 @@ export class UserService {
     address?: string,
     zip?: string,
     town?: string,
-    country?: string
+    country?: string,
+    password?: string,
+    oldPassword?: string
   }): Promise<User> {
     return new Promise((resolve, reject) => {
       this._data.update(user_input)

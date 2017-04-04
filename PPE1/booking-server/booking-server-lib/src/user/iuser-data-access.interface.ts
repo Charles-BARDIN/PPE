@@ -4,17 +4,18 @@ export interface IUserDataAccess {
   checkIfUserExists(mail: string): Promise<boolean>;
 
   add(user: {
-    firstname: string,
     lastname: string,
-    mail: string,
-    phone: string,
+    firstname: string,
     address: string,
-    zip: string,
     town: string,
-    country: string
+    zip: string,
+    country: string,
+    mail: string,
+    password: string,
+    phone?: string
   }): Promise<User>;
 
-  getUserByCredentials(credentials:{
+  getUserByCredentials(credentials: {
     mail: string,
     password: string
   }): Promise<User>;
@@ -26,6 +27,8 @@ export interface IUserDataAccess {
     mail?: string,
     phone?: string,
     address?: string,
+    password?: string,
+    oldPassword?: string,
     zip?: string,
     town?: string,
     country?: string

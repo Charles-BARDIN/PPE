@@ -16,10 +16,13 @@ export class Server {
   private _logger: ILogger;
 
   private _server: express.Application;
-  private _config: { port: string };
+  private _config: {
+    port: string,
+    timeOut: number
+  };
 
   constructor(config: {
-    logger: ILogger, serverConfig: { port: string }, database: Database
+    logger: ILogger, serverConfig: { port: string, timeOut: number }, database: Database
   }) {
     const booking = new BookingAdapter({ logger: config.logger, database: config.database });
     const room = new RoomAdapter({ logger: config.logger, database: config.database });
@@ -30,7 +33,7 @@ export class Server {
       room,
       user
     });
-    
+
     this._logger = config.logger;
 
     this._server = express();

@@ -17,9 +17,23 @@ export class RoomAdapter {
     this._logger = config.logger;
   }
 
-  public get(id: number): Promise<Room> {
+  public get(): Promise<Room[]> {
     return new Promise((resolve, reject) => {
-
+      this._roomService.getRooms()
+        .then(rooms => {
+          resolve(rooms);
+        })
+        .catch(errors => {
+          this._handleErrors(errors, reject);
+        });
     });
+  }
+
+  private _handleErrors(errors, reject) {
+    if (!Array.isArray(errors)) {
+      errors = [errors];
+    }
+
+    reject(errors || []);
   }
 }

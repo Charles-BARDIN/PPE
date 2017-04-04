@@ -11,20 +11,28 @@ export class RoomDatabaseAdapter implements IRoomDataAccess {
     this._db = config.database;
   }
 
-  public getRoom(id: number): Promise<Room> {
+  public getRooms(): Promise<Room[]> {
     return new Promise((resolve, reject) => {
       this._db.query(
         `SELECT *
-        FROM room
-        WHERE room_id = ${id};`
+        FROM room;`
       )
-        .then(room => {
-          if(room.length) {
-            resolve(new Room(room[0]));
-            return;
+        .then(roomArray => {
+          if (!roomArray.length) {
+            reject('ERR_DB_ROOM_NOT_FOUND');
           }
-
-          reject('ERR_DB_ROOM_NOT_FOUND');
+          const rooms = roomArray
+            .reduce((prev, curr) => {
+              prev.push(new Room({
+                id: curr.room_id,
+                name: curr.room_label,
+                image: curr.room_image,
+                description: curr.room_description
+              }));
+              return prev;
+            }, []);
+          resolve(rooms);
+          return;
         })
         .catch(err => {
           reject(err);

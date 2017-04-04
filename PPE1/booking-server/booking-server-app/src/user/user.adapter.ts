@@ -18,22 +18,28 @@ export class UserAdapter {
   }
 
   add(user: {
-    firstname: string,
     lastname: string,
+    firstname: string,
+    address: string,
+    town: string,
+    zip: string,
+    country: string,
     mail: string,
     password: string,
-    phone?: string,
-    address: string,
-    zip: string,
-    town: string,
-    country: string,
+    phone?: string
   }): Promise<User> {
     return new Promise((resolve, reject) => {
-
+      this._userService.addUser(user)
+        .then(user => {
+          resolve(user);
+        })
+        .catch(errors => {
+          this._handleErrors(errors, reject);
+        });
     });
   }
 
-  remove(username: string): Promise<boolean> {
+  remove(id: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
 
     });
@@ -41,24 +47,43 @@ export class UserAdapter {
 
   update(user: {
     id: number,
-    firstname?: string,
-    lastname?: string,
+    address?: string,
+    town?: string,
+    zip?: string,
+    country?: string,
     mail?: string,
     password?: string,
-    phone?: string,
-    address?: string,
-    zip?: string,
-    town?: string,
-    country?: string
+    oldPassword?: string,
+    phone?: string
   }): Promise<User> {
     return new Promise((resolve, reject) => {
-
+      this._userService.updateUser(user)
+        .then(user => {
+          resolve(user);
+        })
+        .catch(errors => {
+          this._handleErrors(errors, reject);
+        });
     });
   }
 
   login(credentials: { mail: string, password: string }): Promise<User> {
     return new Promise((resolve, reject) => {
-
+      this._userService.login(credentials)
+        .then(user => {
+          resolve(user);
+        })
+        .catch(errors => {
+          this._handleErrors(errors, reject);
+        });
     });
+  }
+
+  private _handleErrors(errors, reject) {
+    if (!Array.isArray(errors)) {
+      errors = [errors];
+    }
+
+    reject(errors || []);
   }
 }
