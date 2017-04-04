@@ -24,6 +24,7 @@ const errors = {
   ERR_MODIFYUSER_MAIL_FORMAT: MAIL_FORMAT_MESSAGE,
   ERR_MODIFYUSER_OLDPASSWORD_REQUIRED: "Veuillez renseigner votre ancien mot de passe",
   ERR_MODIFYUSER_PASSWORD_MATCH: CONFIRM_MATCH_MESSAGE,
+  ERR_MODIFYUSER_MAIL_TAKEN: "Ce mail est déjà pris",
 
   // Register
   ERR_REGISTER_LASTNAME_REQUIRED: "Veuillez renseigner votre nom de famille",

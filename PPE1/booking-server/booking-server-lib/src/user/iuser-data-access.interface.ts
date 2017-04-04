@@ -1,7 +1,7 @@
 import { User } from 'm2l-core';
 
 export interface IUserDataAccess {
-  checkIfUserExists(mail: string): Promise<boolean>;
+  checkIfUserExists(mail: string, id?: number): Promise<boolean>;
 
   add(user: {
     lastname: string,

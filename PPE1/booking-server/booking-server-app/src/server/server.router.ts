@@ -113,7 +113,7 @@ export class Router {
         town?: string,
         zip?: string,
         country?: string,
-        mail?: string,
+        mail: string,
         password?: string,
         oldPassword?: string,
         phone?: string

@@ -11,15 +11,17 @@ export class UserDatabaseAdapter implements IUserDataAccess {
     this._db = config.database;
   }
 
-  public checkIfUserExists(mail: string): Promise<boolean> {
+  public checkIfUserExists(mail: string, id?: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this._db.query(
-        `SELECT user_mail
+        `SELECT user_mail, user_id
         FROM user
         WHERE user_mail = '${mail}'`
       )
-        .then(user => {
-          resolve(user.length !== 0);
+        .then(users => {
+          const userIsPresent = users.length !== 0;
+          const isUser = id ? Number(users[0].user_id) === Number(id) : false;
+          resolve(userIsPresent && !isUser);
         })
         .catch(err => {
           reject(err);

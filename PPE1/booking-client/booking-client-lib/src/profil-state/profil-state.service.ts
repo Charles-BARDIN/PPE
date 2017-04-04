@@ -94,7 +94,7 @@ export class ProfilService {
     ].forEach(property => {
       switch (property) {
         case 'mail':
-          if (user[property] && !this._validator.isMail(user[property])) {
+          if (!this._validator.isMail(user[property])) {
             res.valid = false;
             res.faults.push('ERR_MODIFYUSER_MAIL_FORMAT');
           }

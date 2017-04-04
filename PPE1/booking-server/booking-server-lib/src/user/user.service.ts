@@ -73,7 +73,7 @@ export class UserService {
     id: number,
     firstname?: string,
     lastname?: string,
-    mail?: string,
+    mail: string,
     phone?: string,
     address?: string,
     zip?: string,
@@ -83,7 +83,15 @@ export class UserService {
     oldPassword?: string
   }): Promise<User> {
     return new Promise((resolve, reject) => {
-      this._data.update(user_input)
+      this._data.checkIfUserExists(user_input.mail, user_input.id)
+        .then(res => {
+          if(res) {
+            reject('ERR_MODIFYUSER_MAIL_TAKEN');
+            return;
+          }
+
+          return this._data.update(user_input);
+        })
         .then((user_data: User) => {
           this._logger.log('User updated:', user_data);
           resolve(user_data);
