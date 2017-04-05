@@ -10,7 +10,7 @@
 
     <div>
       <span>Date</span>
-      <datepicker class="inputs" v-model="booking.date"></datepicker>
+      <datepicker class="inputs" v-model="booking.date" v-bind:disabled="disabledConfig"></datepicker>
     </div>
 
     <M2LButton label="Enregistrer ma réservation" v-bind:action="book" />
@@ -71,7 +71,8 @@ export default {
       },
       rooms: [],
       confirm: false,
-      errors: []
+      errors: [],
+      disabledConfig: { to: new Date() }
     }
   },
   methods: {
