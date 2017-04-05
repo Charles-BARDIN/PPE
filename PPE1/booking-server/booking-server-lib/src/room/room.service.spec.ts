@@ -12,7 +12,7 @@ let dataAccess: IRoomDataAccess, room: Room, roomService: RoomService, logger: I
 describe('Room Service', () => {
   beforeEach(() => {
     dataAccess = {
-      getRoom: (id: number) => {
+      getRooms: () => {
         return new Promise(resolve => resolve());
       }
     }
@@ -28,21 +28,21 @@ describe('Room Service', () => {
     roomService = new RoomService({ logger, dataAccess });
   });
 
-  describe('getRoom', () => {
+  describe('getRooms', () => {
     it('Should return a Promise', () => {
-      let result = roomService.getRoom(1);
+      let result = roomService.getRooms();
 
       expect(result).to.be.an.instanceof(Promise);
     });
 
     it('Should call the getRoom method of the dataAccess', done => {
-      dataAccess.getRoom = () => {
+      dataAccess.getRooms = () => {
         return new Promise(() => {
           done()
         });
       };
 
-      roomService.getRoom(1);
+      roomService.getRooms();
     })
   });
 });

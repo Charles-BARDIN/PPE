@@ -7,25 +7,62 @@ import { User, ILogger } from 'm2l-core';
 
 import { LoggerAdapter } from 'm2l-node-logger'
 
-let dataAccess: IUserDataAccess, user: User, userService: UserService, logger: ILogger;
+let dataAccess: IUserDataAccess, user: {
+  id: number,
+  lastname: string,
+  firstname: string,
+  address: string,
+  town: string,
+  zip: string,
+  country: string,
+  mail: string,
+  password: string,
+  phone: string,
+}, userService: UserService, logger: ILogger;
 
 describe('User Service', () => {
   beforeEach(() => {
     dataAccess = {
-      checkIfUserExists: (mail: string) => {
+      checkIfUserExists: (mail: string, id?: number) => {
         return new Promise(resolve => { resolve(false); });
       },
       add: (user: {
-        firstname: string,
         lastname: string,
-        mail: string,
-        phone: string,
+        firstname: string,
         address: string,
-        zip: string,
         town: string,
-        country: string
+        zip: string,
+        country: string,
+        mail: string,
+        password: string,
+        phone?: string,
       }) => {
-        return new Promise(resolve => resolve(new User(user)));
+        return new Promise(resolve => {
+          let _user: {
+            lastname: string,
+            firstname: string,
+            address: string,
+            town: string,
+            zip: string,
+            country: string,
+            mail: string,
+            password: string,
+            phone: string,
+            id: number
+          } = {
+              lastname: user.lastname,
+              firstname: user.firstname,
+              address: user.address,
+              town: user.town,
+              zip: user.zip,
+              country: user.country,
+              mail: user.mail,
+              password: user.password,
+              phone: user.phone,
+              id: 1
+            };
+          resolve(new User(_user))
+        });
       },
       getUserByCredentials: (credentials: {
         mail: string,
@@ -44,7 +81,30 @@ describe('User Service', () => {
         town?: string,
         country?: string
       }) => {
-        return new Promise(resolve => resolve(new User(user)));
+        let _user: {
+          lastname: string,
+          firstname: string,
+          address: string,
+          town: string,
+          zip: string,
+          country: string,
+          mail: string,
+          password: string,
+          phone: string,
+          id: number
+        } = {
+            lastname: user.lastname,
+            firstname: user.firstname,
+            address: user.address,
+            town: user.town,
+            zip: user.zip,
+            country: user.country,
+            mail: user.mail,
+            password: 'password',
+            phone: user.phone,
+            id: 1
+          };
+        return new Promise(resolve => resolve(new User(_user)));
       }
     }
 
@@ -66,12 +126,15 @@ describe('User Service', () => {
       address: "111 address",
       zip: "11111",
       town: "Paris",
-      country: "France"
+      country: "France",
+      id: 1,
+      password: 'password'
     };
   });
 
   describe('addUser', () => {
     it('Should return a Promise', () => {
+      user.password = 'password';
       let result = userService.addUser(user);
 
       expect(result).to.be.an.instanceof(Promise);
