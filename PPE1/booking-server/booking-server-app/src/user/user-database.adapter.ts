@@ -38,7 +38,7 @@ export class UserDatabaseAdapter implements IUserDataAccess {
     lastname: string,
     mail: string,
     password: string,
-    phone: string,
+    phone?: string,
     address: string,
     zip: string,
     town: string,
@@ -47,7 +47,7 @@ export class UserDatabaseAdapter implements IUserDataAccess {
     return new Promise((resolve, reject) => {
       this._db.query(
         `INSERT INTO user(user_firstname, user_name, user_mail, user_password, user_phone, user_adresse, user_zip, user_city, user_country)
-        VALUES (${escape(this._escapeHtml(user.firstname))}, ${escape(this._escapeHtml(user.lastname))}, ${escape(this._escapeHtml(user.mail))}, ${escape(this._escapeHtml(user.password))}, ${escape(this._escapeHtml(user.phone))}, ${escape(this._escapeHtml(user.address))}, ${escape(this._escapeHtml(user.zip))}, ${escape(this._escapeHtml(user.town))}, ${escape(this._escapeHtml(user.country))});`
+        VALUES (${escape(this._escapeHtml(user.firstname))}, ${escape(this._escapeHtml(user.lastname))}, ${escape(this._escapeHtml(user.mail))}, ${escape(this._escapeHtml(user.password))}, ${user.phone ? escape(this._escapeHtml(user.phone)) : 'NULL'}, ${escape(this._escapeHtml(user.address))}, ${escape(this._escapeHtml(user.zip))}, ${escape(this._escapeHtml(user.town))}, ${escape(this._escapeHtml(user.country))});`
       )
         .then(() => {
           return this._db.query(`SELECT * FROM user WHERE user_mail = ${escape(this._escapeHtml(user.mail))};`)
@@ -175,7 +175,7 @@ export class UserDatabaseAdapter implements IUserDataAccess {
     user_name: string,
     user_firstname: string,
     user_mail: string,
-    user_phone: string,
+    user_phone?: string,
     user_adresse: string,
     user_city: string,
     user_zip: string,
@@ -186,7 +186,7 @@ export class UserDatabaseAdapter implements IUserDataAccess {
       lastname: this._unescapeHtml(dbUser.user_name),
       firstname: this._unescapeHtml(dbUser.user_firstname),
       mail: this._unescapeHtml(dbUser.user_mail),
-      phone: this._unescapeHtml(dbUser.user_phone),
+      phone: dbUser.user_phone ? this._unescapeHtml(dbUser.user_phone) : undefined,
       address: this._unescapeHtml(dbUser.user_adresse),
       town: this._unescapeHtml(dbUser.user_city),
       zip: this._unescapeHtml(dbUser.user_zip),

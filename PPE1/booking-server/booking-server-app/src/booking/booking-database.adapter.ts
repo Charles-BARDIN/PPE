@@ -65,7 +65,6 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
   }
 
   private _unescapeHtml(safe: string): string {
-    console.log(safe)
     return safe
       .replace(/&amp;/g, "&")
       .replace(/&lt;/g, "<")

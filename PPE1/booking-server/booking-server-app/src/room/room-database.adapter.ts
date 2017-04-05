@@ -28,9 +28,9 @@ export class RoomDatabaseAdapter implements IRoomDataAccess {
           const rooms = roomArray
             .reduce((prev, curr) => {
               prev.push(new Room({
-                id: Number(this._unescapeHtml(curr.room_id)),
+                id: Number(this._unescapeHtml(curr.room_id.toString())),
                 name: this._unescapeHtml(curr.room_label),
-                image: this._unescapeHtml(curr.room_image),
+                image: curr.room_image ? this._unescapeHtml(curr.room_image) : undefined,
                 description: this._unescapeHtml(curr.room_description)
               }));
               return prev;
@@ -54,7 +54,6 @@ export class RoomDatabaseAdapter implements IRoomDataAccess {
   }
 
   private _unescapeHtml(safe: string): string {
-    console.log(safe)
     return safe
       .replace(/&amp;/g, "&")
       .replace(/&lt;/g, "<")
