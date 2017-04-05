@@ -2,15 +2,16 @@
   <div>
     <Profil mode="new" v-bind:onConfirm="register" />
 
-    <div v-for="error in errors">
-      {{ error | error }}
-    </div>
+    <Error>
+      <div v-for="err in errors">{{ err | error }}</div>
+    </Error>
   </div>
 </template>
 
 <script>
   import M2LButton from '@/components/M2LButton'
   import Profil from '@/components/Profil'
+  import Error from '@/components/Error'
 
   import bookingClientLib from '@/lib-adapter'
   import { errorFilter } from '@/common';
@@ -56,7 +57,8 @@
     },
     components: {
       M2LButton,
-      Profil
+      Profil,
+      Error,
     },
     data () {
       return {

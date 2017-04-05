@@ -5,9 +5,9 @@
     <Confirm v-if="showConfirm">
       Profil modifié avec succès !
     </Confirm>
-    <div v-for="err in errors">
-      {{ err | error }}
-    </div>
+    <Error>
+      <div v-for="err in errors">{{ err | error }}</div>
+    </Error>
   </div>
 </template>
 
@@ -15,6 +15,7 @@
   import M2LButton from '@/components/M2LButton'
   import Profil from '@/components/Profil'
   import Confirm from '@/components/Confirm'
+  import Error from '@/components/Error'
   
   import bookingClientLib from '@/lib-adapter'
   import { errorFilter } from '@/common';
@@ -79,6 +80,7 @@
       M2LButton,
       Profil,
       Confirm,
+      Error,
     },
     data () {
       return {

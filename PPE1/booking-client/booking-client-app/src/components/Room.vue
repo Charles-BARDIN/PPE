@@ -4,9 +4,9 @@
 
       <RoomPicker v-bind:onSelectedRoomChange="changeSelectedRoom" v-bind:rooms="rooms" />
 
-      <div>
+      <Error>
         {{ error | error }}
-      </div>
+      </Error>
 
       <div class="room-description">
         {{ selectedRoom.description }}
@@ -20,6 +20,7 @@
   import RoomPicker from '@/components/RoomPicker';
   import M2LTitle from '@/components/M2LTitle';
   import { errorFilter } from '@/common';
+  import Error from '@/components/Error'
 
   Vue.filter('error', errorFilter);
 
@@ -66,6 +67,7 @@
     components: {
       RoomPicker,
       M2LTitle,
+      Error,
     }
   }
 </script>

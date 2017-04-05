@@ -23,7 +23,9 @@
               </form>
             </div>
 
-            <div v-for="err in errors">{{ err | error }}</div>
+            <Error>
+              <div v-for="err in errors">{{ err | error }}</div>
+            </Error>
 
             <div class="modal-footer">
               <M2LButton label="Annuler" class="button" v-bind:action="oncancel" />
@@ -39,6 +41,7 @@
 <script>
   import bookingClientLib from '@/lib-adapter'
   import M2LButton from '@/components/M2LButton'
+  import Error from '@/components/Error'
 
   const loginService = bookingClientLib.loginService;
   
@@ -96,7 +99,8 @@
       };
     },
     components: {
-      M2LButton
+      M2LButton,
+      Error,
     }
   };
 </script>
