@@ -15,5 +15,6 @@
 #titleWrapper {
   font-weight: normal;
   font-size: 2.5em;
+  text-align: center;
 }
 </style>
