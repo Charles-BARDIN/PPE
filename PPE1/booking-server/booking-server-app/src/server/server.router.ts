@@ -100,13 +100,11 @@ export class Router {
     });
 
     this._router.get('/room/:id/image', (req, res) => {
-      console.log(req.params.id)
         this._room.getImageName(req.params.id)
           .then(imageName => {
             res.sendFile(path.resolve(this._config.roomImageRoot, imageName));
           })
           .catch(errors => {
-      console.log(errors)
             res.send({ faults: errors });
           });
     });
