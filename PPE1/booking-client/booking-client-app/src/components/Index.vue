@@ -39,9 +39,6 @@
 </script>
 
 <style scoped>
-  h1 {
-    font-weight: normal;
-  }
   p {
     font-size : large ;
     

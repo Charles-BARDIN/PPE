@@ -7,9 +7,9 @@
       <Error>
         {{ error | error }}
       </Error>
-      
-      <img v-bind:src="imgSrc" />
 
+      <img v-bind:src="imgSrc" />
+      
       <div class="room-description">
         {{ selectedRoom.description }}
       </div>
@@ -78,10 +78,6 @@
 </script>
 
 <style scoped>
-  h1 {
-    font-weight: normal;
-  }
-
   .room-description {
     text-align: justify;
     margin-top: 20px;

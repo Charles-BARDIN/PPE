@@ -148,10 +148,6 @@ export default {
 
 <style scoped>
 
-  h1 {
-    font-weight: normal;
-  }
-
   label {
     display: inline-block;
     width: 250px;
