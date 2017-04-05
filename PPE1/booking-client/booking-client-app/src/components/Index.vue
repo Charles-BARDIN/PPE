@@ -1,6 +1,6 @@
 <template>
     <div class="index">
-      <Title>M2L Accueil</Title>
+      <M2LTitle>M2L Accueil</M2LTitle>
 
       <p>
         Bienvenue sur le site de réservations des salles de la M2L. <br>
@@ -20,7 +20,7 @@
   import router from '@/router'
 
   import bookingClientLib from '@/lib-adapter'
-  import Title from '@/components/M2LTitle';
+  import M2LTitle from '@/components/M2LTitle';
 
   const indexService = bookingClientLib.indexService;
 
@@ -28,7 +28,7 @@
     name: 'index',
     components: {
         M2LButton,
-        Title,
+        M2LTitle,
     },
     methods: {
       onBookingButtonClick: () => {

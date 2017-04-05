@@ -1,6 +1,6 @@
 <template>
 <div class="booking">
-  <Title>Réservation</Title>
+  <M2LTitle>Réservation</M2LTitle>
 
   <form>
     <div>
@@ -15,8 +15,9 @@
 
     <M2LButton label="Enregistrer ma réservation" v-bind:action="book" />
   </form>
-
-  <div v-for="err in errors">{{ err | error }}</div>
+  <Error>
+    <div v-for="err in errors">{{ err | error }}</div>
+  </Error>
   <Confirm v-if="confirm">Votre réservation a bien été effectuée.</Confirm>
 </div>
 </template>
@@ -27,8 +28,9 @@ import bookingClientLib from '@/lib-adapter'
 import Datepicker from 'vuejs-datepicker';
 import M2LButton from '@/components/M2LButton';
 import RoomPicker from '@/components/RoomPicker';
-import Title from '@/components/M2LTitle';
+import M2LTitle from '@/components/M2LTitle';
 import Confirm from '@/components/Confirm';
+import Error from '@/components/Error';
 import { errorFilter } from '@/common';
 import Vue from 'vue';
 
@@ -43,8 +45,9 @@ export default {
       Datepicker,
       M2LButton,
       RoomPicker,
-      Title,
+      M2LTitle,
       Confirm,
+      Error,
   },
   created: function() {
     const setRoomList = this.setRoomList;
