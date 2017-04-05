@@ -7,6 +7,8 @@
       <Error>
         {{ error | error }}
       </Error>
+      
+      <img v-bind:src="imgSrc" />
 
       <div class="room-description">
         {{ selectedRoom.description }}
@@ -16,6 +18,7 @@
 
 <script>
   import Vue from 'vue';
+  import config from '@/config';
   import bookingClientLib from '@/lib-adapter';
   import RoomPicker from '@/components/RoomPicker';
   import M2LTitle from '@/components/M2LTitle';
@@ -47,6 +50,7 @@
         roomService.changeRoomSelection(newRoom);
       },
       displayRoomDescription: function (room) {
+        this.imgSrc = room.image ?`${config.apiBaseUrl}/room/${room.id}/image` : '';
         room.description = room.description || '';
         this.selectedRoom = room;
       },
@@ -60,8 +64,9 @@
     data () {
       return { 
         selectedRoom: {},
-        rooms: ["amphithéatre","Salle de réunion","Salle de convivialité"],
-        error: ''
+        rooms: [],
+        error: '',
+        imgSrc: '',
       }
     },
     components: {
@@ -82,4 +87,8 @@
     margin-top: 20px;
   }
 
+  img {
+    margin-top: 10px;
+    max-width: 250px;
+  }
 </style>
