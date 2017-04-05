@@ -6,10 +6,10 @@
     "doc": "doc"
   },
   "scripts": {
-    "preinit": "npm install && npm run init:database",
+    "preinit": "npm install",
     "init": "npm run link && npm run install:all",
+    "postinit": "npm run init:database && npm run build:dep",
     "init:database": "cd booking-server/booking-server-app && npm run create:db",
-    "postinit": "npm run build:dep",
     "test": "npm run test:logger & npm run test:clib & npm run test:slib & npm run test:sapp",
     "test:logger": "cd ../m2l-node-logger && npm test",
     "test:clib": "cd booking-client/booking-client-lib && npm test",
