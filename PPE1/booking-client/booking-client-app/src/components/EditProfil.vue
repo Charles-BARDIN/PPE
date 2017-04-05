@@ -2,9 +2,9 @@
   <div>
     <Profil mode="edit" v-bind:onConfirm="editUser" v-bind:user="user" />
 
-    <div v-if="showConfirm">
+    <Confirm v-if="showConfirm">
       Profil modifié avec succès !
-    </div>
+    </Confirm>
     <div v-for="err in errors">
       {{ err | error }}
     </div>
@@ -14,6 +14,7 @@
 <script>
   import M2LButton from '@/components/M2LButton'
   import Profil from '@/components/Profil'
+  import Confirm from '@/components/Confirm'
   
   import bookingClientLib from '@/lib-adapter'
   import { errorFilter } from '@/common';
@@ -76,7 +77,8 @@
     },
     components: {
       M2LButton,
-      Profil
+      Profil,
+      Confirm,
     },
     data () {
       return {

@@ -17,7 +17,7 @@
   </form>
 
   <div v-for="err in errors">{{ err | error }}</div>
-  <div v-if="confirm">Votre réservation a bien été effectuée.</div>
+  <Confirm v-if="confirm">Votre réservation a bien été effectuée.</Confirm>
 </div>
 </template>
 
@@ -28,6 +28,7 @@ import Datepicker from 'vuejs-datepicker';
 import M2LButton from '@/components/M2LButton';
 import RoomPicker from '@/components/RoomPicker';
 import Title from '@/components/M2LTitle';
+import Confirm from '@/components/Confirm';
 import { errorFilter } from '@/common';
 import Vue from 'vue';
 
@@ -42,7 +43,8 @@ export default {
       Datepicker,
       M2LButton,
       RoomPicker,
-      Title
+      Title,
+      Confirm,
   },
   created: function() {
     const setRoomList = this.setRoomList;
