@@ -1,6 +1,6 @@
 <template>
     <div class="room">
-      <h1>Liste des salles</h1>
+      <Title>Liste des salles</Title>
 
       <RoomPicker v-bind:onSelectedRoomChange="changeSelectedRoom" v-bind:rooms="rooms" />
 
@@ -18,6 +18,7 @@
   import Vue from 'vue';
   import bookingClientLib from '@/lib-adapter';
   import RoomPicker from '@/components/RoomPicker';
+  import Title from '@/components/M2LTitle';
   import { errorFilter } from '@/common';
 
   Vue.filter('error', errorFilter);
@@ -63,7 +64,8 @@
       }
     },
     components: {
-      RoomPicker
+      RoomPicker,
+      Title,
     }
   }
 </script>

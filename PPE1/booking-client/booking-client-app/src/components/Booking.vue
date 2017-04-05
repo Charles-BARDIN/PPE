@@ -1,6 +1,6 @@
 <template>
 <div class="booking">
-  <h1>Réservation</h1>
+  <Title>Réservation</Title>
 
   <form>
     <div>
@@ -27,6 +27,7 @@ import bookingClientLib from '@/lib-adapter'
 import Datepicker from 'vuejs-datepicker';
 import M2LButton from '@/components/M2LButton';
 import RoomPicker from '@/components/RoomPicker';
+import Title from '@/components/M2LTitle';
 import { errorFilter } from '@/common';
 import Vue from 'vue';
 
@@ -40,7 +41,8 @@ export default {
   components: {
       Datepicker,
       M2LButton,
-      RoomPicker
+      RoomPicker,
+      Title
   },
   created: function() {
     const setRoomList = this.setRoomList;
@@ -109,10 +111,6 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  font-weight: normal;
-}
-
 .inputs {
   margin: 6px;
   margin-bottom: 10px;

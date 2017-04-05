@@ -1,6 +1,6 @@
 <template>
 <div class="profil">
-  <h1>{{ title }}</h1>
+  <Title>{{ title }}</Title>
   <form>
     <div>
       <label>Nom</label>
@@ -77,6 +77,7 @@
 
 <script>
 import M2LButton from '@/components/M2LButton';
+import Title from '@/components/M2LTitle';
 
 export default {
   name: 'profil',
@@ -139,7 +140,8 @@ export default {
     }
   },
   components: {
-    M2LButton
+    M2LButton,
+    Title,
   }
 }
 </script>
