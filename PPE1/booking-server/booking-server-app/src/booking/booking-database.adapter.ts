@@ -20,7 +20,7 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
       const bookingDate = new Date(booking.date).toISOString().slice(0, 19).replace('T', ' ').split(' ')[0];
       this._db.query(
         `INSERT INTO booking(booking_date, user_id, room_id)
-        VALUES ('${escape(this._escapeHtml(bookingDate))}', '${escape(this._escapeHtml(booking.userID.toString()))}', '${escape(this._escapeHtml(booking.roomID.toString()))}');`
+        VALUES (${escape(this._escapeHtml(bookingDate))}, ${escape(this._escapeHtml(booking.userID.toString()))}, ${escape(this._escapeHtml(booking.roomID.toString()))});`
       )
         .then(() => {
           return this.get(booking);
@@ -36,10 +36,10 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
 
   public get(booking: { roomID: number, date?: Date }): Promise<Booking[]> {
     return new Promise((resolve, reject) => {
-      let query = `SELECT * FROM booking WHERE room_id = '${escape(this._escapeHtml(booking.roomID.toString()))}'`;
+      let query = `SELECT * FROM booking WHERE room_id = ${escape(this._escapeHtml(booking.roomID.toString()))}`;
       // http://stackoverflow.com/questions/20083807/javascript-date-to-sql-date-object
-      query += booking.date ? ` AND booking_date = '${escape(this._escapeHtml(new Date(booking.date).toISOString().slice(0, 19).replace('T', ' ').split(' ')[0]))}';` : `;`;
-      
+      query += booking.date ? ` AND booking_date = ${escape(this._escapeHtml(new Date(booking.date).toISOString().slice(0, 19).replace('T', ' ').split(' ')[0]))};` : `;`;
+
       this._db.query(query)
         .then(bookings => {
           let response = bookings
