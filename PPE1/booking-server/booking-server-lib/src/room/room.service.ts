@@ -22,8 +22,21 @@ export class RoomService {
         })
         .catch(err => {
           this._logger.error(err);
-          reject(err);
+          reject('ERR_UNKNOWN');
         });
     })
+  }
+
+  public getImage(id: number): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this._data.getRoomImage(id)
+        .then(imageName => {
+          resolve(imageName);
+        })
+        .catch(err => {
+          this._logger.error(err);
+          reject('ERR_UNKNOWN');
+        });
+    });
   }
 }

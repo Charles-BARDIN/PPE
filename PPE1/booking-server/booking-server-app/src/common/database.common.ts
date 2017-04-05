@@ -49,7 +49,7 @@ export class Database {
             room_id          int (11) Auto_increment  NOT NULL ,
             room_label       Varchar(25) NOT NULL ,
             room_description Text NOT NULL ,
-            room_image       Varchar (25) ,
+            room_image       Varchar (255) ,
             PRIMARY KEY (room_id)
           )ENGINE=InnoDB;`
         );

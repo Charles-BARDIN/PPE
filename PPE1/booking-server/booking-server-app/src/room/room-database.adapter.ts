@@ -44,6 +44,22 @@ export class RoomDatabaseAdapter implements IRoomDataAccess {
     });
   }
 
+  public getRoomImage(id: number): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this._db.query(
+        `SELECT room_image
+        FROM room
+        WHERE room_id = ${escape(this._escapeHtml(id.toString()))};`
+      )
+        .then(data => {
+          resolve(data[0].room_image);
+        })
+        .catch(err => {
+          reject(err);
+        })
+    });
+  }
+
   private _escapeHtml(unsafe: string): string {
     return unsafe
       .replace(/&/g, "&amp;")

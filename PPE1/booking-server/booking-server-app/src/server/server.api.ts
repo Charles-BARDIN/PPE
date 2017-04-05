@@ -18,11 +18,11 @@ export class Server {
   private _server: express.Application;
   private _config: {
     port: string,
-    timeOut: number
+    roomImageRoot: string
   };
 
   constructor(config: {
-    logger: ILogger, serverConfig: { port: string, timeOut: number }, database: Database
+    logger: ILogger, serverConfig: { port: string, roomImageRoot: string }, database: Database
   }) {
     const booking = new BookingAdapter({ logger: config.logger, database: config.database });
     const room = new RoomAdapter({ logger: config.logger, database: config.database });
@@ -31,7 +31,8 @@ export class Server {
     this._router = new Router({
       booking,
       room,
-      user
+      user,
+      config: config.serverConfig
     });
 
     this._logger = config.logger;

@@ -1,12 +1,13 @@
 /**
  * Server api :
  *   VERB______URL________ACTION_____
- *   POST | /login    | login
- *   POST | /logout   | logout
- *   POST | /user     | register user
- *   GET  | /room     | get room list
- *   POST | /booking  | book a room
- *   PUT  | /user/:id | Modify profile
+ *   POST | /login              | login
+ *   POST | /logout             | logout
+ *   POST | /user               | register user
+ *   PUT  | /user/:id           | Modify profile
+ *   GET  | /room               | get room list
+ *   GET  | /room/:roomId/image | Get room image
+ *   POST | /booking            | book a room
  * 
  * Response :
  *   {
@@ -17,6 +18,7 @@
 
 const express = require('express');
 import * as bodyParser from 'body-parser';
+import * as path from 'path';
 
 import { RoomAdapter } from '../room';
 import { BookingAdapter } from '../booking';
@@ -27,11 +29,13 @@ export class Router {
   private _booking: BookingAdapter;
   private _room: RoomAdapter;
   private _user: UserAdapter;
+  private _config;
 
   constructor(config: {
     room: RoomAdapter,
     booking: BookingAdapter,
-    user: UserAdapter
+    user: UserAdapter,
+    config: any
   }) {
     this._router = express.Router();
     this._room = config.room;
@@ -39,6 +43,7 @@ export class Router {
     this._user = config.user;
 
     this._router.use(bodyParser.json());
+    this._config = config.config;
     this._setApi();
   }
 
@@ -92,6 +97,18 @@ export class Router {
         .catch(errors => {
           res.send({ faults: errors });
         });
+    });
+
+    this._router.get('/room/:id/image', (req, res) => {
+      console.log(req.params.id)
+        this._room.getImageName(req.params.id)
+          .then(imageName => {
+            res.sendFile(path.resolve(this._config.roomImageRoot, imageName));
+          })
+          .catch(errors => {
+      console.log(errors)
+            res.send({ faults: errors });
+          });
     });
 
     this._router.post('/booking', (req, res) => {

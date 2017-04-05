@@ -29,6 +29,18 @@ export class RoomAdapter {
     });
   }
 
+  public getImageName(id: number): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this._roomService.getImage(id)
+        .then(imageName => {
+          resolve(imageName);
+        })
+        .catch(errors => {
+          this._handleErrors(errors, reject);
+        });
+    });
+  }
+
   private _handleErrors(errors, reject) {
     if (!Array.isArray(errors)) {
       errors = [errors];
