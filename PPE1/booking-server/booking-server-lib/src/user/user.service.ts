@@ -97,7 +97,7 @@ export class UserService {
         })
         .catch((err: string) => {
           this._logger.error(err);
-          reject(err);
+          reject('ERR_UNKNOWN');
         })
     })
   }

@@ -31,7 +31,10 @@ export class BookingService {
           return this._data.add(book);
         })
         .then(resolve)
-        .catch(reject);
+        .catch(err => {
+          this._logger.error(err);
+          reject('ERR_UNKNOWN');
+        });
     })
   }
 
@@ -39,7 +42,10 @@ export class BookingService {
     return new Promise((resolve, reject) => {
       this._data.get({ roomID: filter.roomID, date: filter.date })
         .then(resolve)
-        .catch(reject);
+        .catch(err => {
+          this._logger.error(err);
+          reject('ERR_UNKNOWN');
+        });
     });
   }
 }
