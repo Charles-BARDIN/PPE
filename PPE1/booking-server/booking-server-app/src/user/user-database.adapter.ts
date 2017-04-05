@@ -4,6 +4,10 @@ import { IUserDataAccess } from 'booking-server-lib';
 
 import { Database } from '../common';
 
+import * as mysql from 'mysql';
+
+const escape = mysql.escape;
+
 export class UserDatabaseAdapter implements IUserDataAccess {
   private _db: Database;
 
@@ -16,7 +20,7 @@ export class UserDatabaseAdapter implements IUserDataAccess {
       this._db.query(
         `SELECT user_mail, user_id
         FROM user
-        WHERE user_mail = '${mail}'`
+        WHERE user_mail = ${escape(this._escapeHtml(mail))};`
       )
         .then(users => {
           const userIsPresent = users.length !== 0;
@@ -43,10 +47,10 @@ export class UserDatabaseAdapter implements IUserDataAccess {
     return new Promise((resolve, reject) => {
       this._db.query(
         `INSERT INTO user(user_firstname, user_name, user_mail, user_password, user_phone, user_adresse, user_zip, user_city, user_country)
-        VALUES ('${user.firstname}', '${user.lastname}', '${user.mail}', '${user.password}', '${user.phone}', '${user.address}', '${user.zip}', '${user.town}', '${user.country}');`
+        VALUES (${escape(this._escapeHtml(user.firstname))}, ${escape(this._escapeHtml(user.lastname))}, ${escape(this._escapeHtml(user.mail))}, ${escape(this._escapeHtml(user.password))}, ${escape(this._escapeHtml(user.phone))}, ${escape(this._escapeHtml(user.address))}, ${escape(this._escapeHtml(user.zip))}, ${escape(this._escapeHtml(user.town))}, ${escape(this._escapeHtml(user.country))});`
       )
         .then(() => {
-          return this._db.query(`SELECT * FROM user WHERE user_mail = '${user.mail}';`)
+          return this._db.query(`SELECT * FROM user WHERE user_mail = ${escape(this._escapeHtml(user.mail))};`)
         })
         .then(users => {
           resolve(this._createUserEntity(users[0]));
@@ -65,8 +69,8 @@ export class UserDatabaseAdapter implements IUserDataAccess {
       this._db.query(
         `SELECT * 
         FROM user
-        WHERE user_mail = '${credentials.mail}'
-        AND user_password = '${credentials.password}';`
+        WHERE user_mail = ${escape(this._escapeHtml(credentials.mail))}
+        AND user_password = ${escape(this._escapeHtml(credentials.password))};`
       )
         .then(users => {
           resolve(users.length ? this._createUserEntity(users[0]) : undefined);
@@ -93,7 +97,7 @@ export class UserDatabaseAdapter implements IUserDataAccess {
         this._getUpdateUserQuery(user)
       )
         .then(() => {
-          return this._db.query(`SELECT * FROM user WHERE user_id = '${user.id}';`)
+          return this._db.query(`SELECT * FROM user WHERE user_id = ${escape(this._escapeHtml(user.id.toString()))};`)
         })
         .then(users => {
           resolve(this._createUserEntity(users[0]));
@@ -131,20 +135,38 @@ export class UserDatabaseAdapter implements IUserDataAccess {
     ].forEach(property => {
       if (user[property]) {
         if (property === 'address') {
-          query.push(`user_adresse = '${user[property]}'`, `,`);
+          query.push(`user_adresse = ${escape(this._escapeHtml(user[property]))}`, `,`);
           return;
         }
         if (property === 'town') {
-          query.push(`user_city = '${user[property]}'`, `,`);
+          query.push(`user_city = ${escape(this._escapeHtml(user[property]))}`, `,`);
           return;
         }
-        query.push(`user_${property} = '${user[property]}'`, `,`);
+        query.push(`user_${property} = ${escape(this._escapeHtml(user[property]))}`, `,`);
       }
     });
     query.pop();
 
-    query.push(`WHERE user_id = '${user.id}';`);
+    query.push(`WHERE user_id = ${escape(this._escapeHtml(user.id.toString()))};`);
     return query.join(' ');
+  }
+
+  private _escapeHtml(unsafe: string): string {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  private _unescapeHtml(safe: string): string {
+    return safe
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#039;/g, "'");
   }
 
   private _createUserEntity(dbUser: {
@@ -160,15 +182,15 @@ export class UserDatabaseAdapter implements IUserDataAccess {
     user_country: string
   }): User {
     return new User({
-      id: dbUser.user_id,
-      lastname: dbUser.user_name,
-      firstname: dbUser.user_firstname,
-      mail: dbUser.user_mail,
-      phone: dbUser.user_phone,
-      address: dbUser.user_adresse,
-      town: dbUser.user_city,
-      zip: dbUser.user_zip,
-      country: dbUser.user_country
+      id: Number(this._unescapeHtml(dbUser.user_id.toString())),
+      lastname: this._unescapeHtml(dbUser.user_name),
+      firstname: this._unescapeHtml(dbUser.user_firstname),
+      mail: this._unescapeHtml(dbUser.user_mail),
+      phone: this._unescapeHtml(dbUser.user_phone),
+      address: this._unescapeHtml(dbUser.user_adresse),
+      town: this._unescapeHtml(dbUser.user_city),
+      zip: this._unescapeHtml(dbUser.user_zip),
+      country: this._unescapeHtml(dbUser.user_country)
     });
   }
 }

@@ -19,10 +19,7 @@ export class Database {
       database: config.database
     });
 
-    this._connection.connect(err => {
-      if (err) throw new Error(err.stack);
-      this._init();
-    });
+    this._init();
   }
 
   set database(database: string) {
@@ -81,8 +78,9 @@ export class Database {
           reject(err);
           return;
         }
+        
         resolve(res);
-      })
+      });
     })
   }
 }

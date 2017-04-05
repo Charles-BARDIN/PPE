@@ -4,6 +4,10 @@ import { IBookingDataAccess } from 'booking-server-lib';
 
 import { Database } from '../common';
 
+import * as mysql from 'mysql';
+
+const escape = mysql.escape;
+
 export class BookingDatabaseAdapter implements IBookingDataAccess {
   private _db: Database;
 
@@ -16,7 +20,7 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
       const bookingDate = new Date(booking.date).toISOString().slice(0, 19).replace('T', ' ').split(' ')[0];
       this._db.query(
         `INSERT INTO booking(booking_date, user_id, room_id)
-        VALUES ('${bookingDate}', '${booking.userID}', '${booking.roomID}');`
+        VALUES ('${escape(this._escapeHtml(bookingDate))}', '${escape(this._escapeHtml(booking.userID.toString()))}', '${escape(this._escapeHtml(booking.roomID.toString()))}');`
       )
         .then(() => {
           return this.get(booking);
@@ -32,9 +36,9 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
 
   public get(booking: { roomID: number, date?: Date }): Promise<Booking[]> {
     return new Promise((resolve, reject) => {
-      let query = `SELECT * FROM booking WHERE room_id = '${booking.roomID}'`;
+      let query = `SELECT * FROM booking WHERE room_id = '${escape(this._escapeHtml(booking.roomID.toString()))}'`;
       // http://stackoverflow.com/questions/20083807/javascript-date-to-sql-date-object
-      query += booking.date ? ` AND booking_date = '${new Date(booking.date).toISOString().slice(0, 19).replace('T', ' ').split(' ')[0]}';` : `;`;
+      query += booking.date ? ` AND booking_date = '${escape(this._escapeHtml(new Date(booking.date).toISOString().slice(0, 19).replace('T', ' ').split(' ')[0]))}';` : `;`;
       
       this._db.query(query)
         .then(bookings => {
@@ -49,5 +53,24 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
           reject(err);
         })
     });
+  }
+
+  private _escapeHtml(unsafe: string): string {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  private _unescapeHtml(safe: string): string {
+    console.log(safe)
+    return safe
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#039;/g, "'");
   }
 }
