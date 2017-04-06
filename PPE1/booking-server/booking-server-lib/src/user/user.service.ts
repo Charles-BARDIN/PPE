@@ -26,44 +26,50 @@ export class UserService {
     phone?: string
   }): Promise<User> {
     return new Promise((resolve, reject) => {
+      this._logger.debug('UserService.addUser: called with parameter', user_input);
       this._data.checkIfUserExists(user_input.mail)
         .then((res) => {
           if (res) {
-            this._logger.log(`Mail ${user_input.mail} already taken`);
+            this._logger.info('UserService.addUser: ERR_REGISTER_MAIL_TAKEN', user_input.mail);
             reject(`ERR_REGISTER_MAIL_TAKEN`);
             return;
           }
 
+          this._logger.debug(`UserService.addUser: mail ${user_input.mail} not taken`);
           return this._data.add(user_input);
         })
         .then((user_data: User) => {
           if (!user_data) {
-            this._logger.error("An unknown error occured");
-            reject("An unknown error occured");
+            this._logger.error('UserService.addUser: user added to database but not given in promise response');
+            reject('ERR_UNKNOWN');
             return;
           }
 
           resolve(user_data);
         })
         .catch((err: string) => {
-          this._logger.error(err);
-          reject(err);
+          this._logger.error('UserService.addUser:', err);
+          reject('ERR_UNKNOWN');
         })
     });
   }
 
   public login(credentials: { mail: string, password: string }): Promise<User> {
+    this._logger.debug('UserService.login: called with parameter', credentials);
     return new Promise((resolve, reject) => {
       this._data.getUserByCredentials(credentials)
         .then(user => {
           if (user) {
+            this._logger.debug('UserService.login: login success', user);
             resolve(user);
           } else {
+            this._logger.info('UserService.login: INVALID_CREDENTIALS', credentials);
             reject('INVALID_CREDENTIALS');
           }
         })
-        .catch(errors => {
-          reject()
+        .catch(err => {
+          this._logger.error('UserService.addUser:', err);
+          reject('ERR_UNKNOWN')
         });
     });
   }
@@ -81,22 +87,22 @@ export class UserService {
     password?: string,
     oldPassword?: string
   }): Promise<User> {
+    this._logger.debug('UserService.updateUser: called with parameter', user_input);
     return new Promise((resolve, reject) => {
       this._data.checkIfUserExists(user_input.mail, user_input.id)
         .then(res => {
-          if(res) {
-            reject('ERR_MODIFYUSER_MAIL_TAKEN');
+          if (res) {
+            this._logger.info('UserService.updateUser: ERR_MODIFYUSER_MAIL_TAKEN', user_input.mail);
+            reject(`ERR_MODIFYUSER_MAIL_TAKEN`);
             return;
           }
 
+          this._logger.debug(`UserService.updateUser: mail ${user_input.mail} not taken`);          
           return this._data.update(user_input);
         })
-        .then((user_data: User) => {
-          this._logger.log('User updated:', user_data);
-          resolve(user_data);
-        })
+        .then(resolve)
         .catch((err: string) => {
-          this._logger.error(err);
+          this._logger.error('UserService.updateUser:', err);
           reject('ERR_UNKNOWN');
         })
     })

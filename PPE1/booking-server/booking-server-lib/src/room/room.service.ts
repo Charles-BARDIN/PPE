@@ -15,26 +15,24 @@ export class RoomService {
   }
 
   public getRooms(): Promise<Room[]> {
+    this._logger.debug('RoomService.getRooms: called');
     return new Promise((resolve, reject) => {
       this._data.getRooms()
-        .then(rooms => {
-          resolve(rooms);
-        })
+        .then(resolve)
         .catch(err => {
-          this._logger.error(err);
+          this._logger.error('RoomService.getRooms:', err);
           reject('ERR_UNKNOWN');
         });
     })
   }
 
   public getImage(id: number): Promise<string> {
+    this._logger.debug('RoomService.getImage: called with id', id);
     return new Promise((resolve, reject) => {
       this._data.getRoomImage(id)
-        .then(imageName => {
-          resolve(imageName);
-        })
+        .then(resolve)
         .catch(err => {
-          this._logger.error(err);
+          this._logger.error('RoomService.getImage:', err);
           reject('ERR_UNKNOWN');
         });
     });
