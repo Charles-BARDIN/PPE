@@ -39,12 +39,12 @@ export class UserSQLAdapter implements IUserDataAccess {
           const userIsPresent = users.length !== 0;
           if (userIsPresent) {
             this._logger.info(`UserSQLAdapter.checkIfUserExists: user ${users[0].id} is found`);
-            resolve(false);
+            resolve(true);
             return;
           }
 
-          this._logger.info(`UserSQLAdapter.checkIfUserExists: user with ${mail} is not found`)
-          resolve(true);
+          this._logger.info(`UserSQLAdapter.checkIfUserExists: user with ${mail} mail is not found`)
+          resolve(false);
         })
         .catch(reject);
     });

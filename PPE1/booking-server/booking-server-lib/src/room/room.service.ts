@@ -19,10 +19,12 @@ export class RoomService {
     return new Promise((resolve, reject) => {
       this._data.getRooms()
         .then(rooms => {
-          if(!rooms) {
+          if(!(rooms && rooms.length)) {
             this._logger.warn('RoomService.getRooms: no rooms found')
             reject('ERR_NO_ROOM_FOUND');
           }
+
+          resolve(rooms);
         })
         .catch(err => {
           this._logger.error('RoomService.getRooms:', err);
