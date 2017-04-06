@@ -14,6 +14,9 @@ describe('Room Service', () => {
     dataAccess = {
       getRooms: () => {
         return new Promise(resolve => resolve());
+      },
+      getRoomImage: (id: number) => {
+        return new Promise(resolve => resolve());
       }
     }
 
