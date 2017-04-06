@@ -26,15 +26,12 @@ export class RoomDatabaseAdapter implements IRoomDataAccess {
             reject('ERR_DB_ROOM_NOT_FOUND');
           }
           const rooms = roomArray
-            .reduce((prev, curr) => {
-              prev.push(new Room({
-                id: Number(this._unescapeHtml(curr.room_id.toString())),
-                name: this._unescapeHtml(curr.room_label),
-                image: curr.room_image ? this._unescapeHtml(curr.room_image) : undefined,
-                description: this._unescapeHtml(curr.room_description)
-              }));
-              return prev;
-            }, []);
+            .map(room => new Room({
+              id: Number(this._unescapeHtml(room.room_id.toString())),
+              name: this._unescapeHtml(room.room_label),
+              image: room.room_image ? this._unescapeHtml(room.room_image) : undefined,
+              description: this._unescapeHtml(room.room_description)
+            }));
           resolve(rooms);
           return;
         })

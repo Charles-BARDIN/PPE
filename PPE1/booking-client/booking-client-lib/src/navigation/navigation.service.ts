@@ -105,10 +105,7 @@ export class NavigationService implements IIndexNavAccess, IRegisterNavAccess, I
     this._menuItems.splice(0);
     this._menuItems.push(
       ...this._states.filter(state => state.appStates.indexOf(appState) !== -1)
-      .reduce((prev, curr) => {
-        prev.push(curr.name);
-        return prev;
-      }, [])
+      .map(state => state.name)
     );
   }
 

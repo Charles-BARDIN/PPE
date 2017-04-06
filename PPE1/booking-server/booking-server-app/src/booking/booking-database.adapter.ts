@@ -43,10 +43,7 @@ export class BookingDatabaseAdapter implements IBookingDataAccess {
       this._db.query(query)
         .then(bookings => {
           let response = bookings
-            .reduce((prev, curr) => {
-              prev.push(new Booking(curr));
-              return prev;
-            }, []);
+            .map(booking => new Booking(booking));
           resolve(response);
         })
         .catch(err => {
