@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     book: function() {
-      this.booking.date = this.booking.date ? this.booking.date.toISOString() : this.booking.date;
+      this.booking.date = this.booking.date instanceof Date ? this.booking.date.toISOString() : this.booking.date;
       bookingService.bookARoom(this.booking);
     },
     changeSelectedRoom: function(newRoom) {
