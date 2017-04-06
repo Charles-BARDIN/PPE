@@ -37,7 +37,11 @@ export class BookingSQLAdapter implements IBookingDataAccess {
             return;
           }
 
-          const _booking = new Booking(booking[0]);
+          const _booking = new Booking({
+            roomID: booking[0].room_id,
+            userID: booking[0].user_id,
+            date: new Date(booking[0].booking_date)
+          });
           this._logger.info(`BookingSQLAdapter.update: modified booking entity`, _booking);
           resolve(_booking);
         })
@@ -59,14 +63,18 @@ export class BookingSQLAdapter implements IBookingDataAccess {
           this._logger.debug(`BookingSQLAdapter.get: data:`, booking);
 
           let response = bookings
-            .map(booking => new Booking(booking));
+            .map(booking => new Booking({
+              roomID: booking.room_id,
+              userID: booking.user_id,
+              date: new Date(booking.booking_date)
+            }));
 
-          if(response.length) {
+          if (response.length) {
             this._logger.info(`BookingSQLAdapter.get: booking entity array`, response);
           } else {
             this._logger.info('BookingSQLAdapter.get: no bookings found');
           }
-          
+
           resolve(response);
         })
         .catch(reject);
