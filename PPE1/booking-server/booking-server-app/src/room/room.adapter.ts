@@ -11,7 +11,7 @@ export class RoomAdapter {
   private _logger: ILogger;
 
   constructor(config: { logger: ILogger, database: Database }) {
-    const dataAccess = new RoomSQLAdapter({ database: config.database });
+    const dataAccess = new RoomSQLAdapter({ logger: config.logger, database: config.database });
 
     this._roomService = new RoomService({ logger: config.logger, dataAccess });
     this._logger = config.logger;

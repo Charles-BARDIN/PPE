@@ -11,7 +11,7 @@ export class UserAdapter {
   private _logger: ILogger;
 
   constructor(config: { logger: ILogger, database: Database }) {
-    const dataAccess = new UserSQLAdapter({ database: config.database });
+    const dataAccess = new UserSQLAdapter({ logger: config.logger, database: config.database });
 
     this._userService = new UserService({ logger: config.logger, dataAccess });
     this._logger = config.logger;

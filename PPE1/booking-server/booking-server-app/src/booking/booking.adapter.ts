@@ -11,7 +11,7 @@ export class BookingAdapter {
   private _logger: ILogger;
 
   constructor(config: { logger: ILogger, database: Database }) {
-    const dataAccess = new BookingSQLAdapter({ database: config.database });
+    const dataAccess = new BookingSQLAdapter({ logger: config.logger, database: config.database });
 
     this._bookingService = new BookingService({ logger: config.logger, dataAccess });
     this._logger = config.logger;
