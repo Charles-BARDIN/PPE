@@ -1,6 +1,6 @@
 /**
  * Server api :
- *   VERB______URL________ACTION_____
+ *   VERB____________URL__________ACTION_____
  *   POST | /login              | login
  *   POST | /logout             | logout
  *   POST | /user               | register user
