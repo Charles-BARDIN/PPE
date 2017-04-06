@@ -18,7 +18,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "typescript": "^2.2.1",
+    "typescript": "^2.2.2",
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.40",
     "chai": "^3.5.0",
