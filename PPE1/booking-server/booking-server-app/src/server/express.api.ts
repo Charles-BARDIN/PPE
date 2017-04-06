@@ -63,17 +63,25 @@ export class ExpressApi {
   private _setApi() {
     this._router.post('/login', (req, res) => {
       const credentials: { mail: string, password: string } = req.body;
+      this._logger.log(`ExpressApi POST request on /login parameters`, credentials);
       this._user.login(credentials)
         .then(data => {
-          res.send({ faults: [], data });
+          const response = { faults: [], data };
+          this._logger.log(`ExpressApi POST request on /login response`, response);
+          res.send(response);
         })
-        .catch(errors => {
-          res.send({ faults: errors });
+        .catch(faults => {
+          const response = { faults };
+          this._logger.log(`ExpressApi POST request on /login response`, response);
+          res.send(response);
         });
     });
 
     this._router.post('/logout', (req, res) => {
-      res.send({ faults: [], data: true });
+      this._logger.log(`ExpressApi POST request on /logout`);
+      const response = { faults: [], date: true };
+      this._logger.log(`ExpressApi POST request on /logout response`, response);
+      res.send(response);
     });
 
     this._router.post('/user', (req, res) => {
@@ -89,44 +97,67 @@ export class ExpressApi {
         phone?: string
       } = req.body;
 
+      this._logger.log(`ExpressApi POST request on /user parameters`, user);
+
       this._user.add(user)
         .then(data => {
-          res.send({ faults: [], data })
+          const response = { faults: [], data };
+          this._logger.log(`ExpressApi POST request on /user response`, response);
+          res.send(response);
         })
-        .catch(errors => {
-          res.send({ faults: errors });
+        .catch(faults => {
+          const response = { faults };
+          this._logger.log(`ExpressApi POST request on /user response`, response);
+          res.send(response);
         });
     });
 
     this._router.get('/room', (req, res) => {
+      this._logger.log(`ExpressApi GET request on /room`);
       this._room.get()
         .then(data => {
-          res.send({ faults: [], data })
+          const response = { faults: [], data };
+          this._logger.log(`ExpressApi GET request on /room response`, response);
+          res.send(response);
         })
-        .catch(errors => {
-          res.send({ faults: errors });
+        .catch(faults => {
+          const response = { faults };
+          this._logger.log(`ExpressApi GET request on /room response`, response);
+          res.send(response);
         });
     });
 
     this._router.get('/room/:id/image', (req, res) => {
-      this._room.getImageName(req.params.id)
-        .then(imageName => {
-          res.sendFile(path.resolve(this._config.roomImageRoot, imageName));
+      const id = req.params.id;
+      this._logger.log(`ExpressApi GET request on /room/${id}/image`);
+      this._room.getImageName(id)
+        .then(data => {
+          const response = { faults: [], data };
+          this._logger.log(`ExpressApi GET request on /room/${id}/image response`, response);
+          res.send(response);
         })
-        .catch(errors => {
-          res.send({ faults: errors });
+        .catch(faults => {
+          const response = { faults };
+          this._logger.log(`ExpressApi GET request on /room/${id}/image response`, response);
+          res.send(response);
         });
     });
 
     this._router.post('/booking', (req, res) => {
       const booking: { roomID: number, userID: number, date: Date } = req.body;
 
+      this._logger.log(`ExpressApi POST request on /booking parameter`, booking);
+
       this._booking.bookARoom(booking)
         .then(data => {
-          res.send({ faults: [], data })
+          const response = { faults: [], data };
+          this._logger.log(`ExpressApi POST request on /booking response`, response);
+          res.send(response);
         })
-        .catch(errors => {
-          res.send({ faults: errors });
+        .catch(faults => {
+          const response = { faults };
+          this._logger.log(`ExpressApi POST request on /booking response`, response);
+          res.send(response);
         });
     });
 
@@ -144,13 +175,21 @@ export class ExpressApi {
       } = req.body;
       modifiedUser.id = req.params.id;
 
+      this._logger.log(`ExpressApi PUT request on /user/${modifiedUser.id}`);
+
       this._user.update(modifiedUser)
         .then(data => {
-          res.send({ faults: [], data })
+          const response = { faults: [], data };
+          this._logger.log(`ExpressApi PUT request on /user/${modifiedUser.id} response`, response);
+          res.send(response);
         })
-        .catch(errors => {
-          res.send({ faults: errors });
+        .catch(faults => {
+          const response = { faults };
+          this._logger.log(`ExpressApi PUT request on /user/${modifiedUser.id} response`, response);
+          res.send(response);
         });
     });
+
+    this._logger.debug('ExpressApi REST API set');
   }
 }

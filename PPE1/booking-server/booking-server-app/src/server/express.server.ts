@@ -46,7 +46,7 @@ export class ExpressServer {
 
   public start() {
     this._server.listen(this._config.port, () => {
-      this._logger.log(`Server started on ${this._config.port}...`);
+      this._logger.log(`ExpressServer server started on ${this._config.port}...`);
     })
   }
 
