@@ -4,15 +4,18 @@
   "description": "",
   "main": "index",
   "scripts": {
-    "build": "tsc --project ./tsconfig.json",
-    "prebuild": "npm run -s clean",
+    "build": "tsc --project ./tsconfig.json && buble -i ./.tmp -o ./dist",
+    "prebuild": "npm run -s clean:dist",
+    "postbuild": "npm run clean:tmp",
     "build:t": "tsc --project ./tsconfig.spec.json",
     "prebuild:t": "npm run -s prebuild",
+    "postbuild:t": "npm run postbuild",    
     "build:w": "tsc -w",
-    "prebuild:w": "npm run -s prebuild",
+    "prebuild:w": "npm run -s clean:dist",
     "test": "mocha dist/**/*.spec.js",
     "pretest": "npm run -s build:t",
-    "clean": "npm run -s clean:dist",
+    "clean": "npm run -s clean:dist && npm run clean:tmp",
+    "clean:tmp": "rimraf -r ./.tmp/",
     "clean:dist": "rimraf -r ./dist/*"
   },
   "dependencies": {
@@ -22,6 +25,7 @@
   "devDependencies": {
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.40",
+    "buble": "^0.15.2",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
     "rimraf": "^2.6.1"

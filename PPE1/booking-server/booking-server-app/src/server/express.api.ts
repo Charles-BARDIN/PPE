@@ -132,9 +132,8 @@ export class ExpressApi {
       this._logger.log(`ExpressApi GET request on /room/${id}/image`);
       this._room.getImageName(id)
         .then(data => {
-          const response = { faults: [], data };
-          this._logger.log(`ExpressApi GET request on /room/${id}/image response`, response);
-          res.send(response);
+          this._logger.log(`ExpressApi GET request on /room/${id}/image response file`, data);
+          res.sendFile(path.resolve(this._config.roomImageRoot, data));
         })
         .catch(faults => {
           const response = { faults };

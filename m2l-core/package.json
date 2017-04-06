@@ -4,14 +4,21 @@
   "description": "",
   "main": "index",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "build:w": "tsc -w"
+    "build": "tsc --project ./tsconfig.json && buble -i ./.tmp -o ./dist",
+    "prebuild": "npm run -s clean:dist",
+    "postbuild": "npm run clean:tmp",   
+    "build:w": "tsc -w",
+    "prebuild:w": "npm run -s clean:dist",
+    "clean": "npm run -s clean:dist && npm run clean:tmp",
+    "clean:tmp": "rimraf -r ./.tmp/",
+    "clean:dist": "rimraf -r ./dist/*"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^2.2.2"
+    "typescript": "^2.2.2",
+    "buble": "^0.15.2",
+    "rimraf": "^2.6.1"
   }
 }
