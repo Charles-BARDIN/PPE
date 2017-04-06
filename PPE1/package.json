@@ -25,7 +25,7 @@
     "link:slib": "cd booking-server/booking-server-lib && npm link && npm link m2l-core m2l-node-logger",
     "link:sapp": "cd booking-server/booking-server-app && npm link m2l-core m2l-node-logger booking-server-lib",
     "install:all": "npm run install:capp &&  npm run install:sapp && npm run install:clib && npm run install:slib && npm run install:logger && npm run install:core",
-    "install:prod": "npm run install:capp -- --only=production &&  npm run install:sapp -- --only=production && npm run install:clib && npm run install:slib && npm run install:logger && npm run install:core",
+    "install:prod": "npm run install:capp && npm run install:sapp -- --only=production && npm run install:clib && npm run install:slib && npm run install:logger && npm run install:core",
     "install:core": "cd ../m2l-core && npm i",
     "install:logger": "cd ../m2l-node-logger && npm i",
     "install:clib": "cd booking-client/booking-client-lib && npm i",
