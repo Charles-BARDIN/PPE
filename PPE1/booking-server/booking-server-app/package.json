@@ -12,8 +12,6 @@
     "build:w": "tsc -w",
     "prebuild:w": "npm run -s prebuild",
     "create:db": "node ./create-database",
-    "test": "mocha dist/**/*.spec.js",
-    "pretest": "npm run -s build:t",
     "clean": "npm run -s clean:dist",
     "clean:dist": "rimraf -r ./dist/*",
     "dev": "concurrently \"npm run build:w\" \"nodemon .\""
@@ -31,11 +29,7 @@
     "rimraf": "^2.6.1"
   },
   "devDependencies": {
-    "@types/chai": "^3.4.35",
-    "@types/mocha": "^2.2.40",
-    "chai": "^3.5.0",
     "concurrently": "^3.4.0",
-    "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
     "typescript": "^2.2.2"
   }

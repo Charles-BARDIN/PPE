@@ -2,13 +2,9 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es6",
-    "declaration": true,
     "outDir": ".tmp"
   },
   "include": [
     "./src/**/*.ts"
-  ],
-  "exclude": [
-    "./src/**/*.spec.ts"
   ]
 }
