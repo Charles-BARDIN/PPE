@@ -4,6 +4,7 @@
   "description": "",
   "main": "index",
   "scripts": {
+    "start": "node .",
     "build": "tsc --project ./tsconfig.json",
     "prebuild": "npm run -s clean",
     "build:t": "tsc --project ./tsconfig.spec.json",
@@ -26,7 +27,8 @@
     "@types/body-parser": "^1.16.3",
     "body-parser": "^1.17.1",
     "express": "^4.14.1",
-    "mysql": "^2.13.0"
+    "mysql": "^2.13.0",
+    "rimraf": "^2.6.1"
   },
   "devDependencies": {
     "@types/chai": "^3.4.35",
@@ -35,7 +37,6 @@
     "concurrently": "^3.4.0",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
-    "rimraf": "^2.6.1",
     "typescript": "^2.2.2"
   }
 }

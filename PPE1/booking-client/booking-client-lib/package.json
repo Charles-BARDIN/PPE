@@ -19,10 +19,10 @@
     "clean:dist": "rimraf -r ./dist/*"
   },
   "dependencies": {
-    "@types/node": "^7.0.8",
-    "typescript": "^2.2.2"
   },
   "devDependencies": {
+    "typescript": "^2.2.2",
+    "@types/node": "^7.0.8",
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.40",
     "buble": "^0.15.2",
