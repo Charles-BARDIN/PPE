@@ -20,6 +20,8 @@ const express = require('express');
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
 
+import { ILogger } from 'm2l-core';
+
 import { RoomAdapter } from '../room';
 import { BookingAdapter } from '../booking';
 import { UserAdapter } from '../user';
@@ -29,18 +31,25 @@ export class ExpressApi {
   private _booking: BookingAdapter;
   private _room: RoomAdapter;
   private _user: UserAdapter;
-  private _config;
+  private _logger: ILogger;
+  private _config: {
+    roomImageRoot: string
+  };
 
   constructor(config: {
     room: RoomAdapter,
     booking: BookingAdapter,
     user: UserAdapter,
-    config: any
+    config: {
+      roomImageRoot: string
+    },
+    logger: ILogger
   }) {
     this._router = express.Router();
     this._room = config.room;
     this._booking = config.booking;
     this._user = config.user;
+    this._logger = config.logger;
 
     this._router.use(bodyParser.json());
     this._config = config.config;
@@ -100,13 +109,13 @@ export class ExpressApi {
     });
 
     this._router.get('/room/:id/image', (req, res) => {
-        this._room.getImageName(req.params.id)
-          .then(imageName => {
-            res.sendFile(path.resolve(this._config.roomImageRoot, imageName));
-          })
-          .catch(errors => {
-            res.send({ faults: errors });
-          });
+      this._room.getImageName(req.params.id)
+        .then(imageName => {
+          res.sendFile(path.resolve(this._config.roomImageRoot, imageName));
+        })
+        .catch(errors => {
+          res.send({ faults: errors });
+        });
     });
 
     this._router.post('/booking', (req, res) => {

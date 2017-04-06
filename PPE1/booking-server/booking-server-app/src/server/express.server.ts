@@ -32,7 +32,8 @@ export class ExpressServer {
       booking,
       room,
       user,
-      config: config.serverConfig
+      config: config.serverConfig,
+      logger: config.logger
     });
 
     this._logger = config.logger;
@@ -45,7 +46,7 @@ export class ExpressServer {
 
   public start() {
     this._server.listen(this._config.port, () => {
-      this._logger.log(`Listening on ${this._config.port}...`);
+      this._logger.log(`Server started on ${this._config.port}...`);
     })
   }
 
