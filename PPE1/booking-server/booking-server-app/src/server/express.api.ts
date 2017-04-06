@@ -24,7 +24,7 @@ import { RoomAdapter } from '../room';
 import { BookingAdapter } from '../booking';
 import { UserAdapter } from '../user';
 
-export class Router {
+export class ExpressApi {
   private _router;
   private _booking: BookingAdapter;
   private _room: RoomAdapter;

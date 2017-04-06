@@ -8,7 +8,7 @@ import * as mysql from 'mysql';
 
 const escape = mysql.escape;
 
-export class BookingDatabaseAdapter implements IBookingDataAccess {
+export class BookingSQLAdapter implements IBookingDataAccess {
   private _db: Database;
   private _logger: ILogger;
 

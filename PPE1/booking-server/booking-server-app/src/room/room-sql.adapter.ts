@@ -8,7 +8,7 @@ import * as mysql from 'mysql';
 
 const escape = mysql.escape;
 
-export class RoomDatabaseAdapter implements IRoomDataAccess {
+export class RoomSQLAdapter implements IRoomDataAccess {
   private _db: Database;
   private _logger: ILogger;
 

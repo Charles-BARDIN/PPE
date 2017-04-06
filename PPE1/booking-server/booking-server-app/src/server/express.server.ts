@@ -6,12 +6,12 @@ import { UserAdapter } from '../user';
 
 import { Database } from '../common';
 
-import { Router } from './server.router';
+import { ExpressApi } from './express.api';
 
 import * as express from 'express';
 
-export class Server {
-  private _router: Router;
+export class ExpressServer {
+  private _router: ExpressApi;
 
   private _logger: ILogger;
 
@@ -28,7 +28,7 @@ export class Server {
     const room = new RoomAdapter({ logger: config.logger, database: config.database });
     const user = new UserAdapter({ logger: config.logger, database: config.database });
 
-    this._router = new Router({
+    this._router = new ExpressApi({
       booking,
       room,
       user,
