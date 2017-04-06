@@ -1,4 +1,4 @@
-import { User } from "m2l-core";
+import { User, ILogger } from "m2l-core";
 
 import { IUserDataAccess } from 'booking-server-lib';
 
@@ -10,9 +10,11 @@ const escape = mysql.escape;
 
 export class UserDatabaseAdapter implements IUserDataAccess {
   private _db: Database;
+  private _logger: ILogger;
 
-  constructor(config: { database: Database }) {
+  constructor(config: { database: Database, logger: ILogger }) {
     this._db = config.database;
+    this._logger = config.logger;
   }
 
   public checkIfUserExists(mail: string, id?: number): Promise<boolean> {

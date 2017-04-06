@@ -1,4 +1,4 @@
-import { Room } from 'm2l-core';
+import { Room, ILogger } from 'm2l-core';
 
 import { IRoomDataAccess } from 'booking-server-lib';
 
@@ -10,9 +10,11 @@ const escape = mysql.escape;
 
 export class RoomDatabaseAdapter implements IRoomDataAccess {
   private _db: Database;
+  private _logger: ILogger;
 
-  constructor(config: { database: Database }) {
+  constructor(config: { database: Database, logger: ILogger }) {
     this._db = config.database;
+    this._logger = config.logger;
   }
 
   public getRooms(): Promise<Room[]> {

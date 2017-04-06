@@ -1,4 +1,4 @@
-import { Booking } from 'm2l-core';
+import { Booking, ILogger } from 'm2l-core';
 
 import { IBookingDataAccess } from 'booking-server-lib';
 
@@ -10,9 +10,11 @@ const escape = mysql.escape;
 
 export class BookingDatabaseAdapter implements IBookingDataAccess {
   private _db: Database;
+  private _logger: ILogger;
 
-  constructor(config: { database: Database }) {
+  constructor(config: { database: Database, logger: ILogger }) {
     this._db = config.database;
+    this._logger = config.logger;
   }
 
   public add(booking: Booking): Promise<Booking> {
