@@ -18,15 +18,17 @@ export class RoomSQLAdapter implements IRoomDataAccess {
   }
 
   public getRooms(): Promise<Room[]> {
+    this._logger.debug(`RoomSQLAdapter.getRooms: called`);
     return new Promise((resolve, reject) => {
-      this._db.query(
-        `SELECT *
-        FROM room;`
-      )
+      const query = `SELECT *
+                    FROM room;`;
+
+      this._logger.debug('RoomSQLAdapter.getRooms: query:', query);
+
+      this._db.query(query)
         .then(roomArray => {
-          if (!roomArray.length) {
-            reject('ERR_DB_ROOM_NOT_FOUND');
-          }
+          this._logger.debug('RoomSQLAdapter.getRooms: data:', roomArray);
+
           const rooms = roomArray
             .map(room => new Room({
               id: Number(this._unescapeHtml(room.room_id.toString())),
@@ -34,28 +36,38 @@ export class RoomSQLAdapter implements IRoomDataAccess {
               image: room.room_image ? this._unescapeHtml(room.room_image) : undefined,
               description: this._unescapeHtml(room.room_description)
             }));
+
+          this._logger.info('RoomSQLAdapter.getRooms: rooms', rooms);
           resolve(rooms);
           return;
         })
-        .catch(err => {
-          reject(err);
-        })
+        .catch(reject);
     });
   }
 
   public getRoomImage(id: number): Promise<string> {
+    this._logger.debug(`RoomSQLAdapter.getRoomImage: called with parameter ${id}`);
     return new Promise((resolve, reject) => {
-      this._db.query(
-        `SELECT room_image
-        FROM room
-        WHERE room_id = ${escape(this._escapeHtml(id.toString()))};`
-      )
+      const query = `SELECT room_image
+                    FROM room
+                    WHERE room_id = ${escape(this._escapeHtml(id.toString()))};`;
+
+      this._logger.debug('RoomSQLAdapter.getRoomImage: query:', query);
+
+      this._db.query(query)
         .then(data => {
-          resolve(data[0].room_image);
+          this._logger.debug('RoomSQLAdapter.getRoomImage: data:', data);
+          if (!(data && data.length)) {
+            this._logger.info('RoomSQLAdapter.getRoomImage: room', id, 'image not found');
+            resolve(undefined);
+            return;
+          }
+
+          const image = data[0].room_image;
+          this._logger.info(`RoomSQLAdapter.getRoomImage: room ${id} image: ${image}`);
+          resolve(image);
         })
-        .catch(err => {
-          reject(err);
-        })
+        .catch(reject);
     });
   }
 

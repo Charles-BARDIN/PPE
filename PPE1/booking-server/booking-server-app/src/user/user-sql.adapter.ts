@@ -18,20 +18,35 @@ export class UserSQLAdapter implements IUserDataAccess {
   }
 
   public checkIfUserExists(mail: string, id?: number): Promise<boolean> {
+    this._logger.debug(`UserSQLAdapter.checkIfUserExists: called with parameter mail: ${mail}, id: ${id}`);
     return new Promise((resolve, reject) => {
-      this._db.query(
-        `SELECT user_mail, user_id
-        FROM user
-        WHERE user_mail = ${escape(this._escapeHtml(mail))};`
-      )
+      let query = `SELECT user_mail, user_id
+                  FROM user
+                  WHERE user_mail = ${escape(this._escapeHtml(mail))}`;
+
+      if (id) {
+        this._logger.debug(`UserSQLAdapter.checkIfUserExists: id filter is set to ${id}`);
+        query += ` AND user_id <> ${escape(this._escapeHtml(id.toString()))};`
+      } else {
+        this._logger.debug(`UserSQLAdapter.checkIfUserExists: id filter is not set`);
+        query += ';';
+      }
+
+      this._logger.debug('UserSQLAdapter.checkIfUserExists: query:', query);
+      this._db.query(query)
         .then(users => {
+          this._logger.debug(`UserSQLAdapter.checkIfUserExists: data:`, users);
           const userIsPresent = users.length !== 0;
-          const isUser = id ? Number(users[0].user_id) === Number(id) : false;
-          resolve(userIsPresent && !isUser);
+          if (userIsPresent) {
+            this._logger.info(`UserSQLAdapter.checkIfUserExists: user ${users[0].id} is found`);
+            resolve(false);
+            return;
+          }
+
+          this._logger.info(`UserSQLAdapter.checkIfUserExists: user with ${mail} is not found`)
+          resolve(true);
         })
-        .catch(err => {
-          reject(err);
-        })
+        .catch(reject);
     });
   };
 
@@ -46,20 +61,36 @@ export class UserSQLAdapter implements IUserDataAccess {
     town: string,
     country: string
   }): Promise<User> {
+    this._logger.debug(`UserSQLAdapter.add: called with parameter`, user);
     return new Promise((resolve, reject) => {
-      this._db.query(
-        `INSERT INTO user(user_firstname, user_name, user_mail, user_password, user_phone, user_adresse, user_zip, user_city, user_country)
-        VALUES (${escape(this._escapeHtml(user.firstname))}, ${escape(this._escapeHtml(user.lastname))}, ${escape(this._escapeHtml(user.mail))}, ${escape(this._escapeHtml(user.password))}, ${user.phone ? escape(this._escapeHtml(user.phone)) : 'NULL'}, ${escape(this._escapeHtml(user.address))}, ${escape(this._escapeHtml(user.zip))}, ${escape(this._escapeHtml(user.town))}, ${escape(this._escapeHtml(user.country))});`
-      )
+      let query = `INSERT INTO user(user_firstname, user_name, user_mail, user_password, user_phone, user_adresse, user_zip, user_city, user_country)
+                  VALUES (${escape(this._escapeHtml(user.firstname))}, ${escape(this._escapeHtml(user.lastname))}, ${escape(this._escapeHtml(user.mail))}, ${escape(this._escapeHtml(user.password))}, ${user.phone ? escape(this._escapeHtml(user.phone)) : 'NULL'}, ${escape(this._escapeHtml(user.address))}, ${escape(this._escapeHtml(user.zip))}, ${escape(this._escapeHtml(user.town))}, ${escape(this._escapeHtml(user.country))});`
+
+      this._logger.debug('UserSQLAdapter.add: query to add the user:', query);
+
+      this._db.query(query)
         .then(() => {
-          return this._db.query(`SELECT * FROM user WHERE user_mail = ${escape(this._escapeHtml(user.mail))};`)
+          query = `SELECT * 
+                  FROM user 
+                  WHERE user_mail = ${escape(this._escapeHtml(user.mail))};`
+
+          this._logger.debug('UserSQLAdapter.add: query to retrieve the user:', query);
+          return this._db.query(query);
         })
         .then(users => {
-          resolve(this._createUserEntity(users[0]));
+          this._logger.debug(`UserSQLAdapter.add: data:`, users);
+
+          if (!(users.length && users[0])) {
+            this._logger.error(`UserSQLAdapter.add: user added is not found`);
+            reject('ERR_ADDED_USER_NOT_FOUND');
+            return;
+          }
+
+          const user = this._createUserEntity(users[0]);
+          this._logger.info(`UserSQLAdapter.add: created user entity`, user);
+          resolve(user);
         })
-        .catch(err => {
-          reject(err);
-        })
+        .catch(reject);
     });
   };
 
@@ -67,19 +98,29 @@ export class UserSQLAdapter implements IUserDataAccess {
     mail: string,
     password: string
   }): Promise<User> {
+    this._logger.debug(`UserSQLAdapter.getUserByCredentials: called with parameter`, credentials);
     return new Promise((resolve, reject) => {
-      this._db.query(
-        `SELECT * 
-        FROM user
-        WHERE user_mail = ${escape(this._escapeHtml(credentials.mail))}
-        AND user_password = ${escape(this._escapeHtml(credentials.password))};`
-      )
+      const query = `SELECT * 
+                      FROM user
+                      WHERE user_mail = ${escape(this._escapeHtml(credentials.mail))}
+                      AND user_password = ${escape(this._escapeHtml(credentials.password))};`;
+
+      this._logger.debug('UserSQLAdapter.getUserByCredentials: query:', query);
+      this._db.query(query)
         .then(users => {
-          resolve(users.length ? this._createUserEntity(users[0]) : undefined);
+          this._logger.debug(`UserSQLAdapter.getUserByCredentials: data:`, users);
+
+          if (!(users.length && users[0])) {
+            this._logger.info(`UserSQLAdapter.getUserByCredentials: user with credentials`, credentials, 'is not found');
+            resolve(undefined);
+            return;
+          }
+
+          const user = this._createUserEntity(users[0]);
+          this._logger.info(`UserSQLAdapter.getUserByCredentials: user found, created user entity`, user);
+          resolve(user);
         })
-        .catch(err => {
-          reject(err);
-        })
+        .catch(reject);
     });
   };
 
@@ -94,19 +135,34 @@ export class UserSQLAdapter implements IUserDataAccess {
     town?: string,
     country?: string
   }): Promise<User> {
+    this._logger.debug(`UserSQLAdapter.update: called with parameter`, user);
     return new Promise((resolve, reject) => {
-      this._db.query(
-        this._getUpdateUserQuery(user)
-      )
+      let query = this._getUpdateUserQuery(user);
+      this._logger.debug('UserSQLAdapter.update: query:', query);
+      this._db.query(query)
         .then(() => {
-          return this._db.query(`SELECT * FROM user WHERE user_id = ${escape(this._escapeHtml(user.id.toString()))};`)
+          query = `SELECT * 
+                  FROM user 
+                  WHERE user_id = ${escape(this._escapeHtml(user.id.toString()))};`;
+
+          this._logger.debug('UserSQLAdapter.update: query:', query);
+
+          return this._db.query(query);
         })
         .then(users => {
-          resolve(this._createUserEntity(users[0]));
+          this._logger.debug(`UserSQLAdapter.update: data:`, users);
+
+          if (!(users.length && users[0])) {
+            this._logger.error(`UserSQLAdapter.update: user modified is not found`);
+            reject('ERR_MODIFIED_USER_NOT_FOUND');
+            return;
+          }
+
+          const user = this._createUserEntity(users[0]);
+          this._logger.info(`UserSQLAdapter.update: modified user entity`, user);
+          resolve(user);
         })
-        .catch(err => {
-          reject(err);
-        })
+        .catch(reject);
     });
   };
 
