@@ -3,26 +3,34 @@
   "version": "1.0.0",
   "description": "",
   "main": "index",
+  "watch": {
+    "build": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "ts",
+      "quiet": false
+    }
+  },
   "scripts": {
     "build": "tsc --project ./tsconfig.json",
-    "prebuild": "npm run -s clean",
+    "release": "npm run build",
+    "prerelease": "npm run -s clean",
     "build:t": "tsc --project ./tsconfig.spec.json",
-    "prebuild:t": "npm run -s prebuild",
-    "build:w": "tsc -w",
-    "prebuild:w": "npm run -s prebuild",
+    "build:w": "npm-watch",
     "test": "mocha dist/**/*.spec.js",
     "pretest": "npm run -s build:t",
     "clean": "npm run -s clean:dist",
     "clean:dist": "rimraf -r ./dist/*"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "typescript": "^2.2.2",
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.40",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
+    "npm-watch": "^0.1.8",
     "rimraf": "^2.6.1"
   },
   "keywords": [],

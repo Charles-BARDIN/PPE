@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index",
+  "watch": {
+    "build": {
+      "patterns": ["src"],
+      "extensions": "ts"
+    }
+  },
   "scripts": {
+    "release": "npm run build",
+    "prerelease": "npm run -s clean:dist",
+    "postrelease": "npm run clean:tmp",
     "build": "tsc --project ./tsconfig.json && buble -i ./.tmp -o ./dist",
-    "prebuild": "npm run -s clean:dist",
-    "postbuild": "npm run clean:tmp",  
-    "build:w": "tsc -w",
-    "prebuild:w": "npm run -s clean:dist",
+    "build:w": "npm-watch",
     "clean": "npm run -s clean:dist && npm run clean:tmp",
     "clean:tmp": "rimraf -r ./.tmp/",
     "clean:dist": "rimraf -r ./dist/*"
@@ -18,6 +24,7 @@
   "devDependencies": {
     "typescript": "^2.2.2",
     "@types/node": "^7.0.8",
+    "npm-watch": "^0.1.8",
     "buble": "^0.15.2",
     "rimraf": "^2.6.1"
   },

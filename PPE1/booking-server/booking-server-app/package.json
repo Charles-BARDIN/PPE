@@ -3,10 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index",
+  "watch": {
+    "start:dev": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "ts",
+      "quiet": false
+    }
+  },
   "scripts": {
     "start": "node .",
     "build": "tsc --project ./tsconfig.json",
-    "prebuild": "npm run -s clean",
+    "release": "npm run build",
+    "prerelease": "npm run -s clean",
     "build:t": "tsc --project ./tsconfig.spec.json",
     "prebuild:t": "npm run -s prebuild",
     "build:w": "tsc -w",
@@ -15,7 +25,8 @@
     "fill:db": "node ./scripts/fill-database",
     "clean": "npm run -s clean:dist",
     "clean:dist": "rimraf -r ./dist/*",
-    "dev": "concurrently \"npm run build:w\" \"nodemon .\""
+    "dev": "npm-watch",
+    "start:dev": "npm run build && node ."
   },
   "keywords": [],
   "author": "",
@@ -31,7 +42,8 @@
   },
   "devDependencies": {
     "concurrently": "^3.4.0",
-    "nodemon": "^1.11.0",
+    "npm-watch": "^0.1.8",
+    "nodemon": "^1.10.2",
     "typescript": "^2.2.2"
   }
 }
