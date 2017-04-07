@@ -3,27 +3,29 @@
   "version": "1.0.0",
   "description": "",
   "main": "index",
+  "watch": {
+    "build": {
+      "patterns": ["src"],
+      "extensions": "ts"
+    }
+  },
   "scripts": {
-    "build": "tsc --project ./tsconfig.json",
-    "prebuild": "npm run -s clean",
-    "build:t": "tsc --project ./tsconfig.spec.json",
-    "prebuild:t": "npm run -s prebuild",
-    "build:w": "tsc -w",
-    "prebuild:w": "npm run -s prebuild",
-    "test": "mocha dist/**/*.spec.js",
-    "pretest": "npm run -s build:t",
-    "clean": "npm run -s clean:dist",
+    "release": "npm run build",
+    "prerelease": "npm run -s clean:dist",
+    "postrelease": "npm run clean:tmp",
+    "build": "tsc --project ./tsconfig.json && buble -i ./.tmp -o ./dist",
+    "build:w": "npm-watch",
+    "clean": "npm run -s clean:dist && npm run clean:tmp",
+    "clean:tmp": "rimraf -r ./.tmp/",
     "clean:dist": "rimraf -r ./dist/*"
   },
   "dependencies": {
-    "@types/node": "^7.0.8",
-    "typescript": "^2.2.2"
   },
   "devDependencies": {
-    "@types/chai": "^3.4.35",
-    "@types/mocha": "^2.2.40",
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0",
+    "typescript": "^2.2.2",
+    "@types/node": "^7.0.8",
+    "npm-watch": "^0.1.8",
+    "buble": "^0.15.2",
     "rimraf": "^2.6.1"
   },
   "keywords": [],

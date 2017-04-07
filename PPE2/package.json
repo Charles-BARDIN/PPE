@@ -1,22 +1,29 @@
 {
   "name": "admin-m2l",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "directories": {
     "doc": "doc"
   },
   "scripts": {
-    "preinit": "npm install",
-    "init": "npm run link && npm run install:all",
-    "postinit": "npm run build:dep",
+    "start": "cd admin-server/admin-server-app/ && npm run start",
 
-    "test": "npm run test:logger & npm run test:clib & npm run test:slib & npm run test:sapp",
-    "test:logger": "cd ../m2l-node-logger && npm test",
-    "test:clib": "cd admin-client/admin-client-lib && npm test",
+    "prerelease": "npm run -s init:prod",
+    "release": "npm run build",
+
+    "init": "npm run install:all && npm run link",
+    "preinit": "npm -s install",
+    "postinit": "npm run -s build:dep",
+    "init:prod": "npm run install:prod && npm run link",
+    "preinit:prod": "npm run -s preinit",
+    "postinit:prod": "npm run init:db && npm run fill:db",
+    "init:db": "cd admin-server/admin-server-app && npm run -s create:db",
+
+    "fill:db": "cd admin-server/admin-server-app && npm run -s fill:db",
+
+    "test": "npm run test:slib",
     "test:slib": "cd admin-server/admin-server-lib && npm test",
-    "test:sapp": "cd admin-server/admin-server-app && npm test",
-    
+
     "link": "npm run link:core && npm run link:logger && npm run link:clib && npm run link:capp && npm run link:slib && npm run link:sapp",
     "link:core": "cd ../m2l-core && npm link",
     "link:logger": "cd ../m2l-node-logger && npm link && npm link m2l-core",
@@ -25,7 +32,8 @@
     "link:slib": "cd admin-server/admin-server-lib && npm link && npm link m2l-core m2l-node-logger",
     "link:sapp": "cd admin-server/admin-server-app && npm link m2l-core m2l-node-logger admin-server-lib",
 
-    "install:all": "npm run install:capp &&  npm run install:sapp && npm run install:clib && npm run install:slib && npm run install:logger && npm run install:core",
+    "install:all": "concurrently \"npm run install:capp\"  \"npm run install:sapp\" \"npm run install:clib\" \"npm run install:slib\" \"npm run install:logger\" \"npm run install:core\"",
+    "install:prod": "concurrently \"npm run install:capp\" \"npm run install:sapp -- --only=production\" \"npm run install:clib\" \"npm run install:slib\" \"npm run install:logger\" \"npm run install:core\"",
     "install:core": "cd ../m2l-core && npm i",
     "install:logger": "cd ../m2l-node-logger && npm i",
     "install:clib": "cd admin-client/admin-client-lib && npm i",
@@ -33,16 +41,16 @@
     "install:slib": "cd admin-server/admin-server-lib && npm i",
     "install:sapp": "cd admin-server/admin-server-app && npm i",
 
-    "build": "npm run build:core && npm run build:logger && npm run build:clib && npm run build:capp && npm run build:slib && npm run build:sapp",
-    "build:dep": "npm run build:core && npm run build:logger && npm run build:clib && npm run build:slib",
-    "build:core": "cd ../m2l-core && npm run build",
+    "prebuild": "npm run -s build:dep",
+    "build": "concurrently \"npm run build:capp\" \"npm run build:sapp\"",
+    "build:dep": "concurrently \"npm run build:core\" \"npm run build:logger\" \"npm run build:clib\" \"npm run build:slib\"",
+    "build:core": "cd ../m2l-core && npm run release",
     "build:logger": "cd ../m2l-node-logger && npm run build",
-    "build:clib": "cd admin-client/admin-client-lib && npm run build",
+    "build:clib": "cd admin-client/admin-client-lib && npm run release",
     "build:capp": "cd admin-client/admin-client-app && npm run build",
     "build:slib": "cd admin-server/admin-server-lib && npm run build",
     "build:sapp": "cd admin-server/admin-server-app && npm run build",
 
-    "dev": "concurrently \"npm run dev:core\" \"npm run dev:logger\" \"npm run dev:clib\" \"npm run dev:capp\" \"npm run dev:slib\" \"npm run dev:sapp\"",
     "dev:core": "cd ../m2l-core && npm run build:w",
     "dev:logger": "cd ../m2l-node-logger && npm run build:w",
     "dev:clib": "cd admin-client/admin-client-lib && npm run build:w",
@@ -54,6 +62,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^3.4.0"
-  }
+    "concurrently": "^3.4.0",
+    "crypto-js": "^3.1.9-1",
+    "vuejs-datepicker": "^0.6.5"
+  },
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "vue": "^2.2.6"
+  },
+  "description": ""
 }
