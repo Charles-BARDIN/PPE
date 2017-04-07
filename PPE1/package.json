@@ -15,6 +15,7 @@
     "preinit:prod": "npm run -s preinit",
     "init:prod": "npm run link && npm run install:prod && npm run init:db",
     "init:db": "cd booking-server/booking-server-app && npm run -s create:db",
+    "fill:db": "cd booking-server/booking-server-app && npm run -s fill:db",
     "test": "npm run test:slib",
     "test:slib": "cd booking-server/booking-server-lib && npm test",
     "link": "npm run link:core && npm run link:logger && npm run link:clib && npm run link:capp && npm run link:slib && npm run link:sapp",

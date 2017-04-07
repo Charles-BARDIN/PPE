@@ -16,7 +16,7 @@ const connection = mySql.createConnection({
 connection.connect(err => {
   if (err) {
     console.error(err);
-    exit(1);
+    process.exit(1);
   }
 
   connection.query(
@@ -24,7 +24,7 @@ connection.connect(err => {
     err => {
       if (err) {
         console.error(err);
-        exit(1);
+        process.exit(1);
       }
 
       connection.query(
@@ -32,7 +32,7 @@ connection.connect(err => {
         err => {
           if (err) {
             console.error(err);
-            exit(1);
+            process.exit(1);
           }
 
           connection.query(
@@ -53,7 +53,7 @@ connection.connect(err => {
             err => {
               if (err) {
                 console.error(err);
-                exit(1);
+                process.exit(1);
               }
 
               connection.query(
@@ -67,7 +67,7 @@ connection.connect(err => {
                 err => {
                   if (err) {
                     console.error(err);
-                    exit(1);
+                    process.exit(1);
                   }
 
                   connection.query(
@@ -82,7 +82,7 @@ connection.connect(err => {
                     err => {
                       if (err) {
                         console.error(err);
-                        exit(1);
+                        process.exit(1);
                       }
 
                       console.log(`Database ${config.database} created with success`);

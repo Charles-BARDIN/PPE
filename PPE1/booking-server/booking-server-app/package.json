@@ -11,7 +11,8 @@
     "prebuild:t": "npm run -s prebuild",
     "build:w": "tsc -w",
     "prebuild:w": "npm run -s prebuild",
-    "create:db": "node ./create-database",
+    "create:db": "node ./scripts/create-database",
+    "fill:db": "node ./scripts/fill-database",
     "clean": "npm run -s clean:dist",
     "clean:dist": "rimraf -r ./dist/*",
     "dev": "concurrently \"npm run build:w\" \"nodemon .\""
