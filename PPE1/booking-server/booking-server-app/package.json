@@ -36,6 +36,7 @@
     "@types/mysql": "0.0.31",
     "@types/body-parser": "^1.16.3",
     "body-parser": "^1.17.1",
+    "@types/node": "^7.0.8",
     "express": "^4.14.1",
     "mysql": "^2.13.0",
     "rimraf": "^2.6.1"

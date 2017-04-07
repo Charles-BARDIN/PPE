@@ -23,6 +23,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^7.0.8",
     "buble": "^0.15.2",
     "npm-watch": "^0.1.8",
     "rimraf": "^2.6.1",

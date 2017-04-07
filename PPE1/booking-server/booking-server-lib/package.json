@@ -28,6 +28,7 @@
     "typescript": "^2.2.2",
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.40",
+    "@types/node": "^7.0.8",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
     "npm-watch": "^0.1.8",
