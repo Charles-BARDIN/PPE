@@ -9,7 +9,7 @@ if(['dev', 'prod', 'mock'].indexOf(arg) < 0) {
 
 fs.writeFileSync(path.resolve(__dirname, '../src/config.js'), 
 `export default {
-  apiBaseUrl: ${arg === 'dev' ? "'http://localhost:9000/api/v1.0.0'" : "'http://localhost:9900/api/v1.0.0'"},
+  apiBaseUrl: ${arg === 'dev' ? "'http://localhost:9000/api/v1.0.0'" : process.env.PORT ? "'http://localhost:" + process.env.PORT + "/api/v1.0.0'" : "'http://localhost:9900/api/v1.0.0'"},
   isMock: ${arg === 'mock'}
 };`
 );
