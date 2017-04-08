@@ -1,8 +1,10 @@
 import { User } from 'm2l-core';
 
+import { INavigationAuthAccess } from '../navigation';
+
 import { IAuthGateway } from '.';
 
-export class AuthService {
+export class AuthService implements INavigationAuthAccess {
   private _gateway: IAuthGateway;
   private _user: User;
   private _hash: Function;
@@ -24,7 +26,8 @@ export class AuthService {
   }
 
   public login(credentials: { mail: string, password: string }): Promise<boolean> {
-    return new Promise((resolve, reject) => {credentials.password = this._hash(credentials.password);
+    return new Promise((resolve, reject) => {
+    credentials.password = this._hash(credentials.password);
       this._gateway.login(credentials)
         .then(user => {
           this._user = user;
