@@ -4,14 +4,14 @@ import { LoggerAdapter } from 'm2l-node-logger';
 
 import { Database } from './common';
 
-import * as config from '../config';
+const config = require('../config');
 
-const logger = new LoggerAdapter(config.loggerConfig);
-const database = new Database(config.databaseConfig);
+const logger = new LoggerAdapter(config.logger);
+const database = new Database(config.database);
 
 let server = new ExpressServer({
   logger,
-  serverConfig: config.serverConfig,
+  serverConfig: config.server,
   database
 });
 

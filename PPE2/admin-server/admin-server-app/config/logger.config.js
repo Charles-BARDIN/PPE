@@ -6,6 +6,6 @@ if(process.env.LOG_LEVEL) {
   level = 'DEBUG';
 }
 
-export const loggerConfig = {
+module.exports = {
   level
 };
