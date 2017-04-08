@@ -56,7 +56,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^3.4.0"
+    "concurrently": "^3.4.0",
+    "mysql": "^2.13.0"
   },
   "devDependencies": {
     "fs-extra": "^2.1.2"

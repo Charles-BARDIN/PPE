@@ -7,10 +7,8 @@
   },
   "scripts": {
     "start": "cd admin-server/admin-server-app/ && npm run start",
-
     "prerelease": "npm run -s init:prod",
     "release": "npm run build",
-
     "init": "npm run install:all && npm run link",
     "preinit": "npm -s install",
     "postinit": "npm run -s build:dep",
@@ -18,14 +16,11 @@
     "preinit:prod": "npm run -s preinit",
     "postinit:prod": "npm run init:db && npm run fill:db",
     "init:db": "npm run -s create:db",
-
     "create:db": "node ./scripts/create-database",
     "fill:db": "node ./scripts/fill-database",
     "copy:client": "node ./scripts/copy-client",
-
     "test": "npm run test:slib",
     "test:slib": "cd admin-server/admin-server-lib && npm test",
-
     "link": "npm run link:core && npm run link:logger && npm run link:clib && npm run link:capp && npm run link:slib && npm run link:sapp",
     "link:core": "cd ../m2l-core && npm link",
     "link:logger": "cd ../m2l-node-logger && npm link && npm link m2l-core",
@@ -33,7 +28,6 @@
     "link:capp": "cd admin-client/admin-client-app && npm link m2l-core admin-client-lib",
     "link:slib": "cd admin-server/admin-server-lib && npm link && npm link m2l-core m2l-node-logger",
     "link:sapp": "cd admin-server/admin-server-app && npm link m2l-core m2l-node-logger admin-server-lib",
-
     "install:all": "concurrently \"npm run install:capp\"  \"npm run install:sapp\" \"npm run install:clib\" \"npm run install:slib\" \"npm run install:logger\" \"npm run install:core\"",
     "install:core": "cd ../m2l-core && npm i",
     "install:logger": "cd ../m2l-node-logger && npm i",
@@ -41,7 +35,6 @@
     "install:capp": "cd admin-client/admin-client-app && npm i",
     "install:slib": "cd admin-server/admin-server-lib && npm i",
     "install:sapp": "cd admin-server/admin-server-app && npm i",
-
     "build": "concurrently \"npm run build:capp\" \"npm run build:sapp\"",
     "prebuild": "npm run -s build:dep",
     "postbuild": "npm run -s copy:client",
@@ -52,7 +45,6 @@
     "build:capp": "cd admin-client/admin-client-app && npm run build",
     "build:slib": "cd admin-server/admin-server-lib && npm run build",
     "build:sapp": "cd admin-server/admin-server-app && npm run build",
-
     "dev:core": "cd ../m2l-core && npm run build:w",
     "dev:logger": "cd ../m2l-node-logger && npm run build:w",
     "dev:clib": "cd admin-client/admin-client-lib && npm run build:w",
@@ -66,6 +58,7 @@
   "dependencies": {
     "concurrently": "^3.4.0",
     "crypto-js": "^3.1.9-1",
+    "mysql": "^2.13.0",
     "vuejs-datepicker": "^0.6.5"
   },
   "devDependencies": {
