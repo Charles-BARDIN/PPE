@@ -5,7 +5,7 @@ import { LogoutService } from './logout-state';
 import { ProfilService, IProfilController, IProfilValidator } from './profil-state';
 import { RegisterService, IRegisterController, IRegisterValidator } from './register-state';
 import { RoomService, IRoomGateway, IRoomController } from './room-state';
-import { AuthService, IAuthGateway } from './session';
+import { AuthService, IAuthGateway } from './authentification';
 import { NavigationService, IRouter } from './navigation';
 
 export interface IGateway extends IAuthGateway, IBookingGateway, IRoomGateway { };
