@@ -64,7 +64,7 @@ class LoggerAdapter implements ILogger {
   }
 
   private _getDateTime() {
-    return (new Date()).toLocaleDateString() + (new Date()).toLocaleTimeString();
+    return [(new Date()).toLocaleDateString(), (new Date()).toLocaleTimeString()].join(' ');
   }
 }
 
