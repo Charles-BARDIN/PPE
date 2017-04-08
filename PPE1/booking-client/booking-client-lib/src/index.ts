@@ -4,7 +4,7 @@ import { LoginService, ILoginController, ILoginValidator } from './login-state';
 import { LogoutService } from './logout-state';
 import { ProfilService, IProfilController, IProfilValidator } from './profil-state';
 import { RegisterService, IRegisterController, IRegisterValidator } from './register-state';
-import { RoomService, IRoomGateway, IRoomController } from './room-list-state';
+import { RoomService, IRoomGateway, IRoomController } from './room-state';
 import { AuthService, IAuthGateway } from './session';
 import { NavigationService, IRouter } from './navigation';
 
