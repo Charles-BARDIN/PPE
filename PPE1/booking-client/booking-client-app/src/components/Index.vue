@@ -7,7 +7,22 @@
         Pour réserver une salle pour toutes vos activités, réunions, présentations, soirées de convenances, 
         n'hésitez pas à contacter la maison des ligues 
         de Lorraine ou à réserver votre salle directement sur notre site Web. <br>
-        Pour réserver une salle, veuillez vous authentifiez ou vous inscrire
+        Pour réserver une salle, veuillez vous authentifiez ou vous inscrire <br>
+        <table>
+          <tr>Le prix des salles est indiqué ci-contre :</tr>
+          <tr>
+            <td>Amphithéatre : </td>
+            <td>500 € la demi-journée</td>
+          </tr>
+        <tr>
+          <td>Salle de réunion : </td>
+          <td>250 € la demi-journée</td>
+        </tr>
+        <tr>
+          <td>Salle de convivialité : </td>
+          <td>200 € la demi-journée</td>
+        </tr>
+        </table>
       </p>
 
        <M2LButton label="Réserver une salle" v-bind:action="onBookingButtonClick" />
