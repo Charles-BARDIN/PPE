@@ -11,7 +11,8 @@ export class RoomEditService {
         navigation: IRoomEditNavAccess,
         gateway: IRoomEditGateway
     }) {
-
+        this._nav = config.navigation;
+        this._gateway = config.gateway
     }
 
     set controller(controller: IRoomEditController) {
