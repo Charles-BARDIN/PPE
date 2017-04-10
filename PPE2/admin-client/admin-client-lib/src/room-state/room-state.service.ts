@@ -30,14 +30,14 @@ export class RoomService {
     }
 
     public onEditClick(room: Room) {
-        this._nav.goTo('room-edit', room);
+        this._nav.goTo('edit-room', room);
     }
 
     public onRemoveClick(room: Room) {
-        this._nav.goTo('room-delete', room);
+        this._nav.goTo('delete-room', room);
     }
 
     public onNewClick() {
-        this._nav.goTo('room-new');
+        this._nav.goTo('new-room');
     }
 }

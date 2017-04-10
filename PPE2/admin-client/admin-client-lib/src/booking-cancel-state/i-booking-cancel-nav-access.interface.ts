@@ -1,4 +1,4 @@
-import { Booking } from 'm2l';
+import { Booking } from 'm2l-core';
 
 export interface IBookingCancelNavAccess {
     goTo(state: string): void;

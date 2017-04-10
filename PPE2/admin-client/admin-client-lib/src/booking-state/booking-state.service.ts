@@ -59,6 +59,6 @@ class BookingStateService {
     }
 
     public onCancelClick(booking: Booking) {
-        this._nav.goTo('booking-cancel', booking);
+        this._nav.goTo('cancel-booking', booking);
     }
 }
