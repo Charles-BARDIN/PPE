@@ -1,3 +1,3 @@
 export interface IRouter {
-  go(state: string): void
+  go(state: string, data?: any): void
 }

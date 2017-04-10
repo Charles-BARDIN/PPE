@@ -54,7 +54,7 @@ export class NavigationService {
       .map(state => state.name);
   }
 
-  public goTo(stateName: string) {
+  public goTo(stateName: string, data?: any) {
     let stateToGo = this._states.filter(state => state.name === stateName)[0];
 
     const authorized = stateToGo && stateToGo.protected === this._auth.userIsConnected();
@@ -63,6 +63,6 @@ export class NavigationService {
       return;
     }
 
-    this._router.go(stateName);
+    this._router.go(stateName, data);
   }
 };
