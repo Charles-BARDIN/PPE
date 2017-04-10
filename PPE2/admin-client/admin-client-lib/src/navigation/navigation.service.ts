@@ -1,7 +1,16 @@
+import {IBookingCancelNavAccess} from '../booking-cancel-state';
+import {IBookingNavAccess} from '../booking-state';
+import {ILoginNavAccess} from '../login-state';
+import {ILogoutNavAccess} from '../logout-state';
+import {IRoomDeleteNavAccess} from '../room-delete-state';
+import {IRoomEditNavAccess} from '../room-edit-state';
+import {IRoomNewNavAccess} from '../room-new-state';
+import {IRoomNavAccess} from '../room-state';
+
 import { IRouter } from '.';
 import { INavigationAuthAccess } from '.';
 
-export class NavigationService {
+export class NavigationService implements IBookingCancelNavAccess, IBookingNavAccess, ILoginNavAccess, ILogoutNavAccess, IRoomDeleteNavAccess, IRoomEditNavAccess, IRoomNewNavAccess, IRoomNavAccess {
   private _router: IRouter;
   private _auth: INavigationAuthAccess;
   private _states: { name: string, protected: boolean }[];
@@ -54,7 +63,7 @@ export class NavigationService {
       .map(state => state.name);
   }
 
-  public goTo(stateName: string) {
+  public goTo(stateName: string, data?: any) {
     let stateToGo = this._states.filter(state => state.name === stateName)[0];
 
     const authorized = stateToGo && stateToGo.protected === this._auth.userIsConnected();
@@ -63,6 +72,10 @@ export class NavigationService {
       return;
     }
 
-    this._router.go(stateName);
+    this._router.go(stateName, data);
+  }
+
+  public getRouteParameters(): any {
+    return this._router.getRouteParameters();
   }
 };
