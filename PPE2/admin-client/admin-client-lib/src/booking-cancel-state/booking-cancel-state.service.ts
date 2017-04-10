@@ -5,6 +5,7 @@ export class BookingCancelService {
     private _nav: IBookingCancelNavAccess;
     private _gateway: IBookingCancelGateway;
     private _controller: IBookingCancelController;
+    private _booking: Booking;
 
     constructor(config: {
         navigation: IBookingCancelNavAccess,
@@ -16,6 +17,10 @@ export class BookingCancelService {
 
     set controller(controller: IBookingCancelController) {
         this._controller = controller;
+    }
+
+    public onPageLoad() {
+        this._booking = this._nav.getRouteParameters();
     }
 
     public onValidate(booking: Booking) {
