@@ -19,12 +19,7 @@ export class RoomNewService {
         this._controller = controller;
     }
 
-    public onPageLoad() {
-        const room = this._nav.getRouteParameters();
-        this._controller.setRoom(room);
-    }
-
-    public addRoom(room: Room) {
+    public addRoom(room: { description: string, name: string, image: string }) {
         let errors = [];
 
         if (!room.description) {
