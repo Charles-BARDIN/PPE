@@ -8,11 +8,14 @@ export class BookingCancelService {
 
     constructor(config: {
         navigation: IBookingCancelNavAccess,
-        gateway: IBookingCancelGateway,
-        controller: IBookingCancelController
+        gateway: IBookingCancelGateway
     }) {
         this._nav = config.navigation;
         this._gateway = config.gateway;
+    }
+
+    set controller(controller: IBookingCancelController) {
+        this._controller = controller;
     }
 
     public onValidate(booking: Booking) {
