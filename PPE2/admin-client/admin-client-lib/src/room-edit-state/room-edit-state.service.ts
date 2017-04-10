@@ -26,16 +26,21 @@ export class RoomEditService {
     public editRoom(room: Room) {
         let errors = [];
 
-        if(!room.description) {
-            errors.push('ERR_EDITROOM_DESCRIPTION')
+        if (!room.description) {
+            errors.push('ERR_EDITROOM_DESCRIPTION_REQUIRED');
         }
+
+        if (!room.name) {
+            errors.push('ERR_EDITROOM_NAME_REQUIRED');
+        }
+
         this._gateway.modifyRoom(room)
             .then(res => {
                 this._controller.showConfirmation();
             })
             .catch(errors => {
                 this._controller.showErrors(errors);
-            })
+            });
     }
 
     public cancel() {
