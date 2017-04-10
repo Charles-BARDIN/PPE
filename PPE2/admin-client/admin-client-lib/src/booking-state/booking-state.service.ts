@@ -2,7 +2,7 @@ import { Booking } from 'm2l-core';
 
 import { IBookingNavAccess, IBookingController, IBookingGateway } from '.';
 
-class BookingStateService {
+export class BookingService {
     private _nav: IBookingNavAccess
     private _controller: IBookingController;
     private _gateway: IBookingGateway;
