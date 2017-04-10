@@ -1,21 +1,21 @@
 import { Room } from 'm2l-core';
 
-import { IRoomEditNavAccess, IRoomEditGateway, IRoomEditController } from '.';
+import { IRoomNewNavAccess, IRoomNewGateway, IRoomNewController } from '.';
 
-export class RoomEditService {
-    private _nav: IRoomEditNavAccess;
-    private _gateway: IRoomEditGateway;
-    private _controller: IRoomEditController;
+export class RoomNewService {
+    private _nav: IRoomNewNavAccess;
+    private _gateway: IRoomNewGateway;
+    private _controller: IRoomNewController;
 
     constructor(config: {
-        navigation: IRoomEditNavAccess,
-        gateway: IRoomEditGateway
+        navigation: IRoomNewNavAccess,
+        gateway: IRoomNewGateway
     }) {
         this._nav = config.navigation;
         this._gateway = config.gateway
     }
 
-    set controller(controller: IRoomEditController) {
+    set controller(controller: IRoomNewController) {
         this._controller = controller;
     }
 
@@ -24,15 +24,15 @@ export class RoomEditService {
         this._controller.setRoom(room);
     }
 
-    public editRoom(room: Room) {
+    public addRoom(room: Room) {
         let errors = [];
 
         if (!room.description) {
-            errors.push('ERR_EDITROOM_DESCRIPTION_REQUIRED');
+            errors.push('ERR_NEWROOM_DESCRIPTION_REQUIRED');
         }
 
         if (!room.name) {
-            errors.push('ERR_EDITROOM_NAME_REQUIRED');
+            errors.push('ERR_NEWROOM_NAME_REQUIRED');
         }
 
         if (errors.length) {
@@ -40,7 +40,7 @@ export class RoomEditService {
             return;
         }
 
-        this._gateway.modifyRoom(room)
+        this._gateway.addRoom(room)
             .then(res => {
                 this._controller.showConfirmation();
             })
