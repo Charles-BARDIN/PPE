@@ -3,7 +3,7 @@ import { AdminClientLib } from 'admin-client-lib';
 import Crypto from 'crypto-js';
 import Gateway from './gateway.adapter';
 import MockedGateway from './mocked-gateway.adapter';
-// import Router from './router.adapter';
+import Router from './router.adapter';
 
 import config from '../config';
 
@@ -18,6 +18,6 @@ const adminClientLib = new AdminClientLib();
 
 adminClientLib.hash = hash;
 adminClientLib.gateway = gateway;
-// adminClientLib.router = router;
+adminClientLib.router = router;
 
 export default adminClientLib;
