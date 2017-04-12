@@ -14,6 +14,7 @@ export class NavigationService implements IBookingCancelNavAccess, IBookingNavAc
   private _router: IRouter;
   private _auth: INavigationAuthAccess;
   private _states: { name: string, protected: boolean }[];
+  private _data: any;
 
   constructor(config: {
     router: IRouter,
@@ -64,6 +65,7 @@ export class NavigationService implements IBookingCancelNavAccess, IBookingNavAc
   }
 
   public goTo(stateName: string, data?: any) {
+    this._data = data;
     let stateToGo = this._states.filter(state => state.name === stateName)[0];
 
     const authorized = stateToGo && stateToGo.protected === this._auth.userIsConnected();
@@ -72,10 +74,10 @@ export class NavigationService implements IBookingCancelNavAccess, IBookingNavAc
       return;
     }
 
-    this._router.go(stateName, data);
+    this._router.go(stateName);
   }
 
   public getRouteParameters(): any {
-    return this._router.getRouteParameters();
+    return this._data;
   }
 };

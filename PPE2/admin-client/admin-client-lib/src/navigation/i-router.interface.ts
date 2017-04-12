@@ -1,4 +1,4 @@
 export interface IRouter {
-  go(state: string, data?: any): void;
+  go(state: string): void;
   getRouteParameters(): any;
 }
