@@ -40,7 +40,7 @@ export default class MockedGateway {
       resolve([
         {
           id: 1,
-          label: 'Amphithéâtre',
+          name: 'Amphithéâtre',
           img: '',
           description: 'Amphi description'
         }
