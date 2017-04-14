@@ -57,7 +57,14 @@ export default class MockedGateway {
 
   getAllRooms() {
     return new Promise(resolve => {
-
+      resolve([
+        {
+          id: 1,
+          name: 'Amphithéâtre',
+          img: '',
+          description: 'Amphi description'
+        }
+      ]);
     });
   }
 
