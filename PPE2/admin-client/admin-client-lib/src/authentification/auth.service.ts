@@ -1,4 +1,4 @@
-import { User } from 'm2l-core';
+import { Admin } from 'm2l-core';
 
 import { INavigationAuthAccess } from '../navigation';
 import { ILoginAuthAccess } from '../login-state';
@@ -8,7 +8,7 @@ import { IAuthGateway } from '.';
 
 export class AuthService implements INavigationAuthAccess, ILoginAuthAccess, ILogoutAuthAccess {
   private _gateway: IAuthGateway;
-  private _user: User;
+  private _user: Admin;
   private _hash: Function;
 
   constructor(config: {
@@ -19,7 +19,7 @@ export class AuthService implements INavigationAuthAccess, ILoginAuthAccess, ILo
     this._hash = config.hash;
   }
 
-  get user(): User {
+  get user(): Admin {
     return this._user;
   }
 
