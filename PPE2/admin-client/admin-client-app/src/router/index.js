@@ -1,3 +1,5 @@
+import adminClientLib from '@/lib-adapters'
+
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
@@ -9,7 +11,7 @@ import Room from '@/components/Room'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/login',
@@ -32,8 +34,8 @@ export default new Router({
           component: EditRoom
         },
         {
-          path: '/room',
-          name: 'Room',
+          path: '/rooms',
+          name: 'rooms',
           component: Room
         },
         {
@@ -44,4 +46,17 @@ export default new Router({
       ]
     }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.name != null) {
+    next(true);
+    return;
+  }
+
+  next('/login');
+});
+
+adminClientLib.router.vueRouter = router;
+
+export default router;
