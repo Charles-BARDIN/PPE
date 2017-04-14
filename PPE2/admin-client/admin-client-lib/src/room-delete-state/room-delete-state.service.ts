@@ -22,7 +22,7 @@ export class RoomDeleteService {
     public onValidate(room: Room) {
         this._gateway.deleteRoom(room)
             .then(res => {
-                this._nav.goTo('room');
+                this._nav.goTo('rooms');
             })
             .catch(errors => {
                 this._controller.displayBackendErrors(errors);
@@ -30,6 +30,6 @@ export class RoomDeleteService {
     }
 
     public onCancel() {
-        this._nav.goTo('room');
+        this._nav.goTo('rooms');
     }
 }

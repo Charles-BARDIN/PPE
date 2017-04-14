@@ -42,7 +42,7 @@ export class LoginService {
         }
 
         this._auth.login(credentials)
-            .then(res => this._nav.goTo('room'))
+            .then(res => this._nav.goTo('rooms'))
             .catch(err => this._controller.showBackendErrors(err))
     }
 }

@@ -50,6 +50,6 @@ export class RoomEditService {
     }
 
     public cancel() {
-        this._nav.goTo('room');
+        this._nav.goTo('rooms');
     }
 }
