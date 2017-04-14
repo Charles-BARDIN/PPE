@@ -33,7 +33,22 @@ export default class MockedGateway {
 
   getAllBookings() {
     return new Promise(resolve => {
-
+      resolve([
+        {
+          roomID: 1,
+          userID: 1,
+          date: new Date(),
+          userMail: 'mail@example.com',
+          roomName: 'Amphithéâtre'
+        },
+        {
+          roomID: 1,
+          userID: 1,
+          date: new Date(Number(new Date()) - 1000 * 3600 * 24 * 2),
+          userMail: 'mail@example.com',
+          roomName: 'Amphithéâtre'
+        }
+      ])
     });
   }
 
