@@ -22,7 +22,7 @@ export {
 };
 
 export class BookingClientLib {
-  private _hash: Function;
+  private _hash: (val: string) => string;
   private _gateway: IGateway;
   private _router: IRouter;
 
@@ -38,7 +38,7 @@ export class BookingClientLib {
   private _navigationService: NavigationService;
 
   constructor(config?: {
-    hash?: Function,
+    hash?: (val: string) => string,
     router?: IRouter,
     gateway?: IGateway
   }) {
@@ -185,7 +185,7 @@ export class BookingClientLib {
     this._gateway = gateway;
   }
 
-  set hash(hash: Function) {
+  set hash(hash: (val: string) => string) {
     this._hash = hash;
   }
 

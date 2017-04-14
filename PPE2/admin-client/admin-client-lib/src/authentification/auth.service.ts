@@ -9,11 +9,11 @@ import { IAuthGateway } from '.';
 export class AuthService implements INavigationAuthAccess, ILoginAuthAccess, ILogoutAuthAccess {
   private _gateway: IAuthGateway;
   private _user: Admin;
-  private _hash: Function;
+  private _hash: (val: string) => string;
 
   constructor(config: {
     gateway: IAuthGateway,
-    hash: Function
+    hash: (val: string) => string
   }) {
     this._gateway = config.gateway;
     this._hash = config.hash;
