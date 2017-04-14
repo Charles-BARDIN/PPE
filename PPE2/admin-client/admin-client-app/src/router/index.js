@@ -24,8 +24,8 @@ const router = new Router({
       component: Main,
       children: [
         {
-          path: '/booking',
-          name: 'booking',
+          path: '/bookings',
+          name: 'bookings',
           component: Booking
         },
         {
@@ -49,6 +49,11 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+  console.log(to.name)
+  if(to.name === 'Main') {
+    let stateToGo = adminClientLib.authService.userIsConnected() ? 'rooms' : 'login';
+    next(stateToGo);
+  }
   if (to.name != null) {
     next(true);
     return;

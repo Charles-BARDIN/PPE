@@ -1,11 +1,11 @@
-import {IBookingCancelNavAccess} from '../booking-cancel-state';
-import {IBookingNavAccess} from '../booking-state';
-import {ILoginNavAccess} from '../login-state';
-import {ILogoutNavAccess} from '../logout-state';
-import {IRoomDeleteNavAccess} from '../room-delete-state';
-import {IRoomEditNavAccess} from '../room-edit-state';
-import {IRoomNewNavAccess} from '../room-new-state';
-import {IRoomNavAccess} from '../room-state';
+import { IBookingCancelNavAccess } from '../booking-cancel-state';
+import { IBookingNavAccess } from '../booking-state';
+import { ILoginNavAccess } from '../login-state';
+import { ILogoutNavAccess } from '../logout-state';
+import { IRoomDeleteNavAccess } from '../room-delete-state';
+import { IRoomEditNavAccess } from '../room-edit-state';
+import { IRoomNewNavAccess } from '../room-new-state';
+import { IRoomNavAccess } from '../room-state';
 
 import { IRouter } from '.';
 import { INavigationAuthAccess } from '.';
@@ -79,5 +79,9 @@ export class NavigationService implements IBookingCancelNavAccess, IBookingNavAc
 
   public getRouteParameters(): any {
     return this._data;
+  }
+
+  public onItemMenuClick(item: string) {
+    this.goTo(item);
   }
 };
