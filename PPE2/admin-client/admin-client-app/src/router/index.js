@@ -15,12 +15,12 @@ const router = new Router({
   routes: [
     {
       path: '/login',
-      name: 'Login',
+      name: 'login',
       component: Login
     },
     {
       path: '/',
-      name: 'Main',
+      name: 'main',
       component: Main,
       children: [
         {
@@ -29,8 +29,8 @@ const router = new Router({
           component: Booking
         },
         {
-          path: '/edit-room',
-          name: 'Edit Room',
+          path: '/rooms/:id',
+          name: 'edit-room',
           component: EditRoom
         },
         {
@@ -39,8 +39,8 @@ const router = new Router({
           component: Room
         },
         {
-          path: '/new-room',
-          name: 'New Room',
+          path: '/rooms/new',
+          name: 'new-room',
           component: NewRoom
         }
       ]
@@ -49,7 +49,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if(to.name === 'Main') {
+  if(to.name === 'main') {
     let stateToGo = adminClientLib.authService.userIsConnected() ? 'rooms' : 'login';
     next(stateToGo);
   }
