@@ -48,7 +48,7 @@ export class BookingService {
             return false;
           }
 
-          if (filter.mail && booking.userMail !== filter.mail) {
+          if (filter.mail && !booking.userMail.includes(filter.mail)) {
             return false;
           }
 
