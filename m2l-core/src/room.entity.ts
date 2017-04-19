@@ -7,11 +7,11 @@ export class Room {
   constructor(room: {
     id: number,
     name: string,
-    image: string,
+    image?: string,
     description: string;
   }) {
-    this.name = room.name;
     this.id = room.id;
+    this.name = room.name;
     this.image = room.image;
     this.description = room.description;
   }
