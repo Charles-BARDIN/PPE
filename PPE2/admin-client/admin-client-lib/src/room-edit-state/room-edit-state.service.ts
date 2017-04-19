@@ -22,6 +22,13 @@ export class RoomEditService {
     public onPageLoad() {
         const room = this._nav.getRouteParameters();
         this._controller.setRoom(room);
+        this._gateway.getRoomImage(room)
+          .then(image => {
+            this._controller.setRoomImage(image);
+          })
+          .catch(err => {
+            console.error(err);
+          })
     }
 
     public editRoom(room: Room) {

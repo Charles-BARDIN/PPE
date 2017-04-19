@@ -4,4 +4,5 @@ export interface IRoomEditController {
     showErrors(errors: string[]): void;
     showConfirmation(): void;
     setRoom(room: Room): void;
+    setRoomImage(image: any): void;
 }

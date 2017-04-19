@@ -48,7 +48,7 @@ export default class MockedGateway {
           userMail: 'mail@example.com',
           roomName: 'Amphithéâtre'
         }
-      ])
+      ]);
     });
   }
 
@@ -56,6 +56,10 @@ export default class MockedGateway {
     return new Promise(resolve => {
 
     });
+  }
+
+  getRoomImage(room) {
+    return Promise.resolve(new Image());
   }
 
   modifyRoom(room) {

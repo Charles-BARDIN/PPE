@@ -85,6 +85,16 @@ export default class Gateway {
       });
   }
 
+  getRoomImage(room) {
+    return this._http()
+      .then(res => {
+
+      })
+      .catch(err => {
+
+      });
+  }
+
   _http(verb, url, argument) {
     return new Promise((resolve, reject) => {
       const req = new XMLHttpRequest();
