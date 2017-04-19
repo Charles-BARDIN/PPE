@@ -66,7 +66,7 @@ export default class MockedGateway {
 
   addRoom(room) {
     return new Promise(resolve => {
-
+      resolve(true);
     });
   }
 
