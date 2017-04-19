@@ -25,6 +25,11 @@ export class BookingService {
       .then(bookings => {
         this._bookingList = bookings;
         this._controller.setBookingList(this._bookingList);
+
+        return this._gateway.getAllRooms();
+      })
+      .then(rooms => {
+        this._controller.setRoomList(rooms);
       })
       .catch(errors => {
         this._controller.setBackendErrors(errors);
@@ -36,27 +41,34 @@ export class BookingService {
     mail?: string,
     date?: Date
   }) {
-    this._bookingList = this._bookingList.reduce((prev, curr) => {
-      let shouldBeAdded = true;
+    this._controller.setBookingList(
+      this._bookingList
+        .filter(booking => {
+          if (filter.room && booking.roomID !== filter.room) {
+            return false;
+          }
 
-      if (filter.room && curr.roomID !== filter.room) {
-        shouldBeAdded = false;
-      }
+          if (filter.mail && booking.userMail !== filter.mail) {
+            return false;
+          }
 
-      if (filter.mail && curr.userMail !== filter.mail) {
-        shouldBeAdded = false;
-      }
+          if (filter.date) {
+            [booking.date, filter.date]
+              .forEach(date => {
+                date.setHours(0);
+                date.setMinutes(0);
+                date.setSeconds(0);
+                date.setMilliseconds(0);
+              });
 
-      if (filter.date && curr.date !== filter.date) {
-        shouldBeAdded = false;
-      }
+            if (Number(booking.date) !== Number(filter.date)) {
+              return false;
+            }
+          }
 
-      if (shouldBeAdded) prev.push(curr);
-
-      return prev;
-    }, []);
-
-    this._controller.setBookingList(this._bookingList);
+          return true;
+        })
+    );
   }
 
   public onCancelClick(booking: Booking) {

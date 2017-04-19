@@ -1,6 +1,7 @@
 <template>
   <div>
     <select class="room-picker" id="room" v-model="selectedRoom">
+      <option></option>
       <option v-for="room in rooms">{{ room.name }}</option>
     </select>
   </div>
