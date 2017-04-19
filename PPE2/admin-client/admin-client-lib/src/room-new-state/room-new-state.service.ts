@@ -19,7 +19,8 @@ export class RoomNewService {
         this._controller = controller;
     }
 
-    public addRoom(room: { description: string, name: string, image: string }) {
+    public addRoom(room: { description: string, name: string, image: File }) {
+        this._controller.hideMessages();
         let errors = [];
 
         if (!room.description) {
