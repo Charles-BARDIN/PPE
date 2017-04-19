@@ -73,22 +73,4 @@ function hideMessages() {
 </script>
 
 <style scoped>
-  label {
-    display: inline-block;
-    width: 250px;
-    text-align: left;
-  }
-
-  input, textarea {
-    width: 250px;
-    max-width: 250px;
-  }
-
-  form {
-    margin-top: 10px;
-  }
-
-  form div {
-    padding: 6px;
-  }
 </style>
