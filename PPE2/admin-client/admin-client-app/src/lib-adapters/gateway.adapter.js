@@ -6,7 +6,7 @@ export default class Gateway {
   }
 
   login(credentials) {
-    return this._http(`POST`,`/login`,credentials)
+    return this._http(`POST`, `/login`, credentials)
       .then(res => {
 
       })
@@ -16,7 +16,7 @@ export default class Gateway {
   }
 
   logout(userID) {
-    return this._http(`POST`,`/logout`,userID)
+    return this._http(`POST`, `/logout`, userID)
       .then(res => {
 
       })
@@ -26,7 +26,7 @@ export default class Gateway {
   }
 
   cancelBooking(booking) {
-    return this._http(`DELETE`,`/booking/${booking.id}`,booking)
+    return this._http(`DELETE`, `/booking/${booking.id}`)
       .then(res => {
 
       })
@@ -36,7 +36,7 @@ export default class Gateway {
   }
 
   getAllBookings() {
-    return this._http(`GET`,`/booking`)
+    return this._http(`GET`, `/booking`)
       .then(res => {
 
       })
@@ -46,7 +46,7 @@ export default class Gateway {
   }
 
   deleteRoom(room) {
-    return this._http(`DELETE`,`/room/${room.id}`,room)
+    return this._http(`DELETE`, `/room/${room.id}`)
       .then(res => {
 
       })
@@ -56,7 +56,7 @@ export default class Gateway {
   }
 
   modifyRoom(room) {
-    return this._http(`PUT`,`/room/${room.id}`,room)
+    return this._http(`PUT`, `/room/${room.id}`, room)
       .then(res => {
 
       })
@@ -66,7 +66,7 @@ export default class Gateway {
   }
 
   addRoom(room) {
-    return this._http(`POST`,`/room/${room.id}`,room)
+    return this._http(`POST`, `/room`, room)
       .then(res => {
 
       })
@@ -76,7 +76,7 @@ export default class Gateway {
   }
 
   getAllRooms() {
-    return this._http(`GET`,`/room`)
+    return this._http(`GET`, `/room`)
       .then(res => {
 
       })
@@ -86,7 +86,7 @@ export default class Gateway {
   }
 
   getRoomImage(room) {
-    return this._http(`GET`,`/room/${room.id}/img`,room)
+    return this._http(`GET`, `/room/${room.id}/image`)
       .then(res => {
 
       })
