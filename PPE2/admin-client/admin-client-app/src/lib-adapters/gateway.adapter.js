@@ -8,21 +8,21 @@ export default class Gateway {
   login(credentials) {
     return this._http(`POST`, `/login`, credentials)
       .then(res => {
-
+        if (res.faults.length) {
+            reject(res.faults);
+            return;
+          }
+          resolve(new User(res.data));
       })
-      .catch(err => {
-
-      });
+      .catch(err => reject(err));
   }
 
   logout(userID) {
     return this._http(`POST`, `/logout`, userID)
       .then(res => {
-
+        resolve();
       })
-      .catch(err => {
-
-      });
+      .catch(err => reject(err)); 
   }
 
   cancelBooking(booking) {
