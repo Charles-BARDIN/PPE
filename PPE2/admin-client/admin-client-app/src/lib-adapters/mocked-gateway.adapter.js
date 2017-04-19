@@ -97,7 +97,12 @@ export default class MockedGateway {
   }
 
   addRoom(room) {
-    room.id = this._rooms[this._rooms.length - 1].id + 1;
+    if (this._rooms.length) {
+      room.id = this._rooms[this._rooms.length - 1].id + 1;
+    } else {
+      room.id = 1;
+    }
+
     this._rooms.push(room);
     return Promise.resolve(this._rooms[this._rooms.length - 1]);
   }
@@ -126,7 +131,7 @@ export default class MockedGateway {
   _findRoom(room) {
     return this._rooms
       .findIndex(roomFromArray => {
-        return Number(room.id) === Number(roomFromArray.date);
+        return Number(room.id) === Number(roomFromArray.id);
       });
   }
 }
