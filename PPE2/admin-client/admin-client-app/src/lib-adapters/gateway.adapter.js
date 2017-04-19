@@ -28,7 +28,7 @@ export default class Gateway {
   cancelBooking(booking) {
     return this._http(`DELETE`, `/booking/${booking.id}`)
       .then(res => {
-
+        resolve();
       })
       .catch(err => {
 
