@@ -134,6 +134,7 @@ export class ExpressApi {
         .then(data => {
           this._logger.log(`ExpressApi GET request on /room/${id}/image response file`, data);
           res.sendFile(path.resolve(this._config.roomImageRoot, data), err => {
+            if(!err) return;
             this._logger.error(`ExpressApi GET request on /room/${id}/image error`, err);
             const response = { faults: ['ROOM_IMG_NOT_FOUND'] };
             this._logger.log(`ExpressApi GET request on /room/${id}/image response`, response);
