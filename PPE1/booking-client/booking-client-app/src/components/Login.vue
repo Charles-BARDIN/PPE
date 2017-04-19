@@ -6,7 +6,7 @@
           <div class="modal-container">
 
             <div class="modal-header">
-              Login
+              Connexion
             </div>
 
             <div class="modal-body">
