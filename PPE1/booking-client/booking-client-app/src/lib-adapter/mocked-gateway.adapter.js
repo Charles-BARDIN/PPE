@@ -41,7 +41,7 @@ export default class MockedGateway {
         {
           id: 1,
           name: 'Amphithéâtre',
-          img: '',
+          image: '',
           description: 'Amphi description'
         }
       ]);

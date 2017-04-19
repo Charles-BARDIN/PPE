@@ -59,13 +59,11 @@ export default class MockedGateway {
   }
 
   getRoomImage(room) {
-    return Promise.resolve(new Image());
+    return Promise.resolve(new File([""], "img.jpg"));
   }
 
   modifyRoom(room) {
-    return new Promise(resolve => {
-
-    });
+    return Promise.resolve({});
   }
 
   addRoom(room) {
@@ -80,7 +78,7 @@ export default class MockedGateway {
         {
           id: 1,
           name: 'Amphithéâtre',
-          img: '',
+          image: '',
           description: 'Amphi description'
         }
       ]);

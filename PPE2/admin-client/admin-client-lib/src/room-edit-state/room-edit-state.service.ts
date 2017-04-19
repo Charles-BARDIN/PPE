@@ -32,6 +32,7 @@ export class RoomEditService {
     }
 
     public editRoom(room: Room) {
+      this._controller.hideMessages();
         let errors = [];
 
         if (!room.description) {

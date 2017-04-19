@@ -5,4 +5,5 @@ export interface IRoomEditController {
     showConfirmation(): void;
     setRoom(room: Room): void;
     setRoomImage(image: any): void;
+    hideMessages(): void;
 }
