@@ -35,7 +35,7 @@
     props: ['showModal', 'onCancel'],
     methods: {
       onlogout: function() {
-        logoutService.logout({ mail: this.mail, password: this.password });
+        logoutService.logout();
       },
       oncancel: function() {
         this.onCancel();
