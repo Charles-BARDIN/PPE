@@ -55,7 +55,6 @@
     },
     methods: {
       onconfirm: function() {
-        // TODO
         bookingCancelService.onValidate();
       },
       oncancel: function() {
