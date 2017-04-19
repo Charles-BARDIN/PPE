@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     onAddClick: function(room) {
-      console.log(room)
       roomEditService.editRoom(room);
     },
     onCancelClick: function() {
