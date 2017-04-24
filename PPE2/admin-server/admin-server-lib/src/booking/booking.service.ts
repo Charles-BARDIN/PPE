@@ -1,8 +1,17 @@
-import { Booking } from 'm2l-core';
+import { Booking, ILogger } from 'm2l-core';
+
+import { IBookingDataAccess } from '.';
 
 export class BookingService {
-  constructor() {
+  private _data: IBookingDataAccess;
+  private _logger: ILogger;
 
+  constructor(config: {
+    dataAccess: IBookingDataAccess,
+    logger: ILogger
+  }) {
+    this._data = config.dataAccess;
+    this._logger = config.logger;
   }
 
   public cancelBooking(booking: Booking): Promise<boolean> {
