@@ -18,4 +18,9 @@ export class LogoutService {
       .then(res => this._nav.goTo('login'))
       .catch(err => this._nav.goTo('login'));
   }
+  public onPageLoad() {
+    if (!this._auth.userIsConnected()) {
+      this._nav.goTo('login');
+    }
+  }
 }
