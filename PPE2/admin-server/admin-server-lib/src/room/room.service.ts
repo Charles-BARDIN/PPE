@@ -1,8 +1,19 @@
-import { Room } from 'm2l-core';
+import { Room, ILogger } from 'm2l-core';
+import { IRoomDataAccess, IRoomRessourceAccess } from '.';
 
 export class RoomService {
-  constructor() {
+  private _data: IRoomDataAccess;
+  private _ressources: IRoomRessourceAccess;
+  private _logger: ILogger;
 
+  constructor(config: {
+    dataAccess: IRoomDataAccess,
+    ressourceAccess: IRoomRessourceAccess,
+    logger: ILogger
+  }) {
+    this._data = config.dataAccess;
+    this._ressources = config.ressourceAccess;
+    this._logger = config.logger;
   }
 
   public deleteRoom(roomID: number): Promise<boolean> {
@@ -23,7 +34,10 @@ export class RoomService {
     });
   }
 
-  public getRoomImage(roomID: number): Promise<string> {
+  public getRoomImage(roomID: number): Promise<{
+    ext: string,
+    data: string
+  }> {
     return new Promise((resolve, reject) => {
 
     });
