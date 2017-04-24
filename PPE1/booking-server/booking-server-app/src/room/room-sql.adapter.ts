@@ -30,12 +30,24 @@ export class RoomSQLAdapter implements IRoomDataAccess {
           this._logger.debug('RoomSQLAdapter.getRooms: data:', roomArray);
 
           const rooms = roomArray
-            .map(room => new Room({
-              id: Number(this._unescapeHtml(room.room_id.toString())),
-              name: this._unescapeHtml(room.room_label),
-              image: room.room_image ? this._unescapeHtml(room.room_image) : undefined,
-              description: this._unescapeHtml(room.room_description)
-            }));
+            .map(room => {
+              let roomImg = undefined;
+
+              if(room.room_image) {
+                const arr = room.room_image.split('.');
+                roomImg = {
+                  ext: arr[arr.length - 1],
+                  data: undefined
+                };
+              }
+
+              return new Room({
+                id: Number(this._unescapeHtml(room.room_id.toString())),
+                name: this._unescapeHtml(room.room_label),
+                description: this._unescapeHtml(room.room_description),
+                image: roomImg
+              });
+            });
 
           this._logger.info('RoomSQLAdapter.getRooms: rooms', rooms);
           resolve(rooms);

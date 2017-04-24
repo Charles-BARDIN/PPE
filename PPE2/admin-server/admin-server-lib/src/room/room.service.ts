@@ -1,7 +1,12 @@
-import { Room } from 'm2l-core';
+import { Room, ILogger } from 'm2l-core';
+import { IRoomDataAccess, IRoomRessourceAccess } from '.';
 
 export class RoomService {
-  constructor() {
+  constructor(config: {
+    dataAccess: IRoomDataAccess,
+    ressourceAccess: IRoomRessourceAccess,
+    logger: ILogger
+  }) {
 
   }
 
@@ -23,7 +28,10 @@ export class RoomService {
     });
   }
 
-  public getRoomImage(roomID: number): Promise<File> {
+  public getRoomImage(roomID: number): Promise<{
+    ext: string,
+    data: string
+  }> {
     return new Promise((resolve, reject) => {
 
     });
