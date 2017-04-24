@@ -1,7 +1,8 @@
 import { Booking } from 'm2l-core';
-import { IBookingCancelNavAccess, IBookingCancelGateway, IBookingCancelController } from '.';
+import { IBookingCancelNavAccess, IBookingCancelGateway, IBookingCancelController, IBookingCancelAuth } from '.';
 
 export class BookingCancelService {
+  private _auth: IBookingCancelAuth;
   private _nav: IBookingCancelNavAccess;
   private _gateway: IBookingCancelGateway;
   private _controller: IBookingCancelController;
@@ -9,10 +10,12 @@ export class BookingCancelService {
 
   constructor(config: {
     navigation: IBookingCancelNavAccess,
-    gateway: IBookingCancelGateway
+    gateway: IBookingCancelGateway,
+    authentification: IBookingCancelAuth
   }) {
     this._nav = config.navigation;
     this._gateway = config.gateway;
+    this._auth = config.authentification;
 
     this._booking = {
       date: undefined,
@@ -32,6 +35,10 @@ export class BookingCancelService {
   }
 
   public onPageLoad() {
+    if(!this._auth.userIsConnected()){
+      this._nav.goTo('login'); 
+    }
+
     const booking = this._nav.getRouteParameters();
 
     for(let key in booking) {

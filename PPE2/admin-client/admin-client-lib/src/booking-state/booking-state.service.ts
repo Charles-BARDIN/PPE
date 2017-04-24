@@ -1,19 +1,23 @@
 import { Booking } from 'm2l-core';
 
-import { IBookingNavAccess, IBookingController, IBookingGateway } from '.';
+import { IBookingNavAccess, IBookingController, IBookingGateway,IBookingAuth } from '.';
 
 export class BookingService {
   private _nav: IBookingNavAccess
   private _controller: IBookingController;
   private _gateway: IBookingGateway;
   private _bookingList: Booking[];
+  private _booking : Booking ;
+  private _auth: IBookingAuth;
 
   constructor(config: {
     navigation: IBookingNavAccess,
-    gateway: IBookingGateway
+    gateway: IBookingGateway, 
+    authentification : IBookingAuth 
   }) {
     this._nav = config.navigation;
     this._gateway = config.gateway;
+    this._auth = config.authentification;
   }
 
   set controller(controller: IBookingController) {
