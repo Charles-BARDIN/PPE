@@ -159,7 +159,7 @@ describe('Room Service', () => {
       function endTest() {
         const isDone = tests.reduce((prev, curr) => {
           return prev && curr.done;
-        }, false);
+        }, true);
 
         if (isDone) done();
       }
@@ -249,7 +249,7 @@ describe('Room Service', () => {
       function endTest() {
         const isDone = tests.reduce((prev, curr) => {
           return prev && curr.done;
-        }, false);
+        }, true);
 
         if (isDone) done();
       }
