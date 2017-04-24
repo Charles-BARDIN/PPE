@@ -23,7 +23,7 @@ export class RoomService {
     });
   }
 
-  public getRoomImage(roomID: number): Promise<string> {
+  public getRoomImage(roomID: number): Promise<File> {
     return new Promise((resolve, reject) => {
 
     });
