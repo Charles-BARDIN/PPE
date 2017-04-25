@@ -14,7 +14,7 @@ describe('Admin Service', () => {
     };
 
     dataAccess = {
-      getUserByCredentials: credentials => Promise.resolve(admin)
+      getAdminByCredentials: credentials => Promise.resolve(new Admin(admin))
     };
 
     logger = {
@@ -36,14 +36,32 @@ describe('Admin Service', () => {
       expect(result).to.be.an.instanceof(Promise);
     });
 
-    it('Should call the getUserByCredentials method of dataAccess', done => {
+    it('Should call the getAdminByCredentials method of dataAccess', done => {
       let credentials = { mail: 'foo@bar.baz', password: 'password' };
-      dataAccess.getUserByCredentials = () => {
+      dataAccess.getAdminByCredentials = () => {
         done();
         return Promise.resolve(new Admin(admin));
       };
 
       adminService.login(credentials);
+    });
+
+    it('Should resolve the Promise with an Admin if the dataAccess returned a value', () => {
+      let credentials = { mail: 'foo@bar.baz', password: 'password' };
+
+      adminService.login(credentials)
+        .then(admin => expect(admin).to.be.an.instanceof(Admin));
+    });
+
+    it('Should reject the Promise if the dataAccess did not return a value', done => {
+      let credentials = { mail: 'foo@bar.baz', password: 'password' };
+
+      dataAccess.getAdminByCredentials = () => {
+        return Promise.resolve(undefined);
+      };
+
+      adminService.login(credentials)
+        .catch(() => done());
     });
   });
 
