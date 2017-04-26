@@ -79,7 +79,7 @@ describe('Booking Service', () => {
     });
 
     it('Should resolve the Promise if the dataAccess resolved the Promise', done => {
-      dataAccess.getBookings = () => Promise.resolve([done()]);
+      dataAccess.getBookings = () => Promise.resolve([]);
 
       bookingService.getAllBookings()
         .then(() => done());
