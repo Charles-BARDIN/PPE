@@ -216,7 +216,7 @@ describe('Room Service', () => {
 
       tests.forEach(test => {
         let _room = Object.assign({}, room);
-        _room.image = { ext: test.ext };
+        _room.image = { ext: test.ext, data: image.data };
 
         if (positiveCaseExtensions.indexOf(test.ext) < 0) {
           roomService.addRoom(_room)
@@ -249,7 +249,11 @@ describe('Room Service', () => {
     });
 
     it('Should call the getRoomImage method of the data access', done => {
-      dataAccess.getRoomImage = () => Promise.resolve(done());
+      dataAccess.getRoomImage = () => {
+        done();
+
+        return Promise.resolve(image);
+      };
 
       roomService.getRoomImage(1);
     });
