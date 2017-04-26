@@ -16,13 +16,27 @@ export class BookingService {
 
   public cancelBooking(booking: Booking): Promise<boolean> {
     return new Promise((resolve, reject) => {
-
+      this._data.removeBooking(booking)
+        .then(result => {
+          resolve(result);
+        })
+        .catch(errors => {
+          this._logger.error(errors);
+          reject('UNKNOWN_ERROR');
+        })
     });
   }
 
   public getAllBookings(): Promise<Booking[]> {
     return new Promise((resolve, reject) => {
-
+      this._data.getBookings()
+        .then(bookingList => {
+          resolve(bookingList);
+        })
+        .catch(errors => {
+          this._logger.error(errors);
+          reject('UNKNOWN_ERROR');
+        })
     });
   }
 }
