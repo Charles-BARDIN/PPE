@@ -84,7 +84,8 @@ export class AdminClientLib {
 
     this._bookingCancelService = new BookingCancelService({
       navigation: this.navigationService,
-      gateway: this._gateway
+      gateway: this._gateway,
+      authentification: this.authService
     });
 
     return this._bookingCancelService;
@@ -101,7 +102,8 @@ export class AdminClientLib {
 
     this._bookingService = new BookingService({
       navigation: this.navigationService,
-      gateway: this._gateway
+      gateway: this._gateway,
+      authentification: this.authService
     });
 
     return this._bookingService;
