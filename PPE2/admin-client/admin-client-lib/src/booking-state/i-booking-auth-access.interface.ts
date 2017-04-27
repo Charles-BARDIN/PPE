@@ -1,5 +1,5 @@
 import { Booking } from 'm2l-core';
 
-export interface IBookingAuth {
+export interface IBookingAuthAccess {
   userIsConnected(): boolean;
 }

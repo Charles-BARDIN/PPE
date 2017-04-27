@@ -1,23 +1,23 @@
 import { Room } from 'm2l-core';
 
-import { IRoomDeleteNavAccess, IRoomDeleteGateway, IRoomDeleteController,IRoomDeleteRoomAuth } from '.';
+import { IRoomDeleteNavAccess, IRoomDeleteGateway, IRoomDeleteController, IRoomDeleteAuthAccess } from '.';
 
 export class RoomDeleteService {
   private _nav: IRoomDeleteNavAccess;
   private _gateway: IRoomDeleteGateway;
   private _controller: IRoomDeleteController;
   private _room: Room;
-  private _auth : IRoomDeleteRoomAuth ; 
+  private _auth: IRoomDeleteAuthAccess;
 
 
   constructor(config: {
     navigation: IRoomDeleteNavAccess,
     gateway: IRoomDeleteGateway,
-    authentification : IRoomDeleteRoomAuth
+    authentification: IRoomDeleteAuthAccess
   }) {
     this._nav = config.navigation;
     this._gateway = config.gateway;
-    this._auth = config.authentification ; 
+    this._auth = config.authentification;
 
     this._room = {
       description: undefined,
@@ -36,8 +36,8 @@ export class RoomDeleteService {
   }
 
   public onPageLoad() {
-    if(!this._auth.userIsConnected()){
-      this._nav.goTo('login'); 
+    if (!this._auth.userIsConnected()) {
+      this._nav.goTo('login');
     }
     const room = this._nav.getRouteParameters();
 
