@@ -22,7 +22,7 @@ export class BookingService {
         })
         .catch(errors => {
           this._logger.error(errors);
-          reject('UNKNOWN_ERROR');
+          reject('ERR_UNKNOWN');
         })
     });
   }
@@ -35,7 +35,7 @@ export class BookingService {
         })
         .catch(errors => {
           this._logger.error(errors);
-          reject('UNKNOWN_ERROR');
+          reject('ERR_UNKNOWN');
         })
     });
   }

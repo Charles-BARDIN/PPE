@@ -21,7 +21,7 @@ export class RoomService {
         })
         .catch(errors => {
           this._logger.error(errors);
-          reject('UNKNOWN_ERROR');
+          reject('ERR_UNKNOWN');
         })
     });
   }
@@ -43,7 +43,7 @@ export class RoomService {
         })
         .catch(errors => {
           this._logger.error(errors);
-          reject('UNKNOWN_ERROR');
+          reject('ERR_UNKNOWN');
         });
     });
   }
@@ -65,7 +65,7 @@ export class RoomService {
         })
         .catch(errors => {
           this._logger.error(errors);
-          reject('UNKNOWN_ERROR');
+          reject('ERR_UNKNOWN');
         });
     });
   }
@@ -86,7 +86,7 @@ export class RoomService {
         })
         .catch(errors => {
           this._logger.error(errors);
-          reject('UNKNOWN_ERROR');
+          reject('ERR_UNKNOWN');
         });
     });
   }
@@ -99,7 +99,7 @@ export class RoomService {
         })
         .catch(errors => {
           this._logger.error(errors);
-          reject('UNKNOWN_ERROR');
+          reject('ERR_UNKNOWN');
         })
     });
   }

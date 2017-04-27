@@ -45,7 +45,7 @@ export class AdminService {
         })
         .catch(errors => {
           this._logger.error(errors);
-          reject('UNKNOWN_ERROR');
+          reject('ERR_UNKNOWN');
         })
     });
   }
