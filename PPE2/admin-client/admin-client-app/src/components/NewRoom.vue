@@ -36,8 +36,8 @@ export default {
       showConfirmation: this.showConfirmation,
       hideMessages: this.hideMessages
     };
-
     roomNewService.controller = controller;
+    roomNewService.onPageLoad() ;
   },
   data () {
     return {

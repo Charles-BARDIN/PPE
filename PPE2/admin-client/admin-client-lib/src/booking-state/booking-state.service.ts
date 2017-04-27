@@ -25,6 +25,9 @@ export class BookingService {
   }
 
   public onPageLoad() {
+    if(!this._auth.userIsConnected()){
+      this._nav.goTo('login'); 
+    }
     this._gateway.getAllBookings()
       .then(bookings => {
         this._bookingList = bookings;
@@ -36,6 +39,7 @@ export class BookingService {
         this._controller.setRoomList(rooms);
       })
       .catch(errors => {
+    
         this._controller.setBackendErrors(errors);
       })
   }
@@ -74,7 +78,6 @@ export class BookingService {
         })
     );
   }
-
   public onCancelClick(booking: Booking) {
     this._nav.goTo('cancel-booking', booking);
   }
