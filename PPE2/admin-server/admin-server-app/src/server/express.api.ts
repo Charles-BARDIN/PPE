@@ -33,7 +33,7 @@ export class ExpressApi {
     this._admin = config.admin;
     this._logger = config.logger;
 
-    this._router.use(bodyParser.json());
+    this._router.use(bodyParser.json({ limit: '50mb' }));
     this._config = config.config;
     this._setApi();
   }
