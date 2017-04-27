@@ -50,8 +50,8 @@
 
       roomDeleteService.controller = controller;
 
-      roomDeleteService.onPageLoad();
       this.room = roomDeleteService.room;
+      roomDeleteService.onPageLoad();
     },
     methods: {
       onconfirm: function() {

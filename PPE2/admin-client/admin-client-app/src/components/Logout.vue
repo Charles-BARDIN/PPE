@@ -33,6 +33,9 @@
   export default {
     name: 'logout',
     props: ['showModal', 'onCancel'],
+    created: function() {
+      logoutService.onPageLoad();
+    },
     methods: {
       onlogout: function() {
         logoutService.logout();

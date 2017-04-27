@@ -50,8 +50,8 @@
 
       bookingCancelService.controller = controller;
 
-      bookingCancelService.onPageLoad();
       this.booking = bookingCancelService.booking;
+      bookingCancelService.onPageLoad();
     },
     methods: {
       onconfirm: function() {

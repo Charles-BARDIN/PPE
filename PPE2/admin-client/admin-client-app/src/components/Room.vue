@@ -39,7 +39,7 @@ export default {
 
     roomService.controller = controller;
 
-    roomService.onPageLoad()
+    roomService.onPageLoad();
   },
   data () {
     return {

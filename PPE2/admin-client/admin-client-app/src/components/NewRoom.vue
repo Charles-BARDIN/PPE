@@ -37,7 +37,7 @@ export default {
       hideMessages: this.hideMessages
     };
     roomNewService.controller = controller;
-    roomNewService.onPageLoad() ;
+    roomNewService.onPageLoad();
   },
   data () {
     return {
