@@ -26,14 +26,13 @@ export class AdminSQLAdapter implements IAdminDataAccess {
 
       this._db.query(query)
         .then(admins => {
-
           if (!(admins.length && admins[0])) {
             resolve(undefined);
             return;
           }
 
           const admin = new Admin({
-            id: Number(this._unescapeHtml(admins[0].admin_id)),
+            id: Number(admins[0].admin_id),
             mail: this._unescapeHtml(admins[0].admin_mail)
           });
 
