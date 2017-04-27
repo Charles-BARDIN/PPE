@@ -90,7 +90,7 @@ export class RoomSQLAdapter implements IRoomDataAccess {
 
           resolve(new Room({
             id: rooms[0].room_id,
-            name: rooms[0].room_name,
+            name: rooms[0].room_label,
             description: rooms[0].room_description
           }));
         })
@@ -130,7 +130,7 @@ export class RoomSQLAdapter implements IRoomDataAccess {
 
           resolve(new Room({
             id: rooms[0].room_id,
-            name: rooms[0].room_name,
+            name: rooms[0].room_label,
             description: rooms[0].room_description
           }));
         })
@@ -140,7 +140,7 @@ export class RoomSQLAdapter implements IRoomDataAccess {
 
   getRooms(): Promise<Room[]> {
     return new Promise((resolve, reject) => {
-      const query = `SELECT room_id, room_name, room_description
+      const query = `SELECT room_id, room_label, room_description
                     FROM room;`;
 
       this._db.query(query)
@@ -163,17 +163,22 @@ export class RoomSQLAdapter implements IRoomDataAccess {
 
   getRoomImage(id: number): Promise<{ ext: string, data: string }> {
     return new Promise((resolve, reject) => {
-      const query = `SELECT room_image FROM room WHERE room_id=${id}`;
+      const query = `SELECT room_image AS img FROM room WHERE room_id=${id}`;
 
       this._db.query(query)
         .then(roomImageName => {
-          fs.readFileSync(path.resolve('../../../../data/room_image', roomImageName), (error, bitmap) => {
+          if(!roomImageName[0].img) {
+            reject('ERR_NO_ROOM');
+            return;
+          }
+
+          fs.readFile(path.resolve(__dirname, '../../../../data/room_img', roomImageName[0].img), (error, bitmap) => {
             if (error) {
               reject(error);
               return;
             }
 
-            let roomImageNameArray = roomImageName.split('.');
+            let roomImageNameArray = roomImageName[0].img.split('.');
             const ext = roomImageNameArray[roomImageNameArray.length - 1];
             const data = new Buffer(bitmap).toString('base64');
             resolve({ ext, data });
@@ -186,7 +191,7 @@ export class RoomSQLAdapter implements IRoomDataAccess {
 
   private _writeImage(base64Image: string, name: string): { success: boolean, error?: string } {
     try {
-      fs.writeFileSync(path.resolve('../../../../data/room_img', name), base64Image, 'base64');
+      fs.writeFileSync(path.resolve(__dirname, '../../../../data/room_img', name), base64Image, 'base64');
     } catch (e) {
       return { success: false, error: e };
     }
