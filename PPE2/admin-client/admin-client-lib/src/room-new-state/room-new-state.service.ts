@@ -1,22 +1,31 @@
 import { Room } from 'm2l-core';
 
-import { IRoomNewNavAccess, IRoomNewGateway, IRoomNewController } from '.';
+import { IRoomNewNavAccess, IRoomNewGateway, IRoomNewController, IRoomNewAuth } from '.';
 
 export class RoomNewService {
     private _nav: IRoomNewNavAccess;
     private _gateway: IRoomNewGateway;
     private _controller: IRoomNewController;
+    private _auth: IRoomNewAuth;
 
     constructor(config: {
         navigation: IRoomNewNavAccess,
-        gateway: IRoomNewGateway
+        gateway: IRoomNewGateway,
+        authentification: IRoomNewAuth
     }) {
         this._nav = config.navigation;
-        this._gateway = config.gateway
+        this._gateway = config.gateway;
+        this._auth = config.authentification;
     }
 
     set controller(controller: IRoomNewController) {
         this._controller = controller;
+    }
+
+    public onPageLoad() {
+        if (!this._auth.userIsConnected()) {
+            this._nav.goTo('login');
+        }
     }
 
     public addRoom(room: { description: string, name: string, image: File }) {
