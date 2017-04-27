@@ -1,18 +1,21 @@
 import { Room } from 'm2l-core';
 
-import { IRoomEditNavAccess, IRoomEditGateway, IRoomEditController } from '.';
+import { IRoomEditNavAccess, IRoomEditGateway, IRoomEditController, IRoomEditRoomAuth } from '.';
 
 export class RoomEditService {
     private _nav: IRoomEditNavAccess;
     private _gateway: IRoomEditGateway;
     private _controller: IRoomEditController;
+    private _auth: IRoomEditRoomAuth;
 
     constructor(config: {
         navigation: IRoomEditNavAccess,
-        gateway: IRoomEditGateway
+        gateway: IRoomEditGateway,
+        authentification: IRoomEditRoomAuth
     }) {
         this._nav = config.navigation;
-        this._gateway = config.gateway
+        this._gateway = config.gateway;
+        this._auth = config.authentification
     }
 
     set controller(controller: IRoomEditController) {
@@ -20,19 +23,22 @@ export class RoomEditService {
     }
 
     public onPageLoad() {
+        if (!this._auth.userIsConnected()) {
+            this._nav.goTo('login');
+        }
         const room = this._nav.getRouteParameters();
         this._controller.setRoom(room);
         this._gateway.getRoomImage(room)
-          .then(image => {
-            this._controller.setRoomImage(image);
-          })
-          .catch(err => {
-            console.error(err);
-          })
+            .then(image => {
+                this._controller.setRoomImage(image);
+            })
+            .catch(err => {
+                console.error(err);
+            })
     }
 
     public editRoom(room: Room) {
-      this._controller.hideMessages();
+        this._controller.hideMessages();
         let errors = [];
 
         if (!room.description) {
