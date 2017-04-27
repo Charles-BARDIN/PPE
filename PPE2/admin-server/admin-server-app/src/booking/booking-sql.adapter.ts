@@ -21,53 +21,22 @@ export class BookingSQLAdapter implements IBookingDataAccess {
     return new Promise((resolve, reject) => {
       let result = [];
 
-      let query = `SELECT *
-                  FROM booking;`;
+      let query = `SELECT booking_date, booking.user_id AS user_id, user_mail, booking.room_id AS room_id, room_label
+                  FROM booking, room, user
+                  WHERE booking.room_id = room.room_id
+                  AND booking.user_id = user.user_id
+                  AND booking_date >= CURRENT_DATE;`;
 
       this._db.query(query)
         .then(bookingArray => {
-          for (let i = 0; i < bookingArray.length; i++) {
-            (function (i) {
-              query = `SELECT room_label
-                      FROM room
-                      WHERE room_id = ${Number(escape(this._escapeHtml(bookingArray[i].room_id)))}`;
-
-              this._db.query(query)
-                .then(roomName => {
-                  if (!(roomName.length && roomName[0])) {
-                    reject('ROOM_DOES_NOT_EXIST');
-                  }
-                  bookingArray[i].roomName = this._unescapeHtml(roomName[0])
-
-                  query = `SELECT user_mail
-                            FROM user
-                            WHERE user_id = ${Number(escape(this._escapeHtml(bookingArray[i].user_id)))}`;
-
-                  this._db.query(query)
-                    .then(usermail => {
-                      if (!(usermail.length && usermail[0])) {
-                        reject('USER_DOES_NOT_EXIST');
-                      }
-
-                      bookingArray[i].userMail = this._unescapeHtml(usermail[0]);
-
-                      result.push(new Booking({
-                        date: new Date(this._unescapeHtml(bookingArray[i].booking_date)),
-                        roomID: Number(this._unescapeHtml(bookingArray[i].roomID)),
-                        roomName: bookingArray[i].roomName,
-                        userMail: bookingArray[i].userMail,
-                        userID: Number(this._unescapeHtml(bookingArray[i].user_id))
-                      }));
-
-                      if (i === bookingArray.length - 1) {
-                        resolve(result);
-                      }
-                    })
-                    .catch(reject);
-                })
-                .catch(reject);
-            })(i);
-          }
+          resolve(bookingArray
+            .map(dbBooking => new Booking({ 
+              date: new Date(dbBooking.booking_date), 
+              roomID: Number(dbBooking.room_id),
+              roomName: this._unescapeHtml(dbBooking.room_label),
+              userID: Number(dbBooking.user_id),
+              userMail: this._unescapeHtml(dbBooking.user_mail)
+            })));
         })
         .catch(reject);
     });
