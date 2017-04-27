@@ -9,56 +9,76 @@ export default class Gateway {
     return this._http(`POST`, `/login`, credentials)
       .then(res => {
         if (res.faults.length) {
-            reject(res.faults);
-            return;
-          }
-          resolve(new User(res.data));
+          reject(res.faults);
+          return;
+        }
+        resolve(new User(res.data));
       })
       .catch(err => reject(err));
   }
 
   logout(userID) {
-    return this._http(`POST`, `/logout`, userID)
+    return this._http(`POST`, `/logout`)
       .then(res => {
+        if (res.faults.length) {
+          reject(res.faults);
+          return;
+        }
         resolve();
       })
-      .catch(err => reject(err)); 
+      .catch(err => reject(err));
   }
 
   cancelBooking(booking) {
-    return this._http(`DELETE`, `/booking/${booking.id}`)
+    return this._http(`DELETE`, `/booking/${booking.id}`, booking)
       .then(res => {
-        resolve();
+        if (res.faults.length) {
+          reject(res.faults);
+          return;
+        }
+        resolve(new Booking(res.data));
       })
       .catch(err => {
-
+        reject(err);
       });
   }
 
   getAllBookings() {
     return this._http(`GET`, `/booking`)
       .then(res => {
-
+        if (res.faults.length) {
+          reject(res.faults);
+          return;
+        }
+        resolve(res.data.map(book => new Booking(book)));
       })
       .catch(err => {
-
+        reject(err);
       });
   }
 
   deleteRoom(room) {
     return this._http(`DELETE`, `/room/${room.id}`)
       .then(res => {
-
+        if (res.faults.length) {
+          reject(res.faults);
+          return;
+        }
+        resolve(res.data);
       })
       .catch(err => {
-
+        reject(err);
       });
   }
 
   modifyRoom(room) {
     return this._http(`PUT`, `/room/${room.id}`, room)
       .then(res => {
-
+        if (res.faults.length) {
+          reject(res.faults);
+          return;
+        }
+        resolve(new Room(res.data));
       })
       .catch(err => {
 
@@ -68,7 +88,11 @@ export default class Gateway {
   addRoom(room) {
     return this._http(`POST`, `/room`, room)
       .then(res => {
-
+        if (res.faults.length) {
+          reject(res.faults);
+          return;
+        }
+        resolve(new Room(res.data));
       })
       .catch(err => {
 
@@ -78,7 +102,11 @@ export default class Gateway {
   getAllRooms() {
     return this._http(`GET`, `/room`)
       .then(res => {
-
+        if (res.faults.length) {
+          reject(res.faults);
+          return;
+        }
+        resolve(res.data.map(room => new Room(room)));
       })
       .catch(err => {
 
@@ -88,7 +116,11 @@ export default class Gateway {
   getRoomImage(room) {
     return this._http(`GET`, `/room/${room.id}/image`)
       .then(res => {
-
+        if (res.faults.length) {
+          reject(res.faults);
+          return;
+        }
+        resolve(res.data);
       })
       .catch(err => {
 
