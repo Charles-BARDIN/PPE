@@ -86,14 +86,24 @@ table {
 
 td {
   text-align: left;
+  height : 50px ;
 }
 
 .room-name {
   width: 20%;
+  max-width :50px ;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .room-description {
-  width: auto;
+    width: auto;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 10px;
 }
 
 .room-actions {
