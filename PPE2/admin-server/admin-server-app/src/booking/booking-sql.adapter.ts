@@ -18,6 +18,7 @@ export class BookingSQLAdapter implements IBookingDataAccess {
   }
 
   public getBookings(): Promise<Booking[]> {
+    this._logger.debug('BookingSQLAdapter.getBookings: called');
     return new Promise((resolve, reject) => {
       let result = [];
 
@@ -27,8 +28,10 @@ export class BookingSQLAdapter implements IBookingDataAccess {
                   AND booking.user_id = user.user_id
                   AND booking_date >= CURRENT_DATE;`;
 
+      this._logger.debug('BookingSQLAdapter.getBookings: query', query);
       this._db.query(query)
         .then(bookingArray => {
+          this._logger.debug('BookingSQLAdapter.getBookings: result', bookingArray);
           resolve(bookingArray
             .map(dbBooking => new Booking({
               date: new Date(dbBooking.booking_date),
@@ -43,14 +46,17 @@ export class BookingSQLAdapter implements IBookingDataAccess {
   }
 
   public removeBooking(booking: Booking): Promise<boolean> {
+    this._logger.debug('BookingSQLAdapter.removeBooking: called with parameter', booking);
     return new Promise((resolve, reject) => {
       const query = `DELETE
                     FROM booking
                     WHERE booking_date = ${escape(new Date(booking.date))} 
                     AND room_id = ${booking.roomID}`;
-                    
+
+      this._logger.debug('BookingSQLAdapter.removeBooking: query', query);
       this._db.query(query)
         .then(data => {
+          this._logger.debug('BookingSQLAdapter.removeBooking: data:', data);
           resolve(true);
         })
         .catch(reject);
