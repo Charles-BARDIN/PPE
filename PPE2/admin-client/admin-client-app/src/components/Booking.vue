@@ -3,7 +3,7 @@
     <M2LTitle>Liste des réservations</M2LTitle>
 
     <Error>
-      <div v-for="error in errors">{{ error }}</div>
+      <div v-for="error in errors">{{ error | error }}</div>
     </Error>
 
     <div id="filter">
@@ -49,6 +49,9 @@ import Error from '@/components/Error'
 import RoomPicker from '@/components/RoomPicker'
 
 import adminClientLib from '@/lib-adapters';
+import { errorFilter } from '@/common';
+
+Vue.filter('error', errorFilter);
 
 Vue.filter('date', input => {
   return new Date(input).toLocaleDateString()

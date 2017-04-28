@@ -14,7 +14,7 @@
             </div>
 
             <Error>
-              <div v-for="error in errors">{{ error }}</div>
+              <div v-for="error in errors">{{ error | error }}</div>
             </Error>
 
             <div class="modal-footer">
@@ -33,6 +33,9 @@
   import adminClientLib from '@/lib-adapters'
   import M2LButton from '@/components/M2LButton'
   import Error from '@/components/Error'
+  import { errorFilter } from '@/common';
+
+  Vue.filter('error', errorFilter);
 
   const bookingCancelService = adminClientLib.bookingCancelService;
   const bookingService = adminClientLib.bookingService;

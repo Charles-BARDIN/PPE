@@ -4,7 +4,7 @@
 
     <Error>
       <div v-for="error in errors">
-        {{ error }}
+        {{ error | error }}
       </div>
     </Error>
 
@@ -20,6 +20,11 @@ import Confirm from '@/components/Confirm';
 import RoomForm from '@/components/RoomForm';
 
 import adminClientLib from '@/lib-adapters';
+import { errorFilter } from '@/common';
+import Vue from 'vue';
+
+
+Vue.filter('error', errorFilter);
 
 const roomNewService = adminClientLib.roomNewService;
 

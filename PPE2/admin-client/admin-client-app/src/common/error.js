@@ -4,6 +4,7 @@ const errors = {
   // Login
   ERR_LOGIN_MAIL_FORMAT: "Veuillez renseigner une adresse email valide",
   ERR_LOGIN_PASSWORD_REQUIRED: "Le mot de passe doit être précisé",
+  INVALID_CREDENTIALS: "La combinaison mail/mot de passe ne correspond pas",
 
   // Room
   ERR_EDITROOM_DESCRIPTION_REQUIRED: "La description de la salle doit être renseignée",

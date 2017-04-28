@@ -14,7 +14,7 @@
 
       <Error>
         <div v-for="error in errors">
-          {{ error }}
+          {{ error | error }}
         </div>
       </Error>
 
@@ -29,6 +29,10 @@
 import M2LButton from '@/components/M2LButton'
 import M2LTitle from '@/components/M2LTitle'
 import Error from '@/components/Error'
+import { errorFilter } from '@/common';
+import Vue from 'vue';
+
+Vue.filter('error', errorFilter);
 
 import adminClientLib from '@/lib-adapters'
 
