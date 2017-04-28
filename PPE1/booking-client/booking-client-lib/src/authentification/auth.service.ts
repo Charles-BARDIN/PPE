@@ -95,6 +95,7 @@ export class AuthService implements INavigationAuthAccess, IIndexAuthAccess, IRe
       if(user.password) {
         user.password = this._hash(user.password);
         user.oldPassword = this._hash(user.oldPassword);
+        user.confirm = undefined;
       }
 
       this._gateway.modifyUser(user)
