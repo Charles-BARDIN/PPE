@@ -61,6 +61,7 @@ export class BookingService {
           }
 
           if (filter.date) {
+            booking.date = new Date(booking.date);
             [booking.date, filter.date]
               .forEach(date => {
                 date.setHours(0);
@@ -68,7 +69,7 @@ export class BookingService {
                 date.setSeconds(0);
                 date.setMilliseconds(0);
               });
-
+              
             if (Number(booking.date) !== Number(filter.date)) {
               return false;
             }
