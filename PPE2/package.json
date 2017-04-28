@@ -27,7 +27,7 @@
     "link:capp": "cd admin-client/admin-client-app && npm link m2l-core admin-client-lib",
     "link:slib": "cd admin-server/admin-server-lib && npm link && npm link m2l-core m2l-node-logger",
     "link:sapp": "cd admin-server/admin-server-app && npm link m2l-core m2l-node-logger admin-server-lib",
-    "install:all": "concurrently \"npm run install:capp\"  \"npm run install:sapp\" \"npm run install:clib\" \"npm run install:slib\" \"npm run install:logger\" \"npm run install:core\"",
+    "install:all": "npm run install:capp && npm run install:sapp && npm run install:clib && npm run install:slib && npm run install:logger && npm run install:core",
     "install:core": "cd ../m2l-core && npm i",
     "install:logger": "cd ../m2l-node-logger && npm i",
     "install:clib": "cd admin-client/admin-client-lib && npm i",
