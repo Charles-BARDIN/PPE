@@ -21,8 +21,8 @@ export class RoomService {
         })
         .catch(errors => {
           this._logger.error(errors);
-          reject('ERR_UNKNOWN');
-        })
+          reject(errors === 'ERR_ROOM_BOOKED' ? errors : 'ERR_UNKNOWN');
+        });
     });
   }
 
