@@ -30,8 +30,8 @@ export class BookingSQLAdapter implements IBookingDataAccess {
       this._db.query(query)
         .then(bookingArray => {
           resolve(bookingArray
-            .map(dbBooking => new Booking({ 
-              date: new Date(dbBooking.booking_date), 
+            .map(dbBooking => new Booking({
+              date: new Date(dbBooking.booking_date),
               roomID: Number(dbBooking.room_id),
               roomName: this._unescapeHtml(dbBooking.room_label),
               userID: Number(dbBooking.user_id),
@@ -46,9 +46,9 @@ export class BookingSQLAdapter implements IBookingDataAccess {
     return new Promise((resolve, reject) => {
       const query = `DELETE
                     FROM booking
-                    WHERE user_id = ${booking.userID} 
+                    WHERE booking_date = ${escape(new Date(booking.date))} 
                     AND room_id = ${booking.roomID}`;
-
+                    
       this._db.query(query)
         .then(data => {
           resolve(true);
@@ -73,5 +73,9 @@ export class BookingSQLAdapter implements IBookingDataAccess {
       .replace(/&gt;/g, ">")
       .replace(/&quot;/g, '"')
       .replace(/&#039;/g, "'");
+  }
+
+  private _getSQLDate(date: Date): string {
+    return new Date(date).toISOString().slice(0, 19).replace('T', ' ').split(' ')[0];
   }
 }
