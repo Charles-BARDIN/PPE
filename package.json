@@ -1,0 +1,24 @@
+{
+  "name": "PPE",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create:db": "node ../scripts/create-database",
+    "fill:db": "node ../scripts/fill-database",
+    "copy:img": "node ./scripts/copy-images",
+    "init": "npm run create:db && npm run fill:db && npm run copy:img"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/Charles-BARDIN/PPE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^3.0.0",
+    "mysql": "^2.13.0"
+  }
+}
