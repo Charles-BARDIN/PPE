@@ -84,7 +84,11 @@ export default class MockedGateway {
   }
 
   getRoomImage(room) {
-    return Promise.resolve(new File([""], "img.jpg"));
+    const index = this._findRoom(room);
+
+    if (index < 0) return Promise.resolve(undefined);
+
+    return Promise.resolve(this._rooms[index].image);
   }
 
   modifyRoom(room) {
@@ -93,7 +97,7 @@ export default class MockedGateway {
     if (index < 0) {
       return Promise.resolve(room);
     }
-
+    
     this._rooms[index].description = room.description;
     this._rooms[index].image = room.image;
     this._rooms[index].name = room.name;
