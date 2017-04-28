@@ -38,7 +38,6 @@
   Vue.filter('error', errorFilter);
 
   const bookingCancelService = adminClientLib.bookingCancelService;
-  const bookingService = adminClientLib.bookingService;
 
   Vue.filter('date', input => {
     return new Date(input).toLocaleDateString()
@@ -60,7 +59,6 @@
     methods: {
       onconfirm: function() {
         bookingCancelService.onValidate();
-        bookingService.onPageLoad();
       },
       oncancel: function() {
         this.onCancel();

@@ -39,7 +39,6 @@
   Vue.filter('error', errorFilter);
 
   const roomDeleteService = adminClientLib.roomDeleteService;
-  const roomService = adminClientLib.roomService;
 
   Vue.filter('date', input => {
     return new Date(input).toLocaleDateString()
@@ -61,7 +60,6 @@
     methods: {
       onconfirm: function() {
         roomDeleteService.onValidate();
-        roomService.onPageLoad();
       },
       oncancel: function() {
         this.onCancel();

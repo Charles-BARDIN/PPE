@@ -85,7 +85,8 @@ export class AdminClientLib {
     this._bookingCancelService = new BookingCancelService({
       navigation: this.navigationService,
       gateway: this._gateway,
-      authentification: this.authService
+      authentification: this.authService,
+      bookingService: this.bookingService
     });
 
     return this._bookingCancelService;
@@ -172,7 +173,8 @@ export class AdminClientLib {
     this._roomDeleteService = new RoomDeleteService({
       gateway: this._gateway,
       navigation: this.navigationService,
-      authentification: this._authService
+      authentification: this._authService,
+      bookingService: this.bookingService
     });
 
     return this._roomDeleteService;
