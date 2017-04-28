@@ -28,7 +28,7 @@ export class BookingSQLAdapter implements IBookingDataAccess {
 
       this._db.query(query)
         .then(() => this.get(booking))
-        .then((bookings: { room_id: number, user_id: number, booking_date: Date }[]) => {
+        .then(bookings => {
           this._logger.debug(`BookingSQLAdapter.add: data:`, bookings);
 
           if (!(bookings.length && bookings[0])) {
@@ -36,14 +36,9 @@ export class BookingSQLAdapter implements IBookingDataAccess {
             reject('ERR_ADDED_BOOKING_NOT_FOUND');
             return;
           }
-
-          const _booking = new Booking({
-            roomID: bookings[0].room_id,
-            userID: bookings[0].user_id,
-            date: new Date(bookings[0].booking_date)
-          });
-          this._logger.info(`BookingSQLAdapter.update: modified booking entity`, _booking);
-          resolve(_booking);
+          
+          this._logger.info(`BookingSQLAdapter.update: modified booking entity`, bookings[0]);
+          resolve(bookings[0]);
         })
         .catch(reject);
     });
