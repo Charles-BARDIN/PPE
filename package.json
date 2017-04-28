@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create:db": "node ../scripts/create-database",
-    "fill:db": "node ../scripts/fill-database",
+    "create:db": "node ./scripts/create-database",
+    "fill:db": "node ./scripts/fill-database",
     "copy:img": "node ./scripts/copy-images",
-    "init": "npm run create:db && npm run fill:db && npm run copy:img"
+    "init": "npm run create:db && npm run fill:db && npm run copy:img",
+    "preinit": "npm i"
   },
   "repository": {
     "type": "git",
