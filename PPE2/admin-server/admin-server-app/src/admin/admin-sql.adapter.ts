@@ -18,14 +18,18 @@ export class AdminSQLAdapter implements IAdminDataAccess {
   }
 
   public getAdminByCredentials(credentials: { mail: string, password: string }): Promise<Admin> {
+    this._logger.debug('AdminSQLAdapter.getAdminByCredentials: called with parameter', credentials);
     return new Promise((resolve, reject) => {
       const query = `SELECT * 
                       FROM admin
                       WHERE admin_mail = ${escape(this._escapeHtml(credentials.mail))}
                       AND admin_password = ${escape(this._escapeHtml(credentials.password))};`;
 
+      this._logger.debug('AdminSQLAdapter.getAdminByCredentials: query', query);
+
       this._db.query(query)
         .then(admins => {
+          this._logger.debug('AdminSQLAdapter.getAdminByCredentials: result', admins);
           if (!(admins.length && admins[0])) {
             resolve(undefined);
             return;
@@ -35,6 +39,8 @@ export class AdminSQLAdapter implements IAdminDataAccess {
             id: Number(admins[0].admin_id),
             mail: this._unescapeHtml(admins[0].admin_mail)
           });
+
+          this._logger.debug('AdminSQLAdapter.getAdminByCredentials: response', admin);
 
           resolve(admin);
         })
