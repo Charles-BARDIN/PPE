@@ -34,8 +34,8 @@ connection.connect(err => {
       const convivDescr = escape(`Les salles de convialité vous permettront de déjeuner dans les locaux de la Maison des Ligues ainsi que de vous reposer.`);
 
       connection.query(
-        `INSERT INTO room(room_label, room_description)
-        VALUES('Amphithéâtre', ${amphiDescr}), ('Salle de réunion', ${reunionDescr}), ('Salle de convivialité', ${convivDescr});`,
+        `INSERT INTO room(room_label, room_description, room_image)
+        VALUES('Amphithéâtre', ${amphiDescr}, 'amphitheatre.jpg'), ('Salle de réunion', ${reunionDescr}, 'salle_reunion.jpg'), ('Salle de convivialité', ${convivDescr}, 'salle_convivial.jpg');`,
         err => {
           if (err) {
             console.error(err);
