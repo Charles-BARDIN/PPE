@@ -71,7 +71,7 @@ export class RoomSQLAdapter implements IRoomDataAccess {
       let query = `UPDATE room
                   SET room_label=${escape(this._escapeHtml(room.name))}, room_description=${escape(this._escapeHtml(room.description))}`;
       if (imageName) {
-        query += `, room_image=${imageName}`;
+        query += `, room_image=${escape(imageName)} `;
       }
 
       query += `WHERE room_id=${room.id};`;

@@ -46,13 +46,7 @@ export default {
     this.title = this.mode === 'new' ? 'Ajouter une salle' : `Modifier la salle ${this.room.name}`;
 
     bus.$on('roomImageSetted', (image) => {
-      this.room.image = image;
-
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        this.src = e.target.result;
-      };
-      reader.readAsDataURL(this.room.image);
+      this.src = 'data:image/jpeg; base64,' + image.data;
     })
   },
   data () {
@@ -70,13 +64,15 @@ export default {
     onFileSelection: function(event) {
       // http://codepen.io/Atinux/pen/qOvawK/
       const files = event.target.files || event.dataTransfer.files;
-      this.room.image = files[0];
+      const img = files[0];
+      this.room.image = { ext: img.type.split('/')[1] };
 
       const reader = new FileReader();
       reader.onload = (e) => {
         this.src = e.target.result;
+        this.room.image.data = this.src.replace('data:image/' + this.room.image.ext + ';base64,', '');
       };
-      reader.readAsDataURL(this.room.image);
+      reader.readAsDataURL(img);
     },
     oncancelclick: function() {
       this.onCancelClick();
