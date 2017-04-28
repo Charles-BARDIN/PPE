@@ -13,6 +13,13 @@ export default class MockedGateway {
         userID: 2,
         date: new Date(Number(new Date()) - 1000 * 3600 * 24 * 2),
         userMail: 'other@example.com',
+        roomName: 'Amphithéâtre'
+      },
+      {
+        roomID: 2,
+        userID: 2,
+        date: new Date(Number(new Date()) - 1000 * 3600 * 24 * 4),
+        userMail: 'other@example.com',
         roomName: 'Salle conviviale'
       }
     ];
@@ -21,13 +28,11 @@ export default class MockedGateway {
       {
         id: 1,
         name: 'Amphithéâtre',
-        image: '',
         description: 'Amphi description'
       },
       {
         id: 2,
         name: 'Salle conviviale',
-        image: '',
         description: 'Salle conviviale'
       }
     ];
