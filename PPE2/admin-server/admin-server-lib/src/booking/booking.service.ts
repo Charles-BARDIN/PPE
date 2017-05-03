@@ -15,27 +15,31 @@ export class BookingService {
   }
 
   public cancelBooking(booking: Booking): Promise<boolean> {
+    this._logger.debug('BookingService.cancelBooking: called with parameter', booking);
     return new Promise((resolve, reject) => {
       this._data.removeBooking(booking)
         .then(result => {
+          this._logger.debug('BookingService.cancelBooking: success', booking);
           resolve(result);
         })
         .catch(errors => {
-          this._logger.error(errors);
-          reject('UNKNOWN_ERROR');
+          this._logger.error('BookingService.cancelBooking:', errors);
+          reject('ERR_UNKNOWN');
         })
     });
   }
 
   public getAllBookings(): Promise<Booking[]> {
+    this._logger.debug('BookingService.getAllBookings: called');
     return new Promise((resolve, reject) => {
       this._data.getBookings()
         .then(bookingList => {
+          this._logger.debug('BookingService.getAllBookings: result', bookingList);
           resolve(bookingList);
         })
         .catch(errors => {
-          this._logger.error(errors);
-          reject('UNKNOWN_ERROR');
+          this._logger.error('BookingService.getAllBookings:', errors);          
+          reject('ERR_UNKNOWN');
         })
     });
   }

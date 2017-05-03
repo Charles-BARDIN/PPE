@@ -84,7 +84,9 @@ export class AdminClientLib {
 
     this._bookingCancelService = new BookingCancelService({
       navigation: this.navigationService,
-      gateway: this._gateway
+      gateway: this._gateway,
+      authentification: this.authService,
+      bookingService: this.bookingService
     });
 
     return this._bookingCancelService;
@@ -101,7 +103,8 @@ export class AdminClientLib {
 
     this._bookingService = new BookingService({
       navigation: this.navigationService,
-      gateway: this._gateway
+      gateway: this._gateway,
+      authentification: this.authService
     });
 
     return this._bookingService;
@@ -169,7 +172,9 @@ export class AdminClientLib {
 
     this._roomDeleteService = new RoomDeleteService({
       gateway: this._gateway,
-      navigation: this.navigationService
+      navigation: this.navigationService,
+      authentification: this._authService,
+      bookingService: this.bookingService
     });
 
     return this._roomDeleteService;
@@ -186,7 +191,8 @@ export class AdminClientLib {
 
     this._roomEditService = new RoomEditService({
       gateway: this._gateway,
-      navigation: this.navigationService
+      navigation: this.navigationService,
+      authentification: this._authService
     });
 
     return this._roomEditService;
@@ -203,7 +209,8 @@ export class AdminClientLib {
 
     this._roomNewService = new RoomNewService({
       gateway: this._gateway,
-      navigation: this.navigationService
+      navigation: this.navigationService,
+      authentification: this._authService
     });
 
     return this._roomNewService;
@@ -220,7 +227,8 @@ export class AdminClientLib {
 
     this._roomService = new RoomService({
       gateway: this._gateway,
-      navigation: this.navigationService
+      navigation: this.navigationService,
+      authentification: this._authService
     });
 
     return this._roomService;

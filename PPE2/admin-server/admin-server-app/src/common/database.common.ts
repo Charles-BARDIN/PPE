@@ -24,7 +24,7 @@ export class Database {
     this._config.database = database;
   }
 
-  public query(sql: string): Promise<any[]> {
+  public query(sql: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this._connection.query(sql, (err, res) => {
         if (err) {

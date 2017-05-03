@@ -13,6 +13,13 @@ export default class MockedGateway {
         userID: 2,
         date: new Date(Number(new Date()) - 1000 * 3600 * 24 * 2),
         userMail: 'other@example.com',
+        roomName: 'Amphithéâtre'
+      },
+      {
+        roomID: 2,
+        userID: 2,
+        date: new Date(Number(new Date()) - 1000 * 3600 * 24 * 4),
+        userMail: 'other@example.com',
         roomName: 'Salle conviviale'
       }
     ];
@@ -21,13 +28,11 @@ export default class MockedGateway {
       {
         id: 1,
         name: 'Amphithéâtre',
-        image: '',
         description: 'Amphi description'
       },
       {
         id: 2,
         name: 'Salle conviviale',
-        image: '',
         description: 'Salle conviviale'
       }
     ];
@@ -79,7 +84,11 @@ export default class MockedGateway {
   }
 
   getRoomImage(room) {
-    return Promise.resolve(new File([""], "img.jpg"));
+    const index = this._findRoom(room);
+
+    if (index < 0) return Promise.resolve(undefined);
+
+    return Promise.resolve(this._rooms[index].image);
   }
 
   modifyRoom(room) {
@@ -88,7 +97,7 @@ export default class MockedGateway {
     if (index < 0) {
       return Promise.resolve(room);
     }
-
+    
     this._rooms[index].description = room.description;
     this._rooms[index].image = room.image;
     this._rooms[index].name = room.name;

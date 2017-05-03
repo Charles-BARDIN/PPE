@@ -1,4 +1,4 @@
-import { ILogger, Admin } from 'm2l-core';
+import { ILogger, Room } from 'm2l-core';
 
 import { RoomService } from 'admin-server-lib';
 import { RoomSQLAdapter } from '.';
@@ -13,6 +13,66 @@ export class RoomAdapter {
 
     this._roomService = new RoomService({ logger: config.logger, dataAccess });
     this._logger = config.logger;
+  }
+
+  public deleteRoom(roomID: number): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this._roomService.deleteRoom(roomID)
+        .then(data => {
+          resolve(data);
+        })
+        .catch(errors => {
+          this._handleErrors(errors, reject);
+        });
+    })
+  }
+
+  public modifyRoom(room: Room): Promise<Room> {
+    return new Promise((resolve, reject) => {
+      this._roomService.modifyRoom(room)
+        .then(data => {
+          resolve(data);
+        })
+        .catch(errors => {
+          this._handleErrors(errors, reject);
+        });
+    })
+  }
+
+  public addRoom(room: Room): Promise<Room> {
+    return new Promise((resolve, reject) => {
+      this._roomService.addRoom(room)
+        .then(data => {
+          resolve(data);
+        })
+        .catch(errors => {
+          this._handleErrors(errors, reject);
+        });
+    })
+  }
+
+  public getRoomImage(roomID: number): Promise<{ ext: string, data: string }> {
+    return new Promise((resolve, reject) => {
+      this._roomService.getRoomImage(roomID)
+        .then(data => {
+          resolve(data);
+        })
+        .catch(errors => {
+          this._handleErrors(errors, reject);
+        });
+    })
+  }
+
+  public getAllRooms(): Promise<Room[]> {
+    return new Promise((resolve, reject) => {
+      this._roomService.getAllRooms()
+        .then(data => {
+          resolve(data);
+        })
+        .catch(errors => {
+          this._handleErrors(errors, reject);
+        });
+    })
   }
 
   private _handleErrors(errors, reject) {

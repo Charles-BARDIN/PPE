@@ -28,22 +28,17 @@ export class BookingSQLAdapter implements IBookingDataAccess {
 
       this._db.query(query)
         .then(() => this.get(booking))
-        .then(booking => {
-          this._logger.debug(`BookingSQLAdapter.add: data:`, booking);
+        .then(bookings => {
+          this._logger.debug(`BookingSQLAdapter.add: data:`, bookings);
 
-          if (!(booking.length && booking[0])) {
+          if (!(bookings.length && bookings[0])) {
             this._logger.error(`BookingSQLAdapter.add: bookind added is not found`);
             reject('ERR_ADDED_BOOKING_NOT_FOUND');
             return;
           }
-
-          const _booking = new Booking({
-            roomID: booking[0].room_id,
-            userID: booking[0].user_id,
-            date: new Date(booking[0].booking_date)
-          });
-          this._logger.info(`BookingSQLAdapter.update: modified booking entity`, _booking);
-          resolve(_booking);
+          
+          this._logger.info(`BookingSQLAdapter.update: modified booking entity`, bookings[0]);
+          resolve(bookings[0]);
         })
         .catch(reject);
     });

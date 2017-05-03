@@ -15,17 +15,21 @@ export class AdminService {
   }
 
   public login(credentials: { mail: string, password: string }): Promise<boolean> {
+    this._logger.debug('AdminService.login: called with parameter', credentials);
     return new Promise((resolve, reject) => {
       if (!credentials) {
+        this._logger.info('AdminService.login: ADMIN_LOGIN_REQUIRED_CREDENTIALS');
         reject('ADMIN_LOGIN_REQUIRED_CREDENTIALS');
       }
       let errors = [];
 
       if (!credentials.mail) {
+        this._logger.info('AdminService.login: ADMIN_LOGIN_REQUIRED_MAIL', credentials);
         errors.push('ADMIN_LOGIN_REQUIRED_MAIL');
       }
 
       if (!credentials.password) {
+        this._logger.info('AdminService.login: ADMIN_LOGIN_REQUIRED_PASSWORD', credentials);
         errors.push('ADMIN_LOGIN_REQUIRED_PASSWORD');
       }
 
@@ -37,20 +41,24 @@ export class AdminService {
       this._data.getAdminByCredentials(credentials)
         .then(admin => {
           if (!admin) {
+            this._logger.info('AdminService.login: INVALID_CREDENTIALS', credentials);
             reject('INVALID_CREDENTIALS');
             return;
           }
 
+          this._logger.debug('AdminService.login: login success', admin);
           resolve(admin);
+
         })
         .catch(errors => {
-          this._logger.error(errors);
-          reject('UNKNOWN_ERROR');
+          this._logger.error('AdminService.login:', errors);
+          reject('ERR_UNKNOWN');
         })
     });
   }
 
   public logout(): Promise<boolean> {
+    this._logger.debug('AdminService.logout: called');
     return Promise.resolve(true);
   }
 }

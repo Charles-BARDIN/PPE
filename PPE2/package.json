@@ -13,10 +13,6 @@
     "preinit": "npm -s install",
     "postinit": "npm run -s build:dep",
     "init:prod": "npm run init",
-    "postinit:prod": "npm run init:db && npm run fill:db",
-    "init:db": "npm run -s create:db",
-    "create:db": "node ./scripts/create-database",
-    "fill:db": "node ./scripts/fill-database",
     "copy:client": "node ./scripts/copy-client",
     "test": "npm run test:slib",
     "test:slib": "cd admin-server/admin-server-lib && npm test",
@@ -27,7 +23,7 @@
     "link:capp": "cd admin-client/admin-client-app && npm link m2l-core admin-client-lib",
     "link:slib": "cd admin-server/admin-server-lib && npm link && npm link m2l-core m2l-node-logger",
     "link:sapp": "cd admin-server/admin-server-app && npm link m2l-core m2l-node-logger admin-server-lib",
-    "install:all": "concurrently \"npm run install:capp\"  \"npm run install:sapp\" \"npm run install:clib\" \"npm run install:slib\" \"npm run install:logger\" \"npm run install:core\"",
+    "install:all": "npm run install:capp && npm run install:sapp && npm run install:clib && npm run install:slib && npm run install:logger && npm run install:core",
     "install:core": "cd ../m2l-core && npm i",
     "install:logger": "cd ../m2l-node-logger && npm i",
     "install:clib": "cd admin-client/admin-client-lib && npm i",
@@ -56,13 +52,8 @@
   "license": "ISC",
   "dependencies": {
     "concurrently": "^3.4.0",
-    "crypto-js": "^3.1.9-1",
     "mysql": "^2.13.0",
-    "vuejs-datepicker": "^0.6.5"
-  },
-  "devDependencies": {
-    "bootstrap": "^3.3.7",
-    "vue": "^2.2.6"
+    "fs-extra": "^2.1.2"
   },
   "description": ""
 }

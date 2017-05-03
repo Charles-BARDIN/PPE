@@ -97,7 +97,25 @@ export class UserService {
             return;
           }
 
-          this._logger.debug(`UserService.updateUser: mail ${user_input.mail} not taken`);          
+          this._logger.debug(`UserService.updateUser: mail ${user_input.mail} not taken`);
+          if (user_input.password) {
+            if (!user_input.oldPassword) {
+              this._logger.info('UserService.updateUser: ERR_PASSWORD_REQUIRED', user_input.id);
+              reject('ERR_PASSWORD_REQUIRED');
+              return;
+            }
+
+            this._data.getUserByCredentials({ mail: user_input.mail, password: user_input.oldPassword })
+              .then(user => {
+                if (!user) {
+                  this._logger.info('UserService.updateUser: INVALID_CREDENTIALS', { mail: user_input.mail, password: user_input.oldPassword });
+                  reject('INVALID_CREDENTIALS');
+                  return;
+                }
+
+                return this._data.update(user_input);
+              })
+          }
           return this._data.update(user_input);
         })
         .then(resolve)

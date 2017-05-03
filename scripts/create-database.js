@@ -85,8 +85,23 @@ connection.connect(err => {
                         process.exit(1);
                       }
 
-                      console.log(`Database ${config.database} created with success`);
-                      process.exit(0);
+                      connection.query(
+                        `CREATE TABLE IF NOT EXISTS admin(
+                          admin_id        int (11) Auto_increment  NOT NULL,
+                          admin_password  Varchar (255) NOT NULL,
+                          admin_mail      Varchar (255) NOT NULL,
+                          PRIMARY KEY (admin_id),
+                          UNIQUE (admin_mail)
+                        )ENGINE=InnoDB;`,
+                        err => {
+                          if (err) {
+                            console.error(err);
+                            process.exit(1);
+                          }
+
+                          console.log(`Database ${config.database} created with success`);
+                          process.exit(0);
+                        });
                     }
                   );
                 }

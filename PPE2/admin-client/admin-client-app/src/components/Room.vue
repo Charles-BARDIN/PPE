@@ -5,7 +5,7 @@
       <M2LButton label="Ajouter une salle" class="button" v-bind:action="onNewClicked" />      
     </div>
     <Error>
-      <div v-for="error in errors">{{ error }}</div>
+      <div v-for="error in errors">{{ error | error }}</div>
     </Error>
     <table v-if="rooms.length > 0">
       <tr v-for="room in rooms">
@@ -26,6 +26,10 @@ import M2LTitle from '@/components/M2LTitle'
 import Error from '@/components/Error'
 
 import adminClientLib from '@/lib-adapters'
+import { errorFilter } from '@/common';
+import Vue from 'vue';
+
+Vue.filter('error', errorFilter);
 
 const roomService = adminClientLib.roomService;
 
@@ -39,7 +43,7 @@ export default {
 
     roomService.controller = controller;
 
-    roomService.onPageLoad()
+    roomService.onPageLoad();
   },
   data () {
     return {
@@ -86,14 +90,24 @@ table {
 
 td {
   text-align: left;
+  height : 50px ;
 }
 
 .room-name {
   width: 20%;
+  max-width :50px ;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .room-description {
-  width: auto;
+    width: auto;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 10px;
 }
 
 .room-actions {
