@@ -116,7 +116,9 @@ export class UserService {
                 return this._data.update(user_input);
               })
           }
-          return this._data.update(user_input);
+          else {
+            return this._data.update(user_input);
+          }
         })
         .then(resolve)
         .catch((err: string) => {

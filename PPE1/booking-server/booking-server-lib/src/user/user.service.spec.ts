@@ -18,6 +18,7 @@ let dataAccess: IUserDataAccess, user: {
   mail: string,
   password: string,
   phone: string,
+  oldPassword?: string
 }, userService: UserService, logger: ILogger;
 
 describe('User Service', () => {
@@ -128,7 +129,8 @@ describe('User Service', () => {
       town: "Paris",
       country: "France",
       id: 1,
-      password: 'password'
+      password: 'password',
+      oldPassword: 'oldPassword'
     };
   });
 
